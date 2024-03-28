@@ -11,8 +11,7 @@ class ImageRequest(BaseModel):
 app = FastAPI()
 
 API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
-TOKEN = "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"
-
+TOKEN = os.getenv("TOKEN")
 headers = {"Authorization": f"Bearer {TOKEN}"}
 
 async def query_hugging_face(prompt: str):

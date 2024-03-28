@@ -18,7 +18,7 @@ load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
 API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
-TOKEN = "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"
+
 
 headers = {"Authorization": f"Bearer {TOKEN}"}
 

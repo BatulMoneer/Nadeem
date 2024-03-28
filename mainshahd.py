@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import aiohttp
 import io
+from dotenv import load_dotenv
+import os
 from PIL import Image
 import datetime
 
@@ -10,8 +12,14 @@ class ImageRequest(BaseModel):
 
 app = FastAPI()
 
-API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
+load_dotenv()
+
+# Access environment variables directly using os.getenv
 TOKEN = os.getenv("TOKEN")
+
+API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
+TOKEN = "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"
+
 headers = {"Authorization": f"Bearer {TOKEN}"}
 
 async def query_hugging_face(prompt: str):

@@ -1,11 +1,6 @@
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel,  validator
-<<<<<<< HEAD
-=======
-from dotenv import load_dotenv
-import openai
->>>>>>> 909d63170c9e66dde4d2d335331d39a8ce0b3f92
 import os
 import re  
 from openai import OpenAI
@@ -14,15 +9,8 @@ load_dotenv()
 
 
 app = FastAPI()
-<<<<<<< HEAD
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)# A global variable to store the last story and its keywords.
-=======
-
-load_dotenv()
-
-# A global variable to store the last story and its keywords.
->>>>>>> 909d63170c9e66dde4d2d335331d39a8ce0b3f92
 last_story_data = {"story": "", "keywords": []}
 
 class StoryRequest(BaseModel):

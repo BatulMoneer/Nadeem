@@ -1,11 +1,13 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel,  validator
+from dotenv import load_dotenv
 import openai
 import os
 import re  
 
 app = FastAPI()
 
+load_dotenv()
 
 # A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}

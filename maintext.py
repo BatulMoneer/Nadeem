@@ -12,7 +12,7 @@ app = FastAPI()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)# A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}
-
+#
 class StoryRequest(BaseModel):
     insert_prompt: str
     name: str

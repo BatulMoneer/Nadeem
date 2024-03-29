@@ -1,13 +1,16 @@
+
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel,  validator
-import openai
 import os
 import re  
+from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = FastAPI()
-
-
-# A global variable to store the last story and its keywords.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=OPENAI_API_KEY)# A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}
 
 class StoryRequest(BaseModel):
@@ -51,46 +54,44 @@ class StoryRequest(BaseModel):
 
    
 
-def ask_gpt(insert_prompt: str, name: str, age: str, gender:str):
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    if not openai.api_key:
-        raise ValueError("OpenAI API key is not set.")
-
+def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            messages = [
-        {
-        "role": "system",
-        "content": (
-            "You are Nadeem, designed to craft children's stories infused with Arabic and Islamic culture. "
-            "The stories are tailored for young minds, ranging from 3 to 12 years old, woven with simple words, "
-            "and set in familiar places like schools, gardens, mosques, and homes. Each tale is a short adventure, "
-            "about 20-25 sentences, designed to instill values like honesty, helping others, and devotion, "
-            "all while being compatible with Islamic morals and presented in Arabic. "
-            "Start the story directly without opening words. At the end of the story, write a list of keywords of the story in English. "
-            "Do not include the character's name as a keyword. Write the story with the appropriate يجب ان تضع تشكيل على جميع الكلمات.")},
-        
-        {"role": "user", "content": f"{insert_prompt} أكتب علامات التشكيل على جميع الكلمات والحروف."},
-        
-        {"role": "user", "content": f"{name} اسم الشخصية الرئيسية."},
-        
-        {"role": "user","content": f"{gender} جنس الشخصية الرئيسية."},
-        
-        {"role": "user","content": f"{age} عمر الطفل الذي سيقرأ القصة."}   
-        ])
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are Nadeem, designed to craft children's stories infused with Arabic and Islamic culture. "
+                        "The stories are tailored for young minds, ranging from 3 to 12 years old, woven with simple words, "
+                        "and set in familiar places like schools, gardens, mosques, and homes. Each tale is a short adventure, "
+                        "about 20-25 sentences, designed to instill values like honesty, helping others, and devotion, "
+                        "all while being compatible with Islamic morals and presented in Arabic. "
+                        "Start the story directly without opening words. At the end of the story, write a list of keywords of the story in English. "
+                        "Do not include the character's name as a keyword. Write the story with the appropriate يجب ان تضع تشكيل على جميع الكلمات.")
+                },
+                {"role": "user", "content": f"{insert_prompt} أكتب علامات التشكيل على جميع الكلمات والحروف."},
+                {"role": "user", "content": f"{name} اسم الشخصية الرئيسية."},
+                {"role": "user", "content": f"{gender} جنس الشخصية الرئيسية."},
+                {"role": "user", "content": f"{age} عمر الطفل الذي سيقرأ القصة."}
+            ]
+        )
 
-        
-        story = response['choices'][0]['message']['content'].strip()
-        english_words = re.findall(r'\b[a-zA-Z]+\b', story)
-        
-        # Store the story and keywords in the global variable
-        last_story_data["story"] = story
-        last_story_data["keywords"] = english_words
-        
-        return story, english_words
+        if response.choices:
+            first_choice = response.choices[0]
+            if hasattr(first_choice, 'message') and hasattr(first_choice.message, 'content'):
+                story = first_choice.message.content.strip()
+                english_words = re.findall(r'\b[a-zA-Z]+\b', story)
+                
+                # Store the story and keywords in the global variable
+                last_story_data["story"] = story
+                last_story_data["keywords"] = english_words
+                
+                return story, english_words
+        return "No response from the model.", []
     except Exception as e:
-        return f"An error occurred: {e}", []
+        return f"An error occurred: {str(e)}", []
+
 
 @app.post("/generate_story/")
 def generate_story_endpoint(story_request: StoryRequest):
@@ -109,7 +110,7 @@ def generate_story_endpoint(story_request: StoryRequest):
 def get_keywords_endpoint():
     if not last_story_data["story"]:
         raise HTTPException(status_code=404, detail="No story found. Please generate a story first.")
-    
+
     # Filter out the word "Keywords" from the list of keywords
     filtered_keywords = [word for word in last_story_data["keywords"] if word.lower() != 'keywords']
     

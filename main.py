@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 client = OpenAI(api_key=SECRET_KEY)
 
 app = FastAPI()
-
+#calclue cost of fetch api
 def calculate_cost(text_string, model_id):
     cost_tier = {
         'tts-1': 0.015,

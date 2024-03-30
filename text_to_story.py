@@ -6,15 +6,12 @@ import re
 # re = regular expressions
 from openai import OpenAI
 from dotenv import load_dotenv
-load_dotenv()
+import main 
 
-
-app = FastAPI()
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)# A global variable to store the last story and its keywords.
+# A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}
 #
-class StoryRequest(BaseModel):
+class Text_to_Story(BaseModel):
     insert_prompt: str
     name: str
     age: str
@@ -54,7 +51,7 @@ class StoryRequest(BaseModel):
         return v
 def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
     try:
-        response = client.chat.completions.create(
+        response = main.text_client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {
@@ -95,30 +92,5 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
         return f"An error occurred: {str(e)}", []
 
 
-@app.post("/generate_story/")
-def generate_story_endpoint(story_request: StoryRequest):
-    #return story, english_words=keywrods
-    original_story, english_words = ask_gpt(story_request.insert_prompt,story_request.name, story_request.age, story_request.gender )
-    if "An error occurred:" in original_story:
-        raise HTTPException(status_code=500, detail=original_story)
 
-    unique_english_words = set(english_words)  
-    pattern = r'\b(' + '|'.join(map(re.escape, unique_english_words)) + r')\b|[:,\n"]'
-    story_cleaned = re.sub(pattern, '', original_story)
-    return {story_cleaned}
-
-
-
-@app.get("/get_keywords/")
-def get_keywords_endpoint():
-    if not last_story_data["story"]:
-        raise HTTPException(status_code=404, detail="No story found. Please generate a story first.")
-
-    # Filter out the word "Keywords" from the list of keywords
-    filtered_keywords = [word for word in last_story_data["keywords"] if word.lower() != 'keywords']
-    
-    # Concatenate the filtered keywords into a single string, separated by commas
-    model_words = ', '.join(filtered_keywords)
-    
-    return {"model_words": model_words}
 

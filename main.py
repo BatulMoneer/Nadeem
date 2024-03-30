@@ -22,28 +22,6 @@ text_client = OpenAI(api_key=TEXT_SECRET_KEY)
 
 app = FastAPI()
 
-# Audio Generator
-@app.post("/generate_speech/")
-async def generate_speech(audio_request: text_to_speech.Text_To_Speech):
-    if audio_request.model not in ['tts-1', 'tts-1-hd']:
-        raise HTTPException(status_code=400, detail="Model not supported")
-    try:
-        response = audio_client.audio.speech.create(
-            model=audio_request.model,
-            voice=audio_request.voice,
-            input=audio_request.input
-        )
-    except AttributeError:
-        raise HTTPException(status_code=500, detail="Speech synthesis method not found. Please check the OpenAI documentation for the correct usage.")
-
-    response.stream_to_file('speech.mp3') # Adjust based on the actual response attribute for audio data
-
-    request_cost = text_to_speech.calculate_cost(audio_request.input, audio_request.model)
-    
-    return {
-        "Cost": f"${request_cost:.3f}",
-        "File": "speech.mp3"  # In a real application, provide a URL or an endpoint for the client to access the file
-    }
 
 # Story Generation
 @app.post("/generate_story/")
@@ -72,6 +50,33 @@ def get_keywords_endpoint():
     model_words = ', '.join(filtered_keywords)
     
     return {"model_words": model_words}
+
+# Audio Generator
+@app.post("/generate_speech/")
+# async def generate_speech(text_input: str, model: str = "tts-1", voice: str = "nova"):
+async def generate_speech():
+    input = text_to_story.last_story_data["story"] 
+    model = "tts-1"
+    voice = "nova"
+    if model not in ['tts-1', 'tts-1-hd']:
+        raise HTTPException(status_code=400, detail="Model not supported")
+    try:
+        response = audio_client.audio.speech.create(
+            model=model,
+            voice=voice,
+            input=input
+        )
+    except AttributeError:
+        raise HTTPException(status_code=500, detail="Speech synthesis method not found. Please check the OpenAI documentation for the correct usage.")
+
+    response.stream_to_file('speech.mp3') # Adjust based on the actual response attribute for audio data
+
+    request_cost = text_to_speech.calculate_cost(input, model)
+    
+    return {
+        "Cost": f"${request_cost:.3f}",
+        "File": "speech.mp3"  # In a real application, provide a URL or an endpoint for the client to access the file
+    }
 
 # Image Generation
 @app.post("/generate-image/")

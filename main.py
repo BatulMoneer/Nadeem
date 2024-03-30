@@ -3,34 +3,20 @@ from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 import openai
 from openai import OpenAI
+from text_to_speech import Text_to_Speech
 
-# Load environment variables from the .env file at the start of your script
+
 load_dotenv()
-
-# Access environment variables directly using os.getenv
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-# Initialize the OpenAI client with the secret key
 client = OpenAI(api_key=SECRET_KEY)
 
 app = FastAPI()
-#calclue cost of fetch api
-def calculate_cost(text_string, model_id):
-    cost_tier = {
-        'tts-1': 0.015,
-        'tts-1-hd': 0.03
-    }
-    cost_unit = cost_tier.get(model_id, None)
-    if cost_unit is None:
-        return None
-    return (cost_unit * len(text_string)) / 1000
+
 
 @app.post("/generate_speech/")
 async def generate_speech(text_input: str, model: str = "tts-1", voice: str = "nova"):
     if model not in ['tts-1', 'tts-1-hd']:
         raise HTTPException(status_code=400, detail="Model not supported")
-    
-    # Assuming the correct method based on OpenAI's API for speech synthesis; this might need adjustment
     try:
         response = client.audio.speech.create(
             model=model,

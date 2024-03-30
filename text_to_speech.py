@@ -10,6 +10,3 @@ class Text_To_Speech:
         if cost_unit is None:
             return None
         return (cost_unit * len(text_string)) / 1000
-
-
-

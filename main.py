@@ -26,7 +26,7 @@ app = FastAPI()
 # Story Generation
 @app.post("/generate_story/")
 def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
-    #return story, english_words=keywrods
+    #return story, english_words=keywords
     original_story, english_words = text_to_story.ask_gpt(story_request.insert_prompt,story_request.name, story_request.age, story_request.gender )
     if "An error occurred:" in original_story:
         raise HTTPException(status_code=500, detail=original_story)
@@ -48,6 +48,8 @@ def get_keywords_endpoint():
     
     # Concatenate the filtered keywords into a single string, separated by commas
     model_words = ', '.join(filtered_keywords)
+    text_to_story.last_story_data["keywords"] = model_words
+   #text_to_story.last_story_data["keywords"] = text_to_story.modify_and_filter_keywords(model_words)
     
     return {"model_words": model_words}
 
@@ -80,9 +82,11 @@ async def generate_speech():
 
 # Image Generation
 @app.post("/generate-image/")
-async def generate_image(request: story_to_image.ImageRequest):
+async def generate_image():
+    prompt= text_to_story.last_story_data["keywords"]
+    
     try:
-        image_bytes = await story_to_image.query_hugging_face(request.prompt)
+        image_bytes = await story_to_image.query_hugging_face(prompt)
         image = Image.open(io.BytesIO(image_bytes))
         
         # Save the image with a timestamp to ensure uniqueness
@@ -90,10 +94,12 @@ async def generate_image(request: story_to_image.ImageRequest):
         filename = f"generated_image_{timestamp}.png"
         image.save(filename)
         
-        return {"message": "Image generated and saved successfully", "filename": filename}
+        return {"message": "Image generated and saved successfully", "filename": filename, "imagePrompt":prompt }
     except HTTPException as e:
+        # In case of an HTTPException from query_hugging_face,
+        # it will be caught and returned here.
         return {"error": e.detail}
-#ساشاي شمسسس
+
 
 if __name__ == "__main__":
     import uvicorn

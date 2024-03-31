@@ -10,7 +10,7 @@ from PIL import Image
 import io
 import datetime
 import story_to_image
-
+from text_to_story import last_story_data,get_keywords_endpoint
 # Load from .env
 load_dotenv()
 AUDIO_SECRET_KEY = os.getenv("AUDIO_SECRET_KEY")
@@ -34,24 +34,10 @@ def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
     unique_english_words = set(english_words)  
     pattern = r'\b(' + '|'.join(map(re.escape, unique_english_words)) + r')\b|[:,\n"]'
     story_cleaned = re.sub(pattern, '', original_story)
+    get_keywords_endpoint()
     return {story_cleaned}
 
 
-
-@app.get("/get_keywords/")
-def get_keywords_endpoint():
-    if not text_to_story.last_story_data["story"]:
-        raise HTTPException(status_code=404, detail="No story found. Please generate a story first.")
-
-    # Filter out the word "Keywords" from the list of keywords
-    filtered_keywords = [word for word in text_to_story.last_story_data["keywords"] if word.lower() != 'keywords']
-    
-    # Concatenate the filtered keywords into a single string, separated by commas
-    model_words = ', '.join(filtered_keywords)
-    text_to_story.last_story_data["keywords"] = model_words
-   #text_to_story.last_story_data["keywords"] = text_to_story.modify_and_filter_keywords(model_words)
-    
-    return {"model_words": model_words}
 
 # Audio Generator
 @app.post("/generate_speech/")
@@ -80,10 +66,9 @@ async def generate_speech():
         "File": "speech.mp3"  # In a real application, provide a URL or an endpoint for the client to access the file
     }
 
-# Image Generation
 @app.post("/generate-image/")
 async def generate_image():
-    prompt= text_to_story.last_story_data["keywords"]
+    prompt= last_story_data["keywords"]
     
     try:
         image_bytes = await story_to_image.query_hugging_face(prompt)

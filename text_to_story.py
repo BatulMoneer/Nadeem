@@ -80,17 +80,52 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
             if hasattr(first_choice, 'message') and hasattr(first_choice.message, 'content'):
                 story = first_choice.message.content.strip() #strip whitespace 
                 # and removes leading and trailing whitespace from the story text.
-                english_words = re.findall(r'\b[a-zA-Z]+\b', story) # search english words
+                english_words = set(word.lower() for word in re.findall(r'\b[a-zA-Z]+\b', story))
+                # Convert each word in the list to lowercase
+                english_words = [word.lower() for word in english_words]
+                for word in english_words:
+                    # Pattern to match the whole word, case-insensitive
+                    pattern = r'\b' + re.escape(word) + r'\b'
+                    story = re.sub(pattern, '', story, flags=re.IGNORECASE)
+                story = re.sub(r'\s{2,}', ' ', story).strip()
+                gender_keywords = {"أنثى", "انثى", "بنت", "فتاة", "فتاه"}
+                genderEng = "girl" if gender in gender_keywords else "boy"
+
                 
                 # Store the story and keywords in the global variable
                 last_story_data["story"] = story
-                last_story_data["keywords"] = english_words # extract keywords
+                last_story_data["keywords"] = list(english_words) + [genderEng]  # Combine English words with gender
                 
                 return story, english_words
         return "No response from the model.", []
     except Exception as e:
         return f"An error occurred: {str(e)}", []
 
+def get_keywords_endpoint():
+    if not last_story_data["story"]:
+        raise HTTPException(status_code=404, detail="No story found. Please generate a story first.")
+
+    # Filter out the word "Keywords" from the list of keywords
+    filtered_keywords = [word for word in last_story_data["keywords"] if word.lower() != 'keywords']
+    pattern = r"\b(?:school|mosque|garden|girl|boy|girl hijabi|girl hijabi cook|girl hijabi clean|boy study|girl hijabi walk )\w*"
+
+    # Process each word
+    processed_words = []
+    for word in filtered_keywords:
+        if re.match(pattern, word, re.IGNORECASE):
+            # If the word matches the pattern, prefix it with "ms"
+            processed_words.append("ms" + word)
+        else:
+            # If the word doesn't match the pattern, leave it as is
+            processed_words.append(word)
+    
+    # Concatenate the filtered keywords into a single string, separated by commas
+    model_words = ', '.join(processed_words)
+    print(processed_words)
+    # Update last_story_data["keywords"] with the processed words
+    last_story_data["keywords"] = model_words
+    
+    return model_words
 
 
 

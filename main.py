@@ -93,7 +93,7 @@ async def generate_image(request: story_to_image.ImageRequest):
         return {"message": "Image generated and saved successfully", "filename": filename}
     except HTTPException as e:
         return {"error": e.detail}
-#
+#ساشاي شمسسس
 
 if __name__ == "__main__":
     import uvicorn

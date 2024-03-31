@@ -3,3 +3,4 @@ __pycache__
 shahd-env
 .venv
 .DS_Store
+node_modules

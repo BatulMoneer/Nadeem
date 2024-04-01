@@ -27,3 +27,4 @@ async def query_hugging_face(prompt: str):
             else:
                 raise HTTPException(status_code=response.status, detail=await response.text())
 
+#hi from lina

@@ -1,8 +1,11 @@
 import React from 'react';
-import './App.css';
-import NadeemLogo from './addings/nadeem name.png';
-import AccountLogo from './addings/Group 397.png';
+import '../App.css';
+import NadeemLogo from '../addings/nadeem name.png';
+import AccountLogo from '../addings/Group 397.png';
+import { Link } from 'react-router-dom';
 
+
+//
 const Header = () => {
     return (
         <header className="app-header">
@@ -12,11 +15,10 @@ const Header = () => {
                     <ul>
                         <li>عن نديم</li>
                         <li>أطفالي</li>
-                        <li>قصصي</li>
-                        <li>الرئيسية</li>
+                        <li><Link to="/storypage">قصصي</Link></li>
+                        <li><Link to="/">الرئيسية</Link></li>
                     </ul>
                 </nav>
-
                 {<img src={AccountLogo} alt="Account" className='account-logo' />}
             </div>
         </header>

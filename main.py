@@ -11,6 +11,9 @@ import io
 import datetime
 import story_to_image
 from text_to_story import last_story_data,get_keywords_endpoint
+from io import BytesIO
+import base64
+
 # Load from .env
 load_dotenv()
 AUDIO_SECRET_KEY = os.getenv("AUDIO_SECRET_KEY")
@@ -19,8 +22,28 @@ audio_client = OpenAI(api_key=AUDIO_SECRET_KEY)
 TEXT_SECRET_KEY = os.getenv("TEXT_SECRET_KEY")
 text_client = OpenAI(api_key=TEXT_SECRET_KEY)
 
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+from fastapi.staticfiles import StaticFiles
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 
 
 # Story Generation
@@ -56,14 +79,16 @@ async def generate_speech():
         )
     except AttributeError:
         raise HTTPException(status_code=500, detail="Speech synthesis method not found. Please check the OpenAI documentation for the correct usage.")
-
-    response.stream_to_file('speech.mp3') # Adjust based on the actual response attribute for audio data
-
+    
     request_cost = text_to_speech.calculate_cost(input, model)
     
+    audio_data = response.content
+    audio_base64 = base64.b64encode(audio_data).decode('utf-8')
+    audio_string = f"data:audio/mp3;base64,{audio_base64}"
+
     return {
         "Cost": f"${request_cost:.3f}",
-        "File": "speech.mp3"  # In a real application, provide a URL or an endpoint for the client to access the file
+        "AudioBase64": audio_string  # Send the Base64 string
     }
 
 @app.post("/generate-image/")

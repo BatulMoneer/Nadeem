@@ -1,28 +1,40 @@
-/* Background */
+/* Home Page Background */
 .homepage {
   background-image: url('./addings/Home (2).png');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
   background-attachment: scroll;
-  min-height: 100vh;
+  min-height: 512vh;
+  width: 100%;
+}
+
+/* Story Page Background */
+.storypage {
+  background-image: url('./addings/Generate Story.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  min-height: 305vh;
   width: 100%;
 }
 
 /* Scrollbar */
-html::-webkit-scrollbar {
-  width: 5px;
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-html::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
+::-webkit-scrollbar-track {
+  display: none;
 }
 
-html::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #efd176;
   border-radius: 10px;
 }
 
-html::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: #d4b557;
 }
 
@@ -93,4 +105,74 @@ html::-webkit-scrollbar-thumb:hover {
 
 .account-logo:hover {
   transform: scale(1.1);
+}
+
+/* Header Navigation Links */
+.header-nav a {
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074;
+  transition: transform 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: #ffffff;
+  background-color: #efd176;
+  padding: 0px 20px;
+  border-radius: 20px;
+  transform: scale(1.1);
+}
+
+/* Buttons */
+.storypage {
+  position: relative;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 700px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.button-container button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.button-container button img {
+  width: 200px;
+  height: auto;
+}
+
+.button-container button:hover img {
+  transform: scale(1.1);
+}
+
+/* Story Output */
+.story-output {
+  position: absolute;
+  top: 50%;
+  /* Adjust this value to position the story text over the book */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  /* Set a max width for the text */
+  text-align: center;
+  /* Center the text within the div */
+  font-family: 'Droid Arabic Kufi', serif;
+  /* Use the special font you imported */
+  font-size: 24px;
+  /* Adjust as needed */
+  color: #333;
+  /* Change the color as needed */
+  z-index: 10;
+  /* Ensure it's above the background image */
 }

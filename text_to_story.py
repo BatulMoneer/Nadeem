@@ -7,7 +7,7 @@ import re
 from openai import OpenAI
 from dotenv import load_dotenv
 import main 
-
+ # HIIIIIIIIIIII LINA
 # A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}
 #
@@ -78,25 +78,26 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
             first_choice = response.choices[0]
             # check if first_choice has a message and content
             if hasattr(first_choice, 'message') and hasattr(first_choice.message, 'content'):
-                story = first_choice.message.content.strip() #strip whitespace 
-                # and removes leading and trailing whitespace from the story text.
-                english_words = set(word.lower() for word in re.findall(r'\b[a-zA-Z]+\b', story))
-                # Convert each word in the list to lowercase
-                english_words = [word.lower() for word in english_words]
-                for word in english_words:
-                    # Pattern to match the whole word, case-insensitive
-                    pattern = r'\b' + re.escape(word) + r'\b'
-                    story = re.sub(pattern, '', story, flags=re.IGNORECASE)
-                story = re.sub(r'\s{2,}', ' ', story).strip()
-                gender_keywords = {"أنثى", "انثى", "بنت", "فتاة", "فتاه"}
-                genderEng = "girl" if gender in gender_keywords else "boy"
+                if isinstance(first_choice.message.content, str):
+                    story = first_choice.message.content.strip() #strip whitespace 
+                    # and removes leading and trailing whitespace from the story text.
+                    english_words = set(word.lower() for word in re.findall(r'\b[a-zA-Z]+\b', story))
+                    # Convert each word in the list to lowercase
+                    english_words = [word.lower() for word in english_words]
+                    for word in english_words:
+                        # Pattern to match the whole word, case-insensitive
+                        pattern = r'\b' + re.escape(word) + r'\b'
+                        story = re.sub(pattern, '', story, flags=re.IGNORECASE)
+                    story = re.sub(r'\s{2,}', ' ', story).strip()
+                    gender_keywords = {"أنثى", "انثى", "بنت", "فتاة", "فتاه"}
+                    genderEng = "girl" if gender in gender_keywords else "boy"
 
-                
-                # Store the story and keywords in the global variable
-                last_story_data["story"] = story
-                last_story_data["keywords"] = list(english_words) + [genderEng]  # Combine English words with gender
-                
-                return story, english_words
+                    
+                    # Store the story and keywords in the global variable
+                    last_story_data["story"] = story
+                    last_story_data["keywords"] = list(english_words) + [genderEng]  # Combine English words with gender
+                    
+                    return story, english_words
         return "No response from the model.", []
     except Exception as e:
         return f"An error occurred: {str(e)}", []

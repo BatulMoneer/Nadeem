@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import Header from "./Header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import LikeButton from "../addings/Group 401.png";
 import AddButton from "../addings/Group 400.png";
@@ -12,9 +12,10 @@ const StoryPage = () => {
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Moved handleAdd outside of useEffect to make it accessible for button click
-  const handleAdd = async () => {
+  // Function to fetch and display the story automatically when the component loads
+  useEffect(() => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -23,33 +24,35 @@ const StoryPage = () => {
     const { insert_prompt, name, age, gender } = location.state;
     const url = "http://localhost:8000/generate_story/";
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ insert_prompt, name, age, gender }),
-      });
+    const fetchStory = async () => {
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ insert_prompt, name, age, gender }),
+        });
 
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        console.log(jsonResponse);
-        setStory(jsonResponse);
-        alert("Story generated successfully");
-      } else {
-        throw new Error("Failed to fetch from the backend");
+        if (response.ok) {
+          const jsonResponse = await response.json();
+          setStory(jsonResponse);
+          console.log("Story generated successfully");
+        } else {
+          throw new Error("Failed to fetch from the backend");
+        }
+      } catch (error) {
+        console.error("Error:", error);
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to generate story");
-    }
-  };
+    };
 
-  // Trigger handleAdd when the component mounts if location.state is available
-  useEffect(() => {
-    handleAdd();
-  }, [location]); // Dependency array includes location to re-run on state change
+    fetchStory();
+  }, [location]);
+
+  // Function to navigate back to the form page
+  const handleAdd = () => {
+    navigate("/form"); // Adjust the path as needed
+  };
 
   const handleLike = () => {
     console.log("Like button clicked");
@@ -70,13 +73,12 @@ const StoryPage = () => {
       if (response.ok) {
         const jsonResponse = await response.json();
         setAudioData(jsonResponse.AudioBase64); // Set the audio data state
-        alert("Sound generated successfully");
+        console.log("Sound generated successfully");
       } else {
         throw new Error("Failed to fetch from the backend");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to generate Sound");
     }
   };
 
@@ -92,8 +94,6 @@ const StoryPage = () => {
           <img src={LikeButton} alt="Like" />
         </button>
         <button onClick={handleAdd}>
-          {" "}
-          {/* Correctly bound to handleAdd */}
           <img src={AddButton} alt="Add" />
         </button>
         <button onClick={handleSound}>

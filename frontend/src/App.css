@@ -66,6 +66,8 @@
   margin: 0;
 }
 
+
+
 /* Special Font*/
 @import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
 
@@ -175,4 +177,74 @@
   /* Change the color as needed */
   z-index: 10;
   /* Ensure it's above the background image */
+}
+
+/* Nadeem msg */
+.label-container {
+  /* Position it absolutely to be more precise. Adjust the top value as needed. */
+  position: absolute;
+  top:170px; /* Adjust this to fit the image's position */
+  right: 390px; /* Adjust this to move the label to the right */
+  z-index: 10; /* To ensure it's layered correctly */
+}
+
+.label-text {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074; /* Base text color */
+}
+
+.label-text span {
+  color: #eabb68; /* Golden text color for highlighted parts */
+}
+/*msg  لدينا قصص بمختلف التصنيفات */
+.label-container2 {
+  /* Position it absolutely to be more precise. Adjust the top value as needed. */
+  position: absolute;
+
+  top:950px; /* Adjust this to fit the image's position */
+  right: 390px; /* Adjust this to move the label to the right */
+  z-index: 10; /* To ensure it's layered correctly */
+}
+.lbl2{
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #fefefe; /* Base text color */
+}
+
+/*msg  in Nadeem*/
+.label-container3 {
+  position: absolute;
+  top: 1500px; /* Adjust this to fit the image's position */
+  z-index: 10;
+  width: 100%; /* Full width to center content */
+  text-align: center; /* Center the children elements */
+}
+
+.lbl3 {
+  font-size: 32px;
+
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0; /* Remove default paragraph margins */
+}
+
+.span1 {
+  font-weight: bold;
+  position: relative; /* Position relative to move right */
+  left: 450px; /* Adjust this value to shift to the right */
+  font-size: 89px; /* This will only affect the font size */
+}
+
+.span2 {
+  color: #eabb68; /* Golden text color for "نديم" */
+}
+
+.span3 {
+  position: relative; /* Position relative to shift left */
+  left: 340px; /* Adjust this value to shift to the left */
+  top: 50px;
 }

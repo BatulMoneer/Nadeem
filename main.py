@@ -27,14 +27,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-from fastapi.staticfiles import StaticFiles
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# from fastapi.staticfiles import StaticFiles
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 origins = [
-    "http://localhost:3000",
-    "localhost:3000"
+    "http://localhost:3000",  # React's default port
+    "http://127.0.0.1:3000",
 ]
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,6 +42,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 

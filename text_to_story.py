@@ -7,7 +7,6 @@ import re
 from openai import OpenAI
 from dotenv import load_dotenv
 import main 
- # HIIIIIIIIIIII LINA
 # A global variable to store the last story and its keywords.
 last_story_data = {"story": "", "keywords": []}
 #

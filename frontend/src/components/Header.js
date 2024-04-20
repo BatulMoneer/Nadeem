@@ -17,6 +17,7 @@ const Header = () => {
                         <li>أطفالي</li>
                         <li><Link to="/storypage">قصصي</Link></li>
                         <li><Link to="/">الرئيسية</Link></li>
+                        <li><Link to="/SetPreferences ">انشاء قصة</Link></li>
                     </ul>
                 </nav>
                 {<img src={AccountLogo} alt="Account" className='account-logo' />}

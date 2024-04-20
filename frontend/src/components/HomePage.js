@@ -5,6 +5,7 @@ import rectangle1 from "../addings/Group 2.png";
 import rectangle2 from "../addings/Group 7.png";
 import rectangle3 from "../addings/Rectangle 5.png";
 import rectangle4 from "../addings/Rectangle 6.png";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -66,7 +67,9 @@ const HomePage = () => {
       </div>
 
       <div className="custom-button-container">
-        <button className="custom-button">اكتب لي قصة</button>
+        <button className="custom-button">
+          <Link to="/form"> اكتب لي قصة</Link>
+        </button>
       </div>
     </div>
   );

@@ -73,12 +73,13 @@ const StoryPage = () => {
       if (response.ok) {
         const jsonResponse = await response.json();
         setAudioData(jsonResponse.AudioBase64); // Set the audio data state
-        console.log("Sound generated successfully");
+        alert("Sound generated successfully");
       } else {
         throw new Error("Failed to fetch from the backend");
       }
     } catch (error) {
       console.error("Error:", error);
+      alert("Failed to generate Sound");
     }
   };
 
@@ -112,8 +113,8 @@ const StoryPage = () => {
         )}
       </div>
       {audioData && (
-        <audio autoPlay controls src={`data:audio/mp3;base64,${audioData}`}>
-          Your browser does not support the audio element.
+        <audio autoPlay controls src={audioData}>
+          gvv Your browser does not support the audio element.
         </audio>
       )}
     </div>

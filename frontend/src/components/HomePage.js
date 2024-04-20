@@ -10,6 +10,7 @@ const HomePage = () => {
     return (
         <div className="homepage">
             <Header />
+<<<<<<< HEAD
             
             <div className="label-container">
                 <p className="label-text"> مرحبا، أنا 
@@ -68,6 +69,8 @@ const HomePage = () => {
                 <button className="custom-button">اكتب لي قصة</button>
             </div>
 
+=======
+>>>>>>> parent of 64094b4 (homepage)
         </div>
     );
 };

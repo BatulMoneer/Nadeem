@@ -1,6 +1,8 @@
 // FormPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../App.css'; // Importing our custom CSS
+
 
 const FormPage = () => {
   const [formData, setFormData] = useState({
@@ -25,35 +27,55 @@ const FormPage = () => {
   };
 
   return (
-    <div>
-      <h1>Enter Story Details</h1>
+    <div class= "FormPage">
+      <div class="form-container">
       <form onSubmit={handleSubmit}>
-        <input
-          name="insert_prompt"
-          value={formData.insert_prompt}
-          onChange={handleChange}
-          placeholder="Story prompt"
-        />
-        <input
+        <div class="label-container">
+
+        <label class="lbl">اسم بطل القصة</label>
+        
+      <input
+          class="in-btn"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Your name"
+          placeholder="حدد اسم بطل القصة"
         />
+        </div>
+
+        <div class="label-container">
+        <label class="lbl">العمر</label>
+
         <input
           name="age"
           value={formData.age}
           onChange={handleChange}
-          placeholder="Your age"
+          placeholder="اختر عمر الطفل من القائمة"
           type="number"
-        />
-        <select name="gender" value={formData.gender} onChange={handleChange}>
-          <option value="">Select Gender</option>
+          class="in-btn"
+        /></div>
+
+        <div class="label-container">
+        <label class="lbl">جنس بطل القصة</label>
+        <select class="in-btn" name="gender" value={formData.gender} onChange={handleChange}>
+          <option class="in-btn" value="">اختر الجنس</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
-        </select>
-        <button type="submit">Submit</button>
+        </select></div>
+        
+        <div class="label-container">
+        <label class="lbl">الفكرة الرئيسية للقصة</label>
+        <textarea class="in-btn"
+          name="insert_prompt"
+          value={formData.insert_prompt}
+          onChange={handleChange}
+          placeholder="وصف مختصر قصير عن القصة التي ترغب بإنشاءها"
+        /></div>
+        <div class="btn-container">
+        <button class="btn" type="submit">اكتب لي قصة</button>
+        </div>
       </form>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,64 @@
+/*Form page*/
+.FormPage{
+    background-image: url('./addings/form2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    min-height: 305vh;
+    width: 100%;
+  }
+  .btn{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    background-color: #835074;
+    color: #ffffff;
+    border-radius: 80px;
+    border: none;
+    padding: 1%;
+  }
+  .btn-container{
+    position: relative;
+    right: 30%;
+    top:82vh;
+  }
+  .in-btn{
+    border-radius: 80px;
+    border: none;
+    text-align: right;
+    height: 90%;
+    width: 30%;
+    padding: 1%;
+    color: C4C4C4;
+    font-family: 'Droid Arabic Kufi', serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    position: relative;
+    left: 10px;
+  }
+  .form-container {
+    border-color: black; /* Consider if you need a visible border */
+    text-align: right;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%; /* Ensure the container takes full width */
+    padding: 20px; /* Added padding for inner spacing */
+    position: relative;
+    top: 500px;
+    left: -10%;
+  }
+  
+  .label-container {
+    text-align: right;
+    margin-bottom: 10px; /* Added margin for spacing between labels and inputs */
+  }
+  
+  .lbl {
+    display: block;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    margin-bottom: 5px; 
+    font-weight: bold;
+  }

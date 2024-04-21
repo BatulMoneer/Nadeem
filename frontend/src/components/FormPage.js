@@ -1,7 +1,7 @@
 // FormPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../App.css'; // Importing our custom CSS
+import '../form1.css'; // Importing our custom CSS
 
 
 const FormPage = () => {

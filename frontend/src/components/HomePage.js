@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 import React from 'react';
 import '../App.css'; // Importing our custom CSS
-
-const HomePage = () => {
-    return (
-        <div className="homepage">
-=======
 import React from "react";
 import "../App.css"; // Importing our custom CSS
 import Header from "./Header";
@@ -35,7 +29,6 @@ const HomePage = () => {
         <div className="image-wrapper">
           <img src={rectangle1} alt="التعليم" />
           <div className="hover-label">التعليم</div>
->>>>>>> 5340b424c464ade5e788a5858d5cf4a777434003
         </div>
         <div className="image-wrapper">
           <img src={rectangle2} alt="عمل جماعي" />

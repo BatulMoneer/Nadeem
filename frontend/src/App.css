@@ -178,7 +178,6 @@
   /* Ensure it's above the background image */
 }
 
-<<<<<<< HEAD
 /*Form page*/
 .FormPage{
   background-image: url('./addings/form2.png');
@@ -243,7 +242,6 @@
   margin-bottom: 5px; 
   font-weight: bold;
 }
-=======
 /* Nadeem msg */
 .label-container {
   /* Position it absolutely to be more precise. Adjust the top value as needed. */
@@ -408,4 +406,3 @@
 }
 
 
->>>>>>> 5340b424c464ade5e788a5858d5cf4a777434003

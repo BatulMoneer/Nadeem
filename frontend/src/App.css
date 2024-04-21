@@ -178,6 +178,7 @@
   /* Ensure it's above the background image */
 }
 
+<<<<<<< HEAD
 /*Form page*/
 .FormPage{
   background-image: url('./addings/form2.png');
@@ -242,3 +243,169 @@
   margin-bottom: 5px; 
   font-weight: bold;
 }
+=======
+/* Nadeem msg */
+.label-container {
+  /* Position it absolutely to be more precise. Adjust the top value as needed. */
+  position: absolute;
+  top:170px; /* Adjust this to fit the image's position */
+  right: 390px; /* Adjust this to move the label to the right */
+  z-index: 10; /* To ensure it's layered correctly */
+}
+
+.label-text {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074; /* Base text color */
+}
+
+.label-text span {
+  color: #eabb68; /* Golden text color for highlighted parts */
+}
+/*msg  لدينا قصص بمختلف التصنيفات */
+.label-container2 {
+  position: absolute;
+  top: 950px;
+  right: 250px;
+  z-index: 10;
+  text-align: center; /* Center inline-block elements */
+}
+
+.lbl2 {
+  font-size: 32px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #fefefe; /* Base text color */
+}
+
+.image-wrapper {
+  display: inline-block; /* Wrap each image */
+  position: relative; /* To position the hover label */
+  width: 200px; /* Width must be specified */
+  height: 200px; /* Height must be specified */
+  margin: 10px; /* Space between images */
+}
+
+.label-container2 img {
+  width: 100%; /* Make the image fill its container */
+  height: 100%; /* Make the image fill its container */
+  object-fit: cover; /* Cover the area without stretching */
+  border-radius: 20px; /* Rounded corners */
+}
+
+.hover-label {
+  position: absolute;
+  bottom: 0; /* Align the label at the bottom of the image container */
+  left: 0;
+  right: 0; /* Stretch across the container */
+  background-color: rgba(234, 187, 104, 0.5); /* Semi-transparent background */
+  color: white; /* Text color */
+  text-align: center; /* Center the text */
+  padding: 10px 0; /* Padding at the top and bottom */
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.3s ease; /* Smooth transition */
+  border-radius: 0 0 20px 20px; /* Rounded corners at the bottom */
+  font-size: 24px; /* Font size for the label */
+  font-weight: bold; /* Bold label text */
+}
+
+.image-wrapper:hover .hover-label {
+  opacity: 1; /* Show the label on hover */
+}
+
+
+
+/*msg  in Nadeem*/
+.label-container3 {
+  position: absolute;
+  top: 1500px; /* Adjust this to fit the image's position */
+  z-index: 10;
+  width: 100%; /* Full width to center content */
+  text-align: center; /* Center the children elements */
+}
+
+.lbl3 {
+  font-size: 32px;
+
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0; /* Remove default paragraph margins */
+}
+
+.span1 {
+  font-weight: bold;
+  position: relative; /* Position relative to move right */
+  left: 450px; /* Adjust this value to shift to the right */
+  font-size: 89px; /* This will only affect the font size */
+}
+
+.span2 {
+  color: #eabb68; /* Golden text color for "نديم" */
+}
+
+.span3 {
+  position: relative; /* Position relative to shift left */
+  left: 340px; /* Adjust this value to shift to the left */
+  top: 50px;
+}
+
+/* رسالة البوتون*/
+.label-container4 {
+  position: absolute;
+  top: 2350px;
+  right: 0px;
+  font-family: 'Droid Arabic Kufi', serif; /* Replace with the actual font used */
+  color: #835074; 
+  text-align: right; /* Align text to the right */
+  margin: 0px; /* Add some space around the text */
+}
+
+.lbl4 {
+  font-size: 32px; 
+  line-height: 1.5; 
+  margin-bottom: 10px; /* Space between the two paragraphs */
+}
+
+.lbl4 span {
+  color: #eabb68; 
+  font-weight: bold; /* Make the text bold */
+}
+
+.lbl5 {
+  font-size: 24px;
+  line-height: 1.5; 
+}
+
+/* button */ 
+.custom-button-container {
+  position: absolute;
+  top: 2600px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  padding: 20px; /* Add some space around the button container */
+}
+
+.custom-button {
+  background-color: #835074; /* The button's background color from the image */
+  color: #FFFFFF; /* The text color */
+  border: none; /* No border */
+  border-radius: 50px; /* Rounded corners */
+  padding: 15px 60px; /* Top & Bottom, Left & Right padding */
+  font-family: 'Droid Arabic Kufi', serif; /* The font family from your CSS */
+  font-size: 32px; /* The font size from your image */
+  font-weight: bold; /* Bold text */
+  cursor: pointer; /* Cursor to pointer when hover over the button */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); /* Optional: add shadow to button */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.custom-button:hover {
+  background-color: #eabb68; /* Slightly darker shade on hover */
+}
+
+
+>>>>>>> 5340b424c464ade5e788a5858d5cf4a777434003

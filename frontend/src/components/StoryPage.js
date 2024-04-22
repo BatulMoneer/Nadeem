@@ -24,6 +24,7 @@ const StoryPage = () => {
     const { insert_prompt, name, age, gender } = location.state;
     const url = "http://localhost:8000/generate_story/";
 
+
     const fetchStory = async () => {
       try {
         const response = await fetch(url, {

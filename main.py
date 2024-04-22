@@ -30,9 +30,12 @@ app = FastAPI()
 # from fastapi.staticfiles import StaticFiles
 # app.mount("/static", StaticFiles(directory="static"), name="static")
 
+
 origins = [
-    "http://localhost:3000",  # React's default port
-    "http://127.0.0.1:3000",
+    "http://localhost:3000",   # React's default port
+    "http://127.0.0.1:3000",    # localhost with explicit IP
+    "http://localhost",        # without port (for cases where React dev server uses a different port)
+    "http://127.0.0.1"         # without port (for cases where React dev server uses a different port)
 ]
 
 app.add_middleware(
@@ -42,16 +45,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-
 
 # Story Generation
 @app.post("/generate_story/")

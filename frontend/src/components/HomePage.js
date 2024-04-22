@@ -68,7 +68,7 @@ const HomePage = () => {
 
       <div className="custom-button-container">
         <button className="custom-button">
-          <Link to="/form"> اكتب لي قصة</Link>
+          <Link to="/setpreferences"> اكتب لي</Link>
         </button>
       </div>
     </div>

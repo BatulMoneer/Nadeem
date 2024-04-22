@@ -1,4 +1,3 @@
-// FormPage.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../form1.css"; // Importing our custom CSS
@@ -10,7 +9,7 @@ const FormPage = () => {
     age: "",
     gender: "",
     choices: "",
-    prompt: "",
+    place: "",
   });
 
   const navigate = useNavigate();
@@ -27,31 +26,38 @@ const FormPage = () => {
   };
 
   return (
-    <div class="FormPage">
-      <div class="form-container">
+    <div className="FormPage">
+      <div className="form-container">
         <form onSubmit={handleSubmit}>
-          <label>
-            Story prompt:
-            <input
-              name="insert_prompt"
-              value={formData.insert_prompt}
-              onChange={handleChange}
-              placeholder="Story prompt"
-            />
-          </label>
-          <label>
-            Your name:
+          <label className="lbl">
+            اسم الطفل
             <input
               name="name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Your name"
+              className="in-btn"
+            />
+          </label>
+          <label className="lbl">
+            القصة
+            <input
+              name="insert_prompt"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              className="in-btn"
             />
           </label>
           <br />
-          <label>
-            <select name="Age" value={formData.age} onChange={handleChange}>
-              <option value="">ادخل عمر الطفل من القائمة</option>
+          <label className="lbl">
+            <select
+              name="age"
+              value={formData.age}
+              onChange={handleChange}
+              className="in-btn"
+            >
+              {/* <option value="">ادخل عمر الطفل من القائمة</option> */}
               <option value="3">٣ سنوات</option>
               <option value="4">٤ سنوات</option>
               <option value="5">٥ سنوات</option>
@@ -60,28 +66,76 @@ const FormPage = () => {
               <option value="8">٨ سنوات</option>
             </select>
           </label>
-          <label>
+          <label className="lbl">
             <input
               type="radio"
               name="gender"
-              value="msboy"
-              checked={formData.gender === "male"}
+              value="ولد"
+              // checked={formData.gender === "boy"}
               onChange={handleChange}
             />
             ولد
           </label>
-          <label>
+          <label className="lbl">
             <input
               type="radio"
               name="gender"
-              value="msgirl hijabi"
-              checked={formData.gender === "female"}
+              value="girl"
+              // checked={formData.gender === "girl"}
               onChange={handleChange}
             />
             بنت
           </label>
           <br />
-          <label>
+
+          <br />
+          {/* {formData.gender === "boy" && (
+            <label className="lbl">
+              اختر موضوع القصة
+              <select
+                name=" insert_prompt"
+                value={formData.insert_prompt}
+                onChange={handleChange}
+              >
+                <option value="">اختر موضوع القصة</option>
+                <option value="msboy study">مذاكرة</option>
+                <option value="msboy clean">ينظف</option>
+                <option value="msboy pray">يصلي</option>
+              </select>
+            </label>
+          )} */}
+          {/* 
+          {formData.gender === "msgirl hijabi" && (
+            <label className="lbl">
+              اختر موضوع القصة للبنت
+              <select
+                name=" insert_prompt"
+                value={formData.insert_prompt}
+                onChange={handleChange}
+              >
+                <option value="">اختر موضوع القصة</option>
+                <option value="msgirl hijabi study">مذاكرة</option>
+                <option value="msgirl hijabi walk">تمشي</option>
+                <option value="msgirl hijabi cook">تطبخ</option>
+                <option value="msgirl hijabi clean">تنظف</option>
+                <option value="msgirl hijabi shop">تتسوق</option>
+                <option value="msgirl hijabi pray">تصلي</option>
+              </select>
+            </label>
+          )} */}
+
+          <br />
+          <label className="lbl">
+            اختر مكان القصة
+            <select name="place" value={formData.place} onChange={handleChange}>
+              <option value="">اختر مكان القصة </option>
+              <option value="msgarden">حديقة</option>
+              <option value="msschool">مدرسة</option>
+              <option value="msmosque"> مسجد</option>
+            </select>
+          </label>
+          {/* 
+          <label className="lbl">
             فعل اخر
             <input
               type="text"
@@ -90,71 +144,10 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="ادخل كلمة واحدة تعبر عن الفعل المطلوب"
             />
-          </label>{" "}
-          <br />
-          <label>
-            اختر موضوع القصة
-            <select
-              name="prompt"
-              value={formData.prompt}
-              onChange={handleChange}
-            >
-              <option value="">اختر موضوع القصة </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </label>
-          <button type="submit">Submit</button>
-          <div class="label-container">
-            <label class="lbl">اسم بطل القصة</label>
+          </label> */}
 
-            <input
-              class="in-btn"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="حدد اسم بطل القصة"
-            />
-          </div>
-          <div class="label-container">
-            <label class="lbl">العمر</label>
-
-            <input
-              name="age"
-              value={formData.age}
-              onChange={handleChange}
-              placeholder="اختر عمر الطفل من القائمة"
-              type="number"
-              class="in-btn"
-            />
-          </div>
-          <div class="label-container">
-            <label class="lbl">جنس بطل القصة</label>
-            <select
-              class="in-btn"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-            >
-              <option class="in-btn" value="">
-                اختر الجنس
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-          <div class="label-container">
-            <label class="lbl">الفكرة الرئيسية للقصة</label>
-            <textarea
-              class="in-btn"
-              name="insert_prompt"
-              value={formData.insert_prompt}
-              onChange={handleChange}
-              placeholder="وصف مختصر قصير عن القصة التي ترغب بإنشاءها"
-            />
-          </div>
-          <div class="btn-container">
-            <button class="btn" type="submit">
+          <div className="btn-container">
+            <button className="btn" type="submit">
               اكتب لي قصة
             </button>
           </div>

@@ -1,64 +1,161 @@
 /*Form page*/
-.FormPage{
-    background-image: url('./addings/form2.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: scroll;
-    min-height: 305vh;
-    width: 100%;
-  }
-  .btn{
-    font-size: 20px;
-    font-weight: bold;
-    font-family: 'Droid Arabic Kufi', serif;
-    background-color: #835074;
-    color: #ffffff;
-    border-radius: 80px;
-    border: none;
-    padding: 1%;
-  }
-  .btn-container{
-    position: relative;
-    right: 30%;
-    top:82vh;
-  }
-  .in-btn{
-    border-radius: 80px;
-    border: none;
-    text-align: right;
-    height: 90%;
-    width: 30%;
-    padding: 1%;
-    color: C4C4C4;
-    font-family: 'Droid Arabic Kufi', serif;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
-    position: relative;
-    left: 10px;
-  }
-  .form-container {
-    border-color: black; /* Consider if you need a visible border */
-    text-align: right;
-    display: block;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%; /* Ensure the container takes full width */
-    padding: 20px; /* Added padding for inner spacing */
-    position: relative;
-    top: 500px;
-    left: -10%;
-  }
-  
-  .label-container {
-    text-align: right;
-    margin-bottom: 10px; /* Added margin for spacing between labels and inputs */
-  }
-  
-  .lbl {
-    display: block;
-    font-family: 'Droid Arabic Kufi', serif;
-    color: #835074;
-    margin-bottom: 5px; 
-    font-weight: bold;
-  }
+.FormPage {
+  background-image: url('./addings/form2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  min-height: 305vh;
+  width: 100%;
+}
+
+.btn {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  background-color: #835074;
+  color: #ffffff;
+  border-radius: 80px;
+  border: none;
+  padding: 1%;
+}
+
+.btn-container {
+  position: relative;
+  right: 30%;
+  top: 82vh;
+}
+
+.in-btn {
+  border-radius: 80px;
+  border: none;
+  text-align: right;
+  height: 90%;
+  width: 30%;
+  padding: 1%;
+  color: C4C4C4;
+  font-family: 'Droid Arabic Kufi', serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 10px;
+}
+
+.placeholder-class {
+  color: C4C4C4;
+  font-family: 'Droid Arabic Kufi', serif;
+}
+
+.form-container {
+  border-color: black;
+  /* Consider if you need a visible border */
+  text-align: right;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  /* Ensure the container takes full width */
+  padding: 20px;
+  /* Added padding for inner spacing */
+  position: relative;
+  top: 500px;
+  right: 30%;
+}
+
+.label-container {
+  text-align: right;
+  margin-bottom: 10px;
+  /* Added margin for spacing between labels and inputs */
+}
+
+.lbl {
+  display: block;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074;
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.select-container select {
+  appearance: none;
+  /* Remove default styling */
+  border: none;
+  /* Remove the border */
+  outline: none;
+  /* Remove focus outline */
+  background-color: white;
+
+  font-size: 16px;
+  /* Adjust as needed */
+  color: C4C4C4;
+  /* Text color */
+  cursor: pointer;
+  text-align: right;
+  font-family: 'Droid Arabic Kufi', serif;
+}
+
+.select-container option {
+  padding: 10px;
+  color: #835074;
+  font-family: 'Droid Arabic Kufi', serif;
+  border-bottom: 1px solid #835074
+}
+
+
+
+.rd-btn {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  /* Space for the custom radio before the text */
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+  color: #835074;
+  font-weight: bold;
+  margin-right: 10px;
+  /* Space between buttons */
+  line-height: 0px;
+  /* Aligns text vertically with the custom radio */
+  font-family: 'Droid Arabic Kufi', serif;
+}
+
+.select-btn {
+  border-radius: 80px;
+  border: none;
+  text-align: right;
+  width: 10%;
+  padding: 0.5%;
+  padding-right: 1%;
+  color: C4C4C4;
+  font-family: 'Droid Arabic Kufi', serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 10px;
+
+}
+
+.lbl-inln {
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.in-btn-small {
+  border-radius: 80px;
+  border: none;
+  text-align: right;
+  width: 10%;
+  padding: 0.5%;
+  color: C4C4C4;
+  font-family: 'Droid Arabic Kufi', serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+  margin: 1PX;
+  margin-top: 10px;
+}

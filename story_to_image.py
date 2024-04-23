@@ -16,8 +16,11 @@ class ImageRequest(BaseModel):
 
 API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
 
+headers = {
+    "Authorization": f"Bearer {IMAGE_SERECT_KEY}",
+    "Cache-Control": "no-cache"  # Add this line to delete the cache
+}
 
-headers = {"Authorization": f"Bearer {IMAGE_SERECT_KEY}"}
 
 async def query_hugging_face(prompt: str):
     async with aiohttp.ClientSession() as session:

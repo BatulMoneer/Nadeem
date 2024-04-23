@@ -5,6 +5,7 @@ import openai
 from openai import OpenAI
 import text_to_speech 
 import text_to_story
+from fastapi.responses import StreamingResponse
 import re  
 from PIL import Image
 import io
@@ -91,24 +92,19 @@ async def generate_speech():
         "AudioBase64": audio_string  # Send the Base64 string
     }
 
-@app.post("/generate-image/")
-async def generate_image():
-    prompt= last_story_data["keywords"]
-    
+@app.post("/generate-image/{prompt}")
+async def generate_image(prompt: str):
     try:
+        # Query Hugging Face API to get image bytes
         image_bytes = await story_to_image.query_hugging_face(prompt)
-        image = Image.open(io.BytesIO(image_bytes))
         
-        # Save the image with a timestamp to ensure uniqueness
-        timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        filename = f"generated_image_{timestamp}.png"
-        image.save(filename)
-        
-        return {"message": "Image generated and saved successfully", "filename": filename, "imagePrompt":prompt }
+        # Return the image bytes as a response
+        return StreamingResponse(io.BytesIO(image_bytes), media_type="image/png")
     except HTTPException as e:
         # In case of an HTTPException from query_hugging_face,
         # it will be caught and returned here.
-        return {"error": e.detail}
+        return JSONResponse({"error": e.detail}, status_code=e.status_code)
+
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ import FullscreenButton from "../addings/Group 398.png";
 const StoryPage = () => {
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,7 +24,6 @@ const StoryPage = () => {
 
     const { insert_prompt, name, age, gender } = location.state;
     const url = "http://localhost:8000/generate_story/";
-
 
     const fetchStory = async () => {
       try {
@@ -50,9 +50,49 @@ const StoryPage = () => {
     fetchStory();
   }, [location]);
 
+  useEffect(() => {
+    // Checking if there's state provided from navigation
+    if (!location.state) {
+      console.log("No form data provided");
+      return;
+    }
+
+    const { place, image_prompt } = location.state;
+    const combinedVariable = `${place},${image_prompt}`;
+
+    const url = `http://localhost:8000/generate-image/${encodeURIComponent(
+      combinedVariable
+    )}`;
+    const fetchImage = async () => {
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          // body: JSON.stringify({ place, image_prompt }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const imageBlob = await response.blob();
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImageSrc(imageObjectURL);
+        console.log("Image fetched successfully");
+        console.log("Image URL:", imageObjectURL); // Check the URL in the console
+      } catch (error) {
+        console.error("Failed to fetch image:", error);
+      }
+    };
+
+    fetchImage();
+  }, [location.state]);
+
   // Function to navigate back to the form page
   const handleAdd = () => {
-    navigate("/form"); // Adjust the path as needed
+    navigate("/setpreferences"); // Adjust the path as needed
   };
 
   const handleLike = () => {
@@ -118,6 +158,17 @@ const StoryPage = () => {
           gvv Your browser does not support the audio element.
         </audio>
       )}
+      <div>
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt="Generated from AI"
+            style={{ width: "100%", height: "auto" }}
+          />
+        ) : (
+          <p>Loading image...</p>
+        )}
+      </div>
     </div>
   );
 };

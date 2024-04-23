@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../form1.css"; // Importing our custom CSS
+import Header from "./Header";
 
 const FormPage = () => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ const FormPage = () => {
 
   return (
     <div className="FormPage">
+      <Header />
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <div>

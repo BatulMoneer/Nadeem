@@ -1,0 +1,198 @@
+/* Header */
+.app-header {
+    border-radius: 0 0 60px 60px;
+    /**/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 2.2rem;
+    background: #ffffff;
+    color: #835074;
+    align-items: center;
+    box-shadow: 0px 1px 25px #353535, 0px -1px 5px #5a5a5a;
+
+}
+
+.header-container {
+    flex: 1;
+    /**/
+    padding: 18px 0px 25px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    /**/
+
+}
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+}
+
+/* Special Font*/
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+.header-nav ul li {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    transition: transform 0.3s ease;
+}
+
+.header-nav ul li :hover {
+    color: #ffffff;
+    background-color: #efd176;
+    padding: 0px 20px;
+    border-radius: 20px;
+    transform: scale(1.1);
+}
+
+.header-nav ul li a {
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    transition: all 0.3s ease;
+}
+
+.header-nav ul li a :hover {
+    color: #ffffff;
+    background-color: #efd176;
+    padding: 0px 20px;
+    border-radius: 20px;
+    transform: scale(1.1);
+}
+
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+
+.header-logo {
+    position: absolute;
+    right: 2.5rem;
+    top: 0.6rem;
+    width: 11.2rem;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+
+.header-logo:hover {
+    transform: translate(10%);
+}
+
+.account-logo {
+    padding-right: 2rem;
+    padding-top: 0.2rem;
+    transition: transform 0.3s ease;
+    width: 4rem;
+    height: auto;
+}
+
+.account-logo:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 1424px) {
+    .header-nav ul li:not(:first-child):not(:last-child):nth-last-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 1224px) {
+    .header-nav ul li:not(:first-child):not(:last-child):nth-last-child(n+4) {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-nav ul li:not(:first-child):not(:last-child):nth-last-child(n+3) {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .header-nav ul li:not(:first-child):not(:last-child):nth-last-child(n+2) {
+        display: none;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .menu-icon {
+        display: block;
+    }
+
+    .header-nav {
+        display: none;
+        position: absolute;
+        top: 5.5rem;
+        right: 0;
+        left: 0;
+        /* Added to center the nav */
+        background: #ffffff;
+        width: 100%;
+        border-radius: 60px;
+        align-items: center;
+        /* Center align the navigation */
+    }
+
+    .header-nav.open {
+        display: flex;
+        /* Changed to flex to use align-items */
+        flex-direction: column;
+    }
+
+    .header-nav ul {
+        display: block;
+        flex-direction: column;
+        width: 40%;
+        margin: 0 auto;
+        padding: 1rem 0rem;
+    }
+
+
+
+    .header-nav ul li a {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: bold;
+        font-family: 'Droid Arabic Kufi', serif;
+        color: #835074;
+        display: block;
+        transition: all 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .header-nav ul li a:hover {
+        color: #ffffff;
+        background-color: #efd176;
+        transform: scale(1.1);
+    }
+
+
+    .header-logo {
+        position: absolute;
+        right: 40%;
+        top: 0.5rem;
+        width: 8rem;
+        height: auto;
+    }
+
+    .header-logo:hover {
+        transform: translate(20%);
+    }
+}

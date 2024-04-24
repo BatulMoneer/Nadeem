@@ -164,7 +164,7 @@ const handleChange = (e) => {
                 className="in-btn"
                 
               >
-                <option value="" hidden className="op">
+                <option value="" hidden className="placeholder-class">
                   اختر عمر الطفل من القائمة
                 </option>
                 <option value="3">ثلاث سنوات</option>
@@ -220,7 +220,7 @@ const handleChange = (e) => {
                   value={formData.image_prompt}
                   onChange={handleChange}
                 >
-                  <option value="" hidden>اختر النشاط</option>
+                  <option value="" className="placeholder-class" hidden>اختر النشاط</option>
                   <option value="msboy study">مذاكرة</option>
                   <option value="msboy clean">تنظيف</option>
                   <option value="msboy pray">صلاة</option>
@@ -238,7 +238,7 @@ const handleChange = (e) => {
                   value={formData.image_prompt}
                   onChange={handleChange}
                 >
-                  <option value="" hidden>اختر النشاط</option>
+                  <option value="" hidden className="placeholder-class">اختر النشاط</option>
                   <option value="msgirl hijabi study">مذاكرة</option>
                   <option value="msgirl hijabi walk">مشي</option>
                   <option value="msgirl hijabi cook">طبخ</option>
@@ -255,7 +255,7 @@ const handleChange = (e) => {
             <input
               className="in-btn-small"
               type="text"
-              name="choice"
+              name="choices"
               value={formData.choices}
               onChange={handleChange}
               placeholder="ادخل كلمة واحدة"
@@ -264,14 +264,14 @@ const handleChange = (e) => {
             
 
             <div className="select-container">
-              <label className="lbl">اختر مكان القصة</label>
+              <label className="lbl"> مكان القصة</label>
               <select
                 name="place"
                 className="select-btn"
                 value={formData.place}
                 onChange={handleChange}
               >
-                <option value="" hidden>اختر مكان القصة </option>
+                <option value="" hidden className="placeholder-class">اختر مكان القصة </option>
                 <option value="msgarden">حديقة</option>
                 <option value="msschool">مدرسة</option>
                 <option value="msmosque"> مسجد</option>
@@ -301,7 +301,9 @@ const handleChange = (e) => {
         </div>
         <img src={FormNadeem} alt="Nadeem" className='form-nadeem' />
         <div class="nadeem-speech">
-          <text class="nadeem-text">مرحبًا مرة أخرى ساعدني في تعبئة البيانات التالية لأتمكن من انشاء قصة تثير اعجابك</text>
+          <text class="nadeem-text">
+          <span>مرحبًا مرة أخرى، ساعدني في</span> <span className="dif-txy">تعبئة البيانات</span> <span>التالية لأتمكن من إنشاء قصة تثير إعجابك</span>
+            </text>
         </div>
       </div>
       <img src={FormStars} alt="Stars" className='form-stars' />

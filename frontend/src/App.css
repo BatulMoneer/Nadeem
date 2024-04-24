@@ -403,6 +403,7 @@
 
 .custom-button:hover {
   background-color: #eabb68; /* Slightly darker shade on hover */
+  transform: scale(1.1);
 }
 
 

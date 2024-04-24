@@ -18,20 +18,119 @@ const FormPage = () => {
   });
 
   const navigate = useNavigate();
+  const [errorName, setErrorName] = useState('');
+  const [errorPrompt, setErrorPrompt] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const [errors, setErrors] = useState({});
+
+
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   // if (isValidArabicInput(value)){
+  //   //   setError('');
+    
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [name]: value,
+  //   }));
+  // // }else{
+  // //   setError('يرجى ملئ الحقل باللغة العربية');
+  // // }
+  // };
+  
+const handleChange = (e) => {
+    const { name, value} = e.target;
+
+    // Check the type of the input to decide if it needs Arabic validation
+    if (name === "name" && name !== "age" && name !== "choices") { // Assuming 'age' and 'choices' do not require Arabic validation
+        if (isValidArabicName(value)) {
+            setErrorName('');
+            setFormData((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        } else {
+            setErrorName('يرجى ادخال الاسم باللغة العربية');
+            formData.name="";
+        }
+    } else {
+        // For non-text inputs or text inputs that do not require Arabic validation
+        setFormData((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+        setErrorName('');  // Clear any error as other inputs do not require Arabic validation
+    }
+    if (name === "insert_prompt" && name !== "age" && name !== "choices") { // Assuming 'age' and 'choices' do not require Arabic validation
+      if (isValidArabicPrompt(value)) {
+          setErrorPrompt('');
+          setFormData((prevState) => ({
+              ...prevState,
+              [name]: value,
+          }));
+      } else {
+          setErrorPrompt('يرجى ادخال الوصف باللغة العربية');
+          formData.insert_prompt="";
+      }
+  } else {
+      // For non-text inputs or text inputs that do not require Arabic validation
+      setFormData((prevState) => ({
+          ...prevState,
+          [name]: value,
+      }));
+      setErrorPrompt('');  // Clear any error as other inputs do not require Arabic validation
+  }
+};
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/story", { state: { ...formData } }); // Spread the formData into the state object
+    const { isValid, newErrors } = validateForm();
+    if (!isValid){
+      setErrors(newErrors);
+    }else{
+      navigate("/story", { state: { ...formData } }); // Spread the formData into the state object
+      setErrors({});  // Clear errors on successful submission
+    }
+    
   };
 
+  // Validation
+  const isValidArabicName = (input) => {
+    return !/[^ا-ي\s]/.test(input);
+  };
+  const isValidArabicPrompt = (input) => {
+    return !/[^ا-ي\s]/.test(input);
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+  
+    if (!formData.name.trim()) {
+      newErrors.name = 'يرجى إدخال اسم الطفل';
+    }
+    if (!formData.age.trim()) {
+      newErrors.age = 'يرجى اختيار عمر الطفل';
+    }
+    if (!formData.gender.trim()) {
+      newErrors.gender = "يرجى اخيار جنس بطل القصة";
+    }
+    if (!formData.image_prompt.trim()) {
+      newErrors.image_prompt ="يرجى اختيار النشاط الأساسي لبطل القصة";
+    }
+    if (!formData.place.trim()) {
+      newErrors.place ="يرجى اختيار مكان القصة";
+    }
+    if (!formData.insert_prompt.trim()) {
+      newErrors.insert_prompt ="يرجى ادخال الفكرة الرئيسية للقصة";
+    }
+  
+    isValid = Object.keys(newErrors).length === 0;
+    return { isValid, newErrors };
+  };
+  
   return (
     <div className="FormPage">
       <Header />
@@ -47,9 +146,14 @@ const FormPage = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="ادخل اسم الطفل كبطل للقصة"
-                className="in-btn"
-              />
+                className={errorName ? 'in-btn-error' : 'in-btn'}
+              />           
             </div>
+            {errorName && <div className="error-message">{errorName}</div>}
+            {errors.name && <div className="error-message">{errors.name}</div>}
+
+            
+
 
             <div className="select-container">
               <label className="lbl">العمر</label>
@@ -58,8 +162,9 @@ const FormPage = () => {
                 value={formData.age}
                 onChange={handleChange}
                 className="in-btn"
+                
               >
-                <option value="" hidden>
+                <option value="" hidden className="op">
                   اختر عمر الطفل من القائمة
                 </option>
                 <option value="3">ثلاث سنوات</option>
@@ -70,48 +175,44 @@ const FormPage = () => {
                 <option value="8">ثمان سنوات</option>
               </select>
             </div>
+            {errors.age && <div className="error-message">{errors.age}</div>}
 
-            <div>
-              <label class="lbl">جنس بطل القصة</label>
-              <label class="rd-btn">
-                <span class="custom-radio"></span>
-                بنت
-                <input
-                  type="radio"
-                  name="gender"
-                  value="بنت"
-                  onChange={handleChange}
-                />
-              </label>
-              <label class="rd-btn">
-                <span class="custom-radio"></span>
-                ولد
-                <input
-                  type="radio"
-                  name="gender"
-                  value="ولد"
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
+
+  <div>
+  <label class="lbl">جنس بطل القصة</label>
+  <label class="rd-btn">
+    بنت
+    <input checked
+      type="radio"
+      name="gender"
+      value="بنت"
+      onChange={handleChange}
+      class="real-radio-btn"
+    />
+    <span class="custom-radio"></span>
+  </label>
+  <label class="rd-btn">
+    ولد
+    <input
+      type="radio"
+      name="gender"
+      value="ولد"
+      onChange={handleChange}
+      class="real-radio-btn"
+    />
+    <span class="custom-radio"></span>
+  </label>
+</div>
+
+
+            {errors.gender && <div className="error-message">{errors.gender}</div>}
+
 
             <div className="select-container">
               <label className="lbl">النشاط الأساسي لبطل القصة</label>
-
-              <label className="lbl-inln">نشاط اخر</label>
-
-              <input
-                className="in-btn-small"
-                type="text"
-                name="choice"
-                value={formData.choices}
-                onChange={handleChange}
-                placeholder="ادخل كلمة واحدة"
-              />
             </div>
             {formData.gender === "ولد" && (
               <div className="select-container">
-                <label className="lbl">اختر النشاط</label>
 
                 <select
                   className="select-btn"
@@ -119,33 +220,48 @@ const FormPage = () => {
                   value={formData.image_prompt}
                   onChange={handleChange}
                 >
-                  <option value="">اختر النشاط</option>
+                  <option value="" hidden>اختر النشاط</option>
                   <option value="msboy study">مذاكرة</option>
                   <option value="msboy clean">تنظيف</option>
                   <option value="msboy pray">صلاة</option>
+                  <option value="">نشاط اخر</option>
+
                 </select>
               </div>
             )}
 
             {formData.gender === "بنت" && (
               <div className="select-container">
-                <label className="lbl">اختر النشاط</label>
                 <select
                   name="image_prompt"
                   className="select-btn"
                   value={formData.image_prompt}
                   onChange={handleChange}
                 >
-                  <option value="">اختر النشاط</option>
+                  <option value="" hidden>اختر النشاط</option>
                   <option value="msgirl hijabi study">مذاكرة</option>
-                  <option value="msgirl hijabi walk">تمشي</option>
-                  <option value="msgirl hijabi cook">تطبخ</option>
+                  <option value="msgirl hijabi walk">مشي</option>
+                  <option value="msgirl hijabi cook">طبخ</option>
                   <option value="msgirl hijabi clean">تنظف</option>
-                  <option value="msgirl hijabi shop">تتسوق</option>
-                  <option value="msgirl hijabi pray">تصلي</option>
+                  <option value="msgirl hijabi shop">تسوق</option>
+                  <option value="msgirl hijabi pray">صلاة</option>
+                  <option value="">نشاط اخر</option>
                 </select>
               </div>
             )}
+              {errors.image_prompt && <div className="error-message">{errors.image_prompt}</div>}
+
+          
+            <input
+              className="in-btn-small"
+              type="text"
+              name="choice"
+              value={formData.choices}
+              onChange={handleChange}
+              placeholder="ادخل كلمة واحدة"
+            />
+            <label className="lbl-inln ">نشاط اخر</label>
+            
 
             <div className="select-container">
               <label className="lbl">اختر مكان القصة</label>
@@ -155,13 +271,13 @@ const FormPage = () => {
                 value={formData.place}
                 onChange={handleChange}
               >
-                <option value="">اختر مكان القصة </option>
+                <option value="" hidden>اختر مكان القصة </option>
                 <option value="msgarden">حديقة</option>
                 <option value="msschool">مدرسة</option>
                 <option value="msmosque"> مسجد</option>
               </select>
             </div>
-
+            {errors.place && <div className="error-message">{errors.place}</div>}
             <div>
               <label className="lbl">الفكرة الرئيسيه للقصة</label>
               <textarea
@@ -172,6 +288,9 @@ const FormPage = () => {
                 className="in-btn"
               />
             </div>
+            {errorPrompt && <div className="error-message">{errorPrompt}</div>}
+            {errors.insert_prompt && <div className="error-message">{errors.insert_prompt}</div>}
+            
 
             <div className="btn-container">
               <button className="btn" type="submit">

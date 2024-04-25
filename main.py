@@ -5,7 +5,7 @@ import openai
 from openai import OpenAI
 import text_to_speech 
 import text_to_story
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
 import re  
 from PIL import Image
 import io

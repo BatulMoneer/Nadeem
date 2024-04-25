@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "../App.css";
+import React, { useState, useEffect, useRef } from "react";
+import "./StoryPage.css";
 import Header from "./Header";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -7,13 +7,26 @@ import LikeButton from "../addings/Group 401.png";
 import AddButton from "../addings/Group 400.png";
 import SoundButton from "../addings/Group 399.png";
 import FullscreenButton from "../addings/Group 398.png";
+import StoryBook from "../addings/StoryBook.png"
+import StoryClouds from "../addings/StoryClouds.png"
+import StoryFrame from "../addings/StoryFrame.png"
+import ExitFullScreen from "../addings/ExitFullScreen.png"
+
+
+
 
 const StoryPage = () => {
+
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
+  const storyContentRef = useRef(null); // Ref for the story content div
+  const exitFullScreenRef = useRef(null);
+
+
+
 
   // Function to fetch and display the story automatically when the component loads
   useEffect(() => {
@@ -114,7 +127,6 @@ const StoryPage = () => {
       if (response.ok) {
         const jsonResponse = await response.json();
         setAudioData(jsonResponse.AudioBase64); // Set the audio data state
-        alert("Sound generated successfully");
       } else {
         throw new Error("Failed to fetch from the backend");
       }
@@ -124,50 +136,105 @@ const StoryPage = () => {
     }
   };
 
+
   const handleFullScreen = () => {
-    console.log("FullScreen button clicked");
+    if (storyContentRef.current) {
+      const element = storyContentRef.current;
+      const isFullscreen = document.fullscreenElement;
+
+      const onFullScreenChange = () => {
+        if (document.fullscreenElement) {
+          element.classList.add("full-screen-active");
+          console.log("Entering full-screen mode...");
+        } else {
+          element.classList.remove("full-screen-active");
+          console.log("Exiting full-screen mode...");
+        }
+      };
+
+      document.addEventListener("fullscreenchange", onFullScreenChange);
+
+      if (!isFullscreen) {
+        if (element.requestFullscreen) {
+          element.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+          });
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
   };
+
+  const handleExitFullScreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
+
 
   return (
     <div className="storypage">
       <Header />
-      <div className="button-container">
-        <button onClick={handleLike}>
-          <img src={LikeButton} alt="Like" />
-        </button>
-        <button onClick={handleAdd}>
-          <img src={AddButton} alt="Add" />
-        </button>
-        <button onClick={handleSound}>
-          <img src={SoundButton} alt="Sound" />
-        </button>
-        <button onClick={handleFullScreen}>
-          <img src={FullscreenButton} alt="FullScreen" />
-        </button>
-      </div>
-      <div className="story-output">
-        {story && (
-          <div>
-            <h3>Generated Story:</h3>
-            <p>{story}</p>
+      <div className="story-bigframe">
+        <img src={StoryClouds} alt="Clouds" className='story-clouds' />
+        <div className="story-section">
+          <img src={StoryFrame} alt="Frame" className='story-frame' />
+          <div className="story-content" ref={storyContentRef}>
+            <div>
+              <img src={StoryBook} alt="Book" className='story-book' />
+              <div className="left-page">
+                {/* Story text output */}
+                <div className="story-output">
+                  {story && (
+                    <div>
+                      <p>{story}</p>
+                    </div>
+                  )}
+                  {audioData && (
+                    <audio autoPlay src={audioData} className="audio">
+                      Your browser does not support the audio element.
+                    </audio>
+                  )}
+                </div>
+              </div>
+              <div className="right-page">
+                {/* Story image output */}
+                {imageSrc ? (
+                  <img
+                    src={imageSrc}
+                    alt="Generated from AI"
+                    className="story-image"
+                  />
+                ) : (
+                  <p></p>
+                )}
+              </div>
+            </div>
+            <div className="button-container">
+              <button onClick={handleLike}>
+                <img src={LikeButton} alt="Like" />
+              </button>
+              <button onClick={handleAdd}>
+                <img src={AddButton} alt="Add" />
+              </button>
+              <button onClick={handleSound}>
+                <img src={SoundButton} alt="Sound" />
+              </button>
+              <button onClick={handleFullScreen}>
+                <img src={FullscreenButton} alt="FullScreen" />
+              </button>
+            </div>
+            <button
+              ref={exitFullScreenRef}
+              className="exit-fullscreen-button"
+              onClick={handleExitFullScreen}>
+              <img src={ExitFullScreen} alt="Exit full-screen" />
+            </button>
           </div>
-        )}
-      </div>
-      {audioData && (
-        <audio autoPlay controls src={audioData}>
-          gvv Your browser does not support the audio element.
-        </audio>
-      )}
-      <div>
-        {imageSrc ? (
-          <img
-            src={imageSrc}
-            alt="Generated from AI"
-            style={{ width: "100%", height: "auto" }}
-          />
-        ) : (
-          <p>Loading image...</p>
-        )}
+        </div>
       </div>
     </div>
   );

@@ -100,9 +100,10 @@
     color: #835074;
     text-align: center;
     font-weight: bold;
-    
+
 }
-.dif-txy{
+
+.dif-txy {
     color: #eabb68;
     display: block;
 }
@@ -115,7 +116,9 @@
     top: 9.5vh;
     transition: all 0.3s ease;
     padding: 20px;
+    z-index: 150;
 }
+
 .btn {
     font-size: 1.3rem;
     font-weight: bold;
@@ -125,19 +128,22 @@
     border-radius: 50px;
     border: none;
     padding: 15px 60px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); /* Optional: add shadow to button */
-    cursor: pointer; 
-    transition: background-color 0.3s ease; /* Smooth background color transition */
-    
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    /* Optional: add shadow to button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth background color transition */
+
 }
 
 .btn-container :hover {
     transform: scale(1.1);
-     background-color: #eabb68;
+    background-color: #eabb68;
 }
+
 input::placeholder {
     color: grey;
-  }
+}
 
 .in-btn {
     border-radius: 80px;
@@ -146,29 +152,31 @@ input::placeholder {
     height: 90%;
     width: 30%;
     padding: 1% 3%;
-    color:  #835074;
+    color: #835074;
     font-family: 'Droid Arabic Kufi', serif;
     box-shadow: 0 4px 8px rgba(55, 54, 54, 0.5);
     position: relative;
     left: 0.9rem;
     font-size: 0.9rem;
 }
-.in-btn:focus{
+
+.in-btn:focus {
     border-color: #835074;
     outline: #835074;
     border-width: 10px;
-    color:#835074 ;
+    color: #835074;
     font-weight: 400;
 }
-.in-btn:after{
-    color:#835074 ;
+
+.in-btn:after {
+    color: #835074;
 }
 
-.in-btn-error{
+.in-btn-error {
     border-radius: 80px;
     border: bold;
     border: #760505;
-    
+
     text-align: right;
     height: 90%;
     width: 30%;
@@ -180,7 +188,8 @@ input::placeholder {
     left: 0.9rem;
     font-size: 0.9rem;
 }
-.in-btn-error:focus{
+
+.in-btn-error:focus {
     outline: #760505;
     border-width: 2rem;
 }
@@ -229,10 +238,10 @@ input::placeholder {
 .select-container option {
     padding: 10px;
     padding-right: 20px;
-    color: #835074; 
-    font-family: 'Droid Arabic Kufi', serif; 
-    border-bottom: 1px solid #835074; 
-    border-radius: 3rem; 
+    color: #835074;
+    font-family: 'Droid Arabic Kufi', serif;
+    border-bottom: 1px solid #835074;
+    border-radius: 3rem;
 }
 
 
@@ -241,30 +250,34 @@ input::placeholder {
     display: inline-block;
     position: relative;
     padding: 10px;
-    padding-right: 30px; /* Space for custom radio button on the right */
+    padding-right: 30px;
+    /* Space for custom radio button on the right */
     margin-right: 3px;
     cursor: pointer;
     display: inline-block;
     font-size: 16px;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
+    /* Prevent text selection */
     color: #835074;
     line-height: 0px;
     font-family: 'Droid Arabic Kufi', serif;
 
-  }
-  
-  /* Hide the actual radio button */
-  .real-radio-btn {
+}
+
+/* Hide the actual radio button */
+.real-radio-btn {
     opacity: 0;
     position: absolute;
-    right: 0; /* Positioned on the right */
-  }
-  
-  /* Custom radio style */
-  .custom-radio {
+    right: 0;
+    /* Positioned on the right */
+}
+
+/* Custom radio style */
+.custom-radio {
     position: absolute;
     top: 0;
-    right: 0; /* Positioned on the right */
+    right: 0;
+    /* Positioned on the right */
     height: 20px;
     width: 20px;
     background-color: #f4f4f4;
@@ -272,18 +285,19 @@ input::placeholder {
     border: 1.5px solid #ccc;
     box-shadow: 0px 1px 5px #5e5e5e, 0px 0px 3px #5a5a5a;
 
-  }
-  
-  /* When radio button is checked, change custom radio style */
-  .real-radio-btn:checked + .custom-radio {
+}
+
+/* When radio button is checked, change custom radio style */
+.real-radio-btn:checked+.custom-radio {
     background-color: #835074;
     border-color: #835074;
-  }
-  
-  /* Hover effect on custom radio */
-  .custom-radio:hover {
+}
+
+/* Hover effect on custom radio */
+.custom-radio:hover {
     background-color: #e8e8e8;
-  }
+}
+
 .select-btn {
     border-radius: 3rem;
     border: none;
@@ -292,7 +306,7 @@ input::placeholder {
     padding: 1% 3%;
     left: 0.9rem;
     padding-right: 1%;
-    color:#835074;
+    color: #835074;
     font-family: 'Droid Arabic Kufi', serif;
     box-shadow: 0 4px 8px rgba(55, 54, 54, 0.5);
     position: relative;
@@ -323,9 +337,10 @@ input::placeholder {
     margin: 1PX;
     margin-top: 20px;
 }
-.error-message{  
+
+.error-message {
     font-family: 'Droid Arabic Kufi', serif;
-    font-size: 0.8rem ;
+    font-size: 0.8rem;
     padding-top: 7px;
     color: #760505;
 
@@ -337,12 +352,12 @@ input::placeholder {
 
     .form-nadeem {
         height: 55%;
-        top: 33rem;
+        top: 37.2rem;
     }
 
     .nadeem-speech {
         transform: scale(0.9);
-        top: 10rem;
+        top: 15rem;
     }
 }
 
@@ -350,12 +365,12 @@ input::placeholder {
 
     .form-nadeem {
         height: 47%;
-        top: 36rem;
+        top: 40.5rem;
     }
 
     .nadeem-speech {
         transform: scale(0.8);
-        top: 15rem;
+        top: 20rem;
     }
 }
 
@@ -399,6 +414,3 @@ input::placeholder {
         width: 25%;
     }
 }
-
-
-  

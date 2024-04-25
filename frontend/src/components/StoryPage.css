@@ -1,0 +1,366 @@
+/* Story Page Background */
+.storypage {
+    background-image: url('../addings/StoryPage.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+}
+
+.story-bigframe {
+    position: relative;
+}
+
+.story-clouds {
+    top: 6rem;
+    left: 3%;
+    position: absolute;
+    width: 90%;
+    height: auto;
+}
+
+.story-section {
+    position: relative;
+}
+
+.story-content {
+    position: relative;
+    align-items: center;
+    top: 17rem;
+
+}
+
+.story-frame {
+    top: 15rem;
+    left: 6%;
+    position: absolute;
+    width: 90%;
+    height: auto;
+}
+
+.story-book {
+    left: 13%;
+    top: 4rem;
+    position: absolute;
+    width: 77%;
+    height: auto;
+    z-index: 10;
+}
+
+.button-container {
+    width: 60%;
+    top: 2rem;
+    left: 50%;
+    /* Center the container */
+    /* Use flexbox for internal alignment */
+    justify-content: space-evenly;
+    /* Space out the buttons evenly */
+    align-items: center;
+    /* Align buttons vertically */
+    padding: 1rem;
+    /* Add some padding around the buttons */
+}
+
+.button-container button img {
+    width: 10vw;
+    /* Use viewport width for scaling */
+    height: auto;
+    /* Maintain aspect ratio */
+    transition: transform 0.3s ease;
+}
+
+.button-container button:hover img {
+    transform: scale(1.1);
+    /* Scales the image up on hover */
+}
+
+
+
+/* Fullscreen adjustments */
+.full-screen-active .button-container {
+    display: none;
+    /* Hide buttons in fullscreen mode */
+}
+
+.full-screen-active .story-book,
+.full-screen-active .story-output {
+    /* Increase sizes for better visibility */
+    width: 85%;
+    top: -9%;
+    left: 10%;
+    align-items: center;
+}
+
+.full-screen-active .story-output {
+    left: 12.5rem;
+    font-size: 1.4rem;
+    width: 100%;
+    /* Larger text in fullscreen */
+    /* Adjust vertical position for readability */
+}
+
+.full-screen-active .right-page {
+    top: 10rem;
+}
+
+.full-screen-active .story-image {
+    width: 90%;
+}
+
+.exit-fullscreen-button {
+    display: none;
+    /* Hide the button by default */
+    position: fixed;
+    /* Fixed position to keep it in place */
+    top: 2rem;
+    /* Adjust the position as needed */
+    right: 2rem;
+    /* Adjust the position as needed */
+    z-index: 1000;
+    background-color: black;
+    border: none;
+    /* Ensure it's above all other content */
+}
+
+.exit-fullscreen-button img {
+    width: 6rem;
+    height: auto;
+}
+
+
+.full-screen-active .exit-fullscreen-button {
+    display: block;
+    /* Show the button in fullscreen mode */
+}
+
+.left-page {
+    position: absolute;
+    top: 32rem;
+    /* Adjust as needed */
+    bottom: 50px;
+    /* Adjust as needed */
+    left: 19%;
+    /* Adjust as needed */
+    right: 50%;
+    /* Adjust as needed */
+}
+
+.right-page {
+    position: absolute;
+    top: 17rem;
+    /* Adjust as needed */
+    bottom: 50px;
+    /* Adjust as needed */
+    left: 52%;
+    /* Adjust to the center spine of the book */
+    right: 10%;
+    /* Adjust as needed */
+    padding: 20px;
+    /* Adjust as needed */
+    z-index: 15;
+}
+
+/* Story Output */
+.story-output {
+    /* Adjust this value to position the story text over the book */
+
+    width: 97%;
+    /* Set a max width for the text */
+    text-align: center;
+    /* Center the text within the div */
+    font-family: 'Droid Arabic Kufi', serif;
+    /* Use the special font you imported */
+    font-size: 0.93rem;
+    /* Adjust as needed */
+    color: #333;
+    /* Change the color as needed */
+    z-index: 10;
+    /* Ensure it's above the background image */
+}
+
+.story-image {
+    width: 80%;
+    height: auto;
+    /* You might not need to adjust the width and height if the parent container is sized correctly */
+}
+
+@media (max-width: 1324px) {
+
+    .right-page {
+        top: 15rem;
+    }
+
+    .left-page {
+        top: 27.5rem;
+    }
+
+    .story-output {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 1224px) {
+
+    .button-container {
+        top: 0.9rem;
+    }
+
+    .story-book {
+        top: 2.8rem;
+    }
+
+    .right-page {
+        top: 13.5rem;
+    }
+
+    .left-page {
+        top: 25rem;
+    }
+
+    .story-output {
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 1090px) {
+
+    .button-container {
+        top: 0.2rem;
+    }
+
+    .story-book {
+        top: 2.3rem;
+    }
+
+    .right-page {
+        top: 11.5rem;
+    }
+
+    .left-page {
+        top: 22rem;
+    }
+
+    .story-output {
+        font-size: 0.68rem;
+    }
+}
+
+@media (max-width: 960px) {
+
+    .button-container {
+        top: 0rem;
+    }
+
+    .story-book {
+        top: 1.7rem;
+    }
+
+    .right-page {
+        top: 9.5rem;
+    }
+
+    .left-page {
+        top: 19rem;
+    }
+
+    .story-output {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 820px) {
+
+    .button-container {
+        top: -0.4rem;
+    }
+
+    .story-book {
+        top: 1.2rem;
+    }
+
+    .right-page {
+        top: 7.5rem;
+    }
+
+    .left-page {
+        top: 16rem;
+    }
+
+    .story-output {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .button-container {
+        top: -0.5rem;
+    }
+
+    .story-book {
+        top: 0.8rem;
+    }
+
+    .right-page {
+        top: 6.5rem;
+    }
+
+    .left-page {
+        top: 14rem;
+    }
+
+    .story-output {
+        font-size: 0.4rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .button-container {
+        top: -1rem;
+    }
+
+    .story-book {
+        top: 0.6rem;
+    }
+
+    .right-page {
+        top: 5.5rem;
+    }
+
+    .left-page {
+        top: 11.5rem;
+    }
+
+    .story-output {
+        font-size: 0.32rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .button-container {
+        top: -1.2rem;
+    }
+
+    .story-book {
+        top: 0.55rem;
+    }
+
+    .right-page {
+        top: 5rem;
+    }
+
+    .left-page {
+        top: 6rem;
+    }
+
+    .story-output {
+        font-size: 0.35rem;
+    }
+}
+
+.audio {
+    border: #333;
+}

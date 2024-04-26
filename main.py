@@ -34,9 +34,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",   # React's default port
-    "http://127.0.0.1:3000",    # localhost with explicit IP
-    "http://localhost",        # without port (for cases where React dev server uses a different port)
-    "http://127.0.0.1"         # without port (for cases where React dev server uses a different port)
+    "http://127.0.0.1:3000",    # localhost with explicit IP        # without port (for cases where React dev server uses a different port)
 ]
 
 app.add_middleware(
@@ -92,18 +90,24 @@ async def generate_speech():
         "AudioBase64": audio_string  # Send the Base64 string
     }
 
+from fastapi.responses import StreamingResponse
+
 @app.post("/generate-image/{prompt}")
 async def generate_image(prompt: str):
     try:
         # Query Hugging Face API to get image bytes
         image_bytes = await story_to_image.query_hugging_face(prompt)
-        
         # Return the image bytes as a response
-        return StreamingResponse(io.BytesIO(image_bytes), media_type="image/png")
+        return StreamingResponse(
+            io.BytesIO(image_bytes),
+            media_type="image/png",
+            headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
+)
     except HTTPException as e:
         # In case of an HTTPException from query_hugging_face,
         # it will be caught and returned here.
         return JSONResponse({"error": e.detail}, status_code=e.status_code)
+
 
 
 

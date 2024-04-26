@@ -204,7 +204,7 @@
 }
 
 .modal-content {
-    background: white;
+    background: rgb(234, 187, 104);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -256,6 +256,240 @@
     animation: spin 1s linear infinite;
     /* Spinner animation */
 }
+/*feedback*/
+.small-btn-container {
+    position: relative;
+    left: 15%;
+    top: 7.5vh;
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.small-btn {
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    background-color: #835074;
+    color: #ffffff;
+    border-radius: 50px;
+    border: none;
+    padding: 15px 60px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    /* Optional: add shadow to button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth background color transition */
+
+}
+
+.small-btn-container :hover {
+    transform: scale(1.1);
+    background-color: #F9DCA8;
+    color: #835074;
+}
+/*rrrr*/
+.radio-buttons {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 1vh; /* Full viewport height */
+  }
+  
+  .radio-button input[type="radio"] {
+    display: none;
+  }
+  .radio-button label {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: center;
+    transition: background-image 0.3s ease; /* Smooth transition for background image */
+  }
+  
+  .like-label {
+    background-image: url('../addings/Group\ 394.png'); /* Path to your like icon */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 1vh;
+  }
+  
+  .dislike-label {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 1vh;
+    background-image: url('../addings/Group\ 395.png'); /* Path to your dislike icon */
+  }
+  
+  .radio-button input[type="radio"]:checked + .like-label {
+    background-image: url('../addings/Group\ lk\ .png'); /* Path to your active like icon */
+  }
+  
+  .radio-button input[type="radio"]:checked + .dislike-label {
+    background-image: url('../addings/Group\ uk.png'); 
+  }
+  .in-btn1 {
+    border-radius: 80px;
+    border: none;
+    text-align: right;
+    width: 90%;
+    color: #C4C4C4;
+    font-family: 'Droid Arabic Kufi', serif;
+    box-shadow: 0 4px 8px rgba(55, 54, 54, 0.5);
+    position: relative;
+    margin: 1PX;
+    padding: 10px;
+}
+.lbl1 {
+    display: block;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 25px;
+}
+  
+ 
+  
+  
+  
+
+/*feedback*/
+.small-btn-container {
+    position: relative;
+    left: 15%;
+    top: 7.5vh;
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.small-btn {
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    background-color: #835074;
+    color: #ffffff;
+    border-radius: 50px;
+    border: none;
+    padding: 15px 60px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    /* Optional: add shadow to button */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth background color transition */
+
+}
+
+.small-btn-container :hover {
+    transform: scale(1.1);
+    background-color: #F9DCA8;
+    color: #835074;
+}
+
+/*rrrr*/
+.radio-buttons {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    min-height: 1vh;
+    /* Full viewport height */
+}
+
+.radio-button input[type="radio"] {
+    display: none;
+}
+
+.radio-button label {
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: center;
+    transition: background-image 0.3s ease;
+    /* Smooth transition for background image */
+}
+
+.like-label {
+    background-image: url('../addings/Group\ 394.png');
+    /* Path to your like icon */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    min-height: 1vh;
+}
+
+.dislike-label {
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    min-height: 1vh;
+    background-image: url('../addings/Group\ 395.png');
+    /* Path to your dislike icon */
+}
+
+.radio-button input[type="radio"]:checked+.like-label {
+    background-image: url('../addings/Group\ lk\ .png');
+    /* Path to your active like icon */
+}
+
+.radio-button input[type="radio"]:checked+.dislike-label {
+    background-image: url('../addings/Group\ uk.png');
+}
+
+.in-btn1 {
+    border-radius: 80px;
+    border: none;
+    text-align: right;
+    width: 90%;
+    color: #C4C4C4;
+    font-family: 'Droid Arabic Kufi', serif;
+    box-shadow: 0 4px 8px rgba(55, 54, 54, 0.5);
+    position: relative;
+    margin: 1PX;
+    padding: 10px;
+}
+
+.lbl1 {
+    display: block;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+
+
+
 
 @keyframes spin {
     0% {

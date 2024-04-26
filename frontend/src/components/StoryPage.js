@@ -11,11 +11,16 @@ import StoryBook from "../addings/StoryBook.png"
 import StoryClouds from "../addings/StoryClouds.png"
 import StoryFrame from "../addings/StoryFrame.png"
 import ExitFullScreen from "../addings/ExitFullScreen.png"
+import Loading from "../addings/Loading.png"
 
 
 
 
 const StoryPage = () => {
+
+  const [isStoryLoading, setIsStoryLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
@@ -24,6 +29,8 @@ const StoryPage = () => {
   const navigate = useNavigate();
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
+  const isLoading = isStoryLoading || isImageLoading || imageSrc;
+
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -56,6 +63,7 @@ const StoryPage = () => {
     const url = "http://localhost:8000/generate_story/";
 
     const fetchStory = async () => {
+      setIsStoryLoading(true); // Start loading
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -75,6 +83,7 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Error:", error);
       }
+      setIsStoryLoading(false);
     };
 
     fetchStory();
@@ -94,6 +103,7 @@ const StoryPage = () => {
       combinedVariable
     )}`;
     const fetchImage = async () => {
+      setIsImageLoading(true);
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -115,7 +125,9 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Failed to fetch image:", error);
       }
+      setIsImageLoading(false);
     };
+
 
     fetchImage();
   }, [location.state]);
@@ -256,6 +268,11 @@ const StoryPage = () => {
         </div>
       </div>
       <RatingModal isOpen={isModalOpen} onClose={toggleModal} />
+      {isLoading && (
+        <div className="loading-container">
+          <img src={Loading} alt="Loading" className="spinner" />
+        </div>
+      )}
     </div>
   );
 };

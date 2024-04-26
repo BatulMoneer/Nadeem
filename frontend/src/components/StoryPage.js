@@ -15,7 +15,7 @@ import Loading from "../addings/Loading.png";
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
-  const [isImageLoading, setIsImageLoading] = useState(false);
+  //const [isImageLoading, setIsImageLoading] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
@@ -25,7 +25,7 @@ const StoryPage = () => {
   const navigate = useNavigate();
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
-  const isLoading = isStoryLoading || isImageLoading;
+  const isLoading = isStoryLoading;
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -112,10 +112,10 @@ const StoryPage = () => {
 
   async function query(data) {
     let response = await fetch(
-      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
+      "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem",
       {
         headers: {
-          Authorization: "Bearer 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",
+          Authorization: "Bearer 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",
           "Content-Type": "application/json",
           "Cache-Control": "no-cache", // Prevent caching
         },

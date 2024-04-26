@@ -61,8 +61,8 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
                         "and set in familiar places like schools, gardens, mosques, and homes. Each tale is a short adventure, "
                         "about 20-25 sentences, designed to instill values like honesty, helping others, and devotion, "
                         "all while being compatible with Islamic morals and presented in Arabic. "
-                        "Start the story directly without opening words. At the end of the story, write a list of keywords of the story in English. "
-                        "Do not include the character's name as a keyword. Write the story with the appropriate يجب ان تضع تشكيل على جميع الكلمات.")
+                        "Start the story directly without opening words. At the end of the story,"
+                        " Write the story with the appropriate يجب ان تضع تشكيل على جميع الكلمات.")
                 },
                 # f"{} is a way to include variables or expressions inside a string.
                 {"role": "user", "content": f"{insert_prompt} أكتب علامات التشكيل على جميع الكلمات والحروف."},

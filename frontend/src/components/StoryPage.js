@@ -42,12 +42,35 @@ const StoryPage = () => {
     return (
       <div className="modal-backdrop">
         <div className="modal-content">
-          <h2>Rate this Story</h2>
-          <p>Give your rating about the story here.</p>
-          {/* Implement your rating logic */}
-          <button onClick={onClose} className="modal-close-button">✖</button>
+          <label className="lbl1">قييم االقصة</label>
+          <div className="radio-buttons">
+          <div className="radio-button">
+            <input type="radio" id="like" name="reaction" value="like"/>
+            <label htmlFor="like" className="like-label"></label>
+          </div>
+          <div className="radio-button">
+            <input type="radio" id="dislike" name="reaction" value="dislike"/>
+            <label htmlFor="dislike" className="dislike-label"></label>
+          </div>
         </div>
-      </div>
+        <div>
+        <input
+                name=""
+                value=""
+                placeholder="في حال الاستياء من القصة اكتب السبب"
+                className="in-btn1"
+              />  
+        </div>
+          {/* Implement your rating logic */}
+          
+
+          <div className="small-btn-container">
+              <button className="small-btn"  onClick={onClose}>
+                ارسال
+              </button>
+            </div>
+        </div>
+        </div>
     );
   };
 

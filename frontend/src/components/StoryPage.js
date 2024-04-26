@@ -16,7 +16,7 @@ import ExitFullScreen from "../addings/ExitFullScreen.png"
 
 
 const StoryPage = () => {
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -25,7 +25,24 @@ const StoryPage = () => {
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
 
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
+  const RatingModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="modal-backdrop">
+        <div className="modal-content">
+          <h2>Rate this Story</h2>
+          <p>Give your rating about the story here.</p>
+          {/* Implement your rating logic */}
+          <button onClick={onClose} className="modal-close-button">✖</button>
+        </div>
+      </div>
+    );
+  };
 
 
   // Function to fetch and display the story automatically when the component loads
@@ -110,7 +127,9 @@ const StoryPage = () => {
 
   const handleLike = () => {
     console.log("Like button clicked");
+    toggleModal(); // Toggle modal visibility
   };
+
 
   const handleSound = async (e) => {
     e.preventDefault();
@@ -236,6 +255,7 @@ const StoryPage = () => {
           </div>
         </div>
       </div>
+      <RatingModal isOpen={isModalOpen} onClose={toggleModal} />
     </div>
   );
 };

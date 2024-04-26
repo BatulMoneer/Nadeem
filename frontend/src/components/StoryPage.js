@@ -11,8 +11,13 @@ import StoryBook from "../addings/StoryBook.png";
 import StoryClouds from "../addings/StoryClouds.png";
 import StoryFrame from "../addings/StoryFrame.png";
 import ExitFullScreen from "../addings/ExitFullScreen.png";
+import Loading from "../addings/Loading.png";
 
 const StoryPage = () => {
+  const [isStoryLoading, setIsStoryLoading] = useState(false);
+  const [isImageLoading, setIsImageLoading] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -20,8 +25,54 @@ const StoryPage = () => {
   const navigate = useNavigate();
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
+  const isLoading = isStoryLoading || isImageLoading;
 
-  // Function to fetch and display the story automatically when the component loads
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const RatingModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="modal-backdrop">
+        <div className="modal-content">
+          <label className="lbl1">قييم االقصة</label>
+          <div className="radio-buttons">
+            <div className="radio-button">
+              <input type="radio" id="like" name="reaction" value="like" />
+              <label htmlFor="like" className="like-label"></label>
+            </div>
+            <div className="radio-button">
+              <input
+                type="radio"
+                id="dislike"
+                name="reaction"
+                value="dislike"
+              />
+              <label htmlFor="dislike" className="dislike-label"></label>
+            </div>
+          </div>
+          <div>
+            <input
+              name=""
+              value=""
+              placeholder="في حال الاستياء من القصة اكتب السبب"
+              className="in-btn1"
+            />
+          </div>
+          {/* Implement your rating logic */}
+
+          <div className="small-btn-container">
+            <button className="small-btn" onClick={onClose}>
+              ارسال
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Function to fetch and display the story automatically when the component loads
   useEffect(() => {
     if (!location.state) {
@@ -33,6 +84,7 @@ const StoryPage = () => {
     const url = "http://localhost:8000/generate_story/";
 
     const fetchStory = async () => {
+      setIsStoryLoading(true);
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -52,6 +104,7 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Error:", error);
       }
+      setIsStoryLoading(false);
     };
 
     fetchStory();
@@ -99,7 +152,6 @@ const StoryPage = () => {
 
     fetchImage();
   }, [location]);
-
   // Function to navigate back to the form page
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
@@ -107,6 +159,7 @@ const StoryPage = () => {
 
   const handleLike = () => {
     console.log("Like button clicked");
+    toggleModal(); // Toggle modal visibility
   };
 
   const handleSound = async (e) => {
@@ -234,6 +287,12 @@ const StoryPage = () => {
           </div>
         </div>
       </div>
+      <RatingModal isOpen={isModalOpen} onClose={toggleModal} />
+      {isLoading && (
+        <div className="loading-container">
+          <img src={Loading} alt="Loading" className="spinner" />
+        </div>
+      )}
     </div>
   );
 };

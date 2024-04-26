@@ -22,6 +22,7 @@ const StoryPage = () => {
   const exitFullScreenRef = useRef(null);
 
   // Function to fetch and display the story automatically when the component loads
+  // Function to fetch and display the story automatically when the component loads
   useEffect(() => {
     if (!location.state) {
       console.log("No form data provided");
@@ -32,7 +33,6 @@ const StoryPage = () => {
     const url = "http://localhost:8000/generate_story/";
 
     const fetchStory = async () => {
-      setIsStoryLoading(true); // Start loading
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -52,7 +52,6 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Error:", error);
       }
-      setIsStoryLoading(false);
     };
 
     fetchStory();
@@ -87,7 +86,6 @@ const StoryPage = () => {
     const combinedVariable = `${place},${image_prompt}`;
 
     const fetchImage = async () => {
-      setIsImageLoading(true);
       try {
         const imageBlob = await query({ inputs: combinedVariable });
         const imageObjectURL = URL.createObjectURL(imageBlob);
@@ -97,11 +95,10 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Failed to fetch image:", error);
       }
-      setIsImageLoading(false);
     };
 
     fetchImage();
-  }, [response]);
+  }, [location]);
 
   // Function to navigate back to the form page
   const handleAdd = () => {
@@ -110,7 +107,6 @@ const StoryPage = () => {
 
   const handleLike = () => {
     console.log("Like button clicked");
-    toggleModal(); // Toggle modal visibility
   };
 
   const handleSound = async (e) => {
@@ -238,12 +234,6 @@ const StoryPage = () => {
           </div>
         </div>
       </div>
-      <RatingModal isOpen={isModalOpen} onClose={toggleModal} />
-      {isLoading && (
-        <div className="loading-container">
-          <img src={Loading} alt="Loading" className="spinner" />
-        </div>
-      )}
     </div>
   );
 };

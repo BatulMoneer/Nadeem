@@ -7,21 +7,12 @@ import LikeButton from "../addings/Group 401.png";
 import AddButton from "../addings/Group 400.png";
 import SoundButton from "../addings/Group 399.png";
 import FullscreenButton from "../addings/Group 398.png";
-import StoryBook from "../addings/StoryBook.png"
-import StoryClouds from "../addings/StoryClouds.png"
-import StoryFrame from "../addings/StoryFrame.png"
-import ExitFullScreen from "../addings/ExitFullScreen.png"
-import Loading from "../addings/Loading.png"
-
-
-
+import StoryBook from "../addings/StoryBook.png";
+import StoryClouds from "../addings/StoryClouds.png";
+import StoryFrame from "../addings/StoryFrame.png";
+import ExitFullScreen from "../addings/ExitFullScreen.png";
 
 const StoryPage = () => {
-
-  const [isStoryLoading, setIsStoryLoading] = useState(false);
-  const [isImageLoading, setIsImageLoading] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -42,35 +33,12 @@ const StoryPage = () => {
     return (
       <div className="modal-backdrop">
         <div className="modal-content">
-          <label className="lbl1">قييم االقصة</label>
-          <div className="radio-buttons">
-          <div className="radio-button">
-            <input type="radio" id="like" name="reaction" value="like"/>
-            <label htmlFor="like" className="like-label"></label>
-          </div>
-          <div className="radio-button">
-            <input type="radio" id="dislike" name="reaction" value="dislike"/>
-            <label htmlFor="dislike" className="dislike-label"></label>
-          </div>
-        </div>
-        <div>
-        <input
-                name=""
-                value=""
-                placeholder="في حال الاستياء من القصة اكتب السبب"
-                className="in-btn1"
-              />  
-        </div>
+          <h2>Rate this Story</h2>
+          <p>Give your rating about the story here.</p>
           {/* Implement your rating logic */}
-          
-
-          <div className="small-btn-container">
-              <button className="small-btn"  onClick={onClose}>
-                ارسال
-              </button>
-            </div>
+          <button onClick={onClose} className="modal-close-button">✖</button>
         </div>
-        </div>
+      </div>
     );
   };
 
@@ -86,7 +54,6 @@ const StoryPage = () => {
     const url = "http://localhost:8000/generate_story/";
 
     const fetchStory = async () => {
-      setIsStoryLoading(true); // Start loading
       try {
         const response = await fetch(url, {
           method: "POST",
@@ -106,11 +73,28 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Error:", error);
       }
-      setIsStoryLoading(false);
     };
 
     fetchStory();
   }, [location]);
+
+  async function query(data) {
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
+      {
+        headers: {
+          Authorization: "Bearer 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",
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache", // Prevent caching
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+
+    return result;
+  }
 
   useEffect(() => {
     // Checking if there's state provided from navigation
@@ -122,25 +106,9 @@ const StoryPage = () => {
     const { place, image_prompt } = location.state;
     const combinedVariable = `${place},${image_prompt}`;
 
-    const url = `http://localhost:8000/generate-image/${encodeURIComponent(
-      combinedVariable
-    )}`;
     const fetchImage = async () => {
-      setIsImageLoading(true);
       try {
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify({ place, image_prompt }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const imageBlob = await response.blob();
+        const imageBlob = await query({ inputs: combinedVariable });
         const imageObjectURL = URL.createObjectURL(imageBlob);
         setImageSrc(imageObjectURL);
         console.log("Image fetched successfully");
@@ -148,12 +116,10 @@ const StoryPage = () => {
       } catch (error) {
         console.error("Failed to fetch image:", error);
       }
-      setIsImageLoading(false);
     };
 
-
     fetchImage();
-  }, [location.state]);
+  }, [location]);
 
   // Function to navigate back to the form page
   const handleAdd = () => {
@@ -162,9 +128,7 @@ const StoryPage = () => {
 
   const handleLike = () => {
     console.log("Like button clicked");
-    toggleModal(); // Toggle modal visibility
   };
-
 
   const handleSound = async (e) => {
     e.preventDefault();
@@ -190,7 +154,6 @@ const StoryPage = () => {
     }
   };
 
-
   const handleFullScreen = () => {
     if (storyContentRef.current) {
       const element = storyContentRef.current;
@@ -210,8 +173,10 @@ const StoryPage = () => {
 
       if (!isFullscreen) {
         if (element.requestFullscreen) {
-          element.requestFullscreen().catch(err => {
-            console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+          element.requestFullscreen().catch((err) => {
+            console.error(
+              `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+            );
           });
         }
       } else {
@@ -228,17 +193,16 @@ const StoryPage = () => {
     }
   };
 
-
   return (
     <div className="storypage">
       <Header />
       <div className="story-bigframe">
-        <img src={StoryClouds} alt="Clouds" className='story-clouds' />
+        <img src={StoryClouds} alt="Clouds" className="story-clouds" />
         <div className="story-section">
-          <img src={StoryFrame} alt="Frame" className='story-frame' />
+          <img src={StoryFrame} alt="Frame" className="story-frame" />
           <div className="story-content" ref={storyContentRef}>
             <div>
-              <img src={StoryBook} alt="Book" className='story-book' />
+              <img src={StoryBook} alt="Book" className="story-book" />
               <div className="left-page">
                 {/* Story text output */}
                 <div className="story-output">
@@ -284,18 +248,13 @@ const StoryPage = () => {
             <button
               ref={exitFullScreenRef}
               className="exit-fullscreen-button"
-              onClick={handleExitFullScreen}>
+              onClick={handleExitFullScreen}
+            >
               <img src={ExitFullScreen} alt="Exit full-screen" />
             </button>
           </div>
         </div>
       </div>
-      <RatingModal isOpen={isModalOpen} onClose={toggleModal} />
-      {isLoading && (
-        <div className="loading-container">
-          <img src={Loading} alt="Loading" className="spinner" />
-        </div>
-      )}
     </div>
   );
 };

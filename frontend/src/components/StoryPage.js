@@ -7,16 +7,12 @@ import LikeButton from "../addings/Group 401.png";
 import AddButton from "../addings/Group 400.png";
 import SoundButton from "../addings/Group 399.png";
 import FullscreenButton from "../addings/Group 398.png";
-import StoryBook from "../addings/StoryBook.png"
-import StoryClouds from "../addings/StoryClouds.png"
-import StoryFrame from "../addings/StoryFrame.png"
-import ExitFullScreen from "../addings/ExitFullScreen.png"
-
-
-
+import StoryBook from "../addings/StoryBook.png";
+import StoryClouds from "../addings/StoryClouds.png";
+import StoryFrame from "../addings/StoryFrame.png";
+import ExitFullScreen from "../addings/ExitFullScreen.png";
 
 const StoryPage = () => {
-
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -25,9 +21,7 @@ const StoryPage = () => {
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
 
-
-
-
+  // Function to fetch and display the story automatically when the component loads
   // Function to fetch and display the story automatically when the component loads
   useEffect(() => {
     if (!location.state) {
@@ -63,6 +57,24 @@ const StoryPage = () => {
     fetchStory();
   }, [location]);
 
+  async function query(data) {
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
+      {
+        headers: {
+          Authorization: "Bearer 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",
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache", // Prevent caching
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+
+    return result;
+  }
+
   useEffect(() => {
     // Checking if there's state provided from navigation
     if (!location.state) {
@@ -73,24 +85,9 @@ const StoryPage = () => {
     const { place, image_prompt } = location.state;
     const combinedVariable = `${place},${image_prompt}`;
 
-    const url = `http://localhost:8000/generate-image/${encodeURIComponent(
-      combinedVariable
-    )}`;
     const fetchImage = async () => {
       try {
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // body: JSON.stringify({ place, image_prompt }),
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const imageBlob = await response.blob();
+        const imageBlob = await query({ inputs: combinedVariable });
         const imageObjectURL = URL.createObjectURL(imageBlob);
         setImageSrc(imageObjectURL);
         console.log("Image fetched successfully");
@@ -136,7 +133,6 @@ const StoryPage = () => {
     }
   };
 
-
   const handleFullScreen = () => {
     if (storyContentRef.current) {
       const element = storyContentRef.current;
@@ -156,8 +152,10 @@ const StoryPage = () => {
 
       if (!isFullscreen) {
         if (element.requestFullscreen) {
-          element.requestFullscreen().catch(err => {
-            console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+          element.requestFullscreen().catch((err) => {
+            console.error(
+              `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+            );
           });
         }
       } else {
@@ -174,17 +172,16 @@ const StoryPage = () => {
     }
   };
 
-
   return (
     <div className="storypage">
       <Header />
       <div className="story-bigframe">
-        <img src={StoryClouds} alt="Clouds" className='story-clouds' />
+        <img src={StoryClouds} alt="Clouds" className="story-clouds" />
         <div className="story-section">
-          <img src={StoryFrame} alt="Frame" className='story-frame' />
+          <img src={StoryFrame} alt="Frame" className="story-frame" />
           <div className="story-content" ref={storyContentRef}>
             <div>
-              <img src={StoryBook} alt="Book" className='story-book' />
+              <img src={StoryBook} alt="Book" className="story-book" />
               <div className="left-page">
                 {/* Story text output */}
                 <div className="story-output">
@@ -230,7 +227,8 @@ const StoryPage = () => {
             <button
               ref={exitFullScreenRef}
               className="exit-fullscreen-button"
-              onClick={handleExitFullScreen}>
+              onClick={handleExitFullScreen}
+            >
               <img src={ExitFullScreen} alt="Exit full-screen" />
             </button>
           </div>

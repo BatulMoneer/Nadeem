@@ -14,11 +14,11 @@ IMAGE_SERECT_KEY = os.getenv("IMAGE_SERECT_KEY")
 class ImageRequest(BaseModel):
     prompt: str
 
-API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem"
+API_URL = "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem"
 
 headers = {
     "Authorization": f"Bearer {IMAGE_SERECT_KEY}",
-    "Cache-Control": "no-cache"  # Add this line to delete the cache
+    "Cache-Control": "no-cache, no-store, must-revalidate",
 }
 
 

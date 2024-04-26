@@ -29,7 +29,7 @@ const StoryPage = () => {
   const navigate = useNavigate();
   const storyContentRef = useRef(null); // Ref for the story content div
   const exitFullScreenRef = useRef(null);
-  const isLoading = isStoryLoading || isImageLoading || imageSrc;
+  const isLoading = isStoryLoading || isImageLoading;
 
 
   const toggleModal = () => {

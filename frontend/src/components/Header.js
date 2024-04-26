@@ -26,8 +26,8 @@ const Header = () => {
                         <li onClick={closeMenu}><Link to="/about">عن نديم</Link></li>
                         <li onClick={closeMenu}><Link to="/children">أطفالي</Link></li>
                         <li onClick={closeMenu}><Link to="/storypage">قصصي</Link></li>
-                        <li onClick={closeMenu}><Link to="/">الرئيسية</Link></li>
                         <li onClick={closeMenu}><Link to="/setpreferences">انشاء قصة</Link></li>
+                        <li onClick={closeMenu}><Link to="/">الرئيسية</Link></li>
                     </ul>
                     <img src={AccountLogo} alt="Account" className='account-logo' />
                 </nav>

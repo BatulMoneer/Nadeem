@@ -1,0 +1,348 @@
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent horizontal scrollbar */
+}
+
+.homepage {
+  background-image: url('./addings/HomeBackground.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  min-height: 512vh;
+  width: 100%;
+
+
+}
+
+
+.first {
+  position: relative;
+}
+
+.firstframe {
+  width: 100%;
+  /* Full width of the container */
+  height: 100%;
+  /* Adjust height based on the image or container needs */
+  left: 0;
+  top: -3%;
+  z-index: 1;
+}
+
+.firststars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Adjust if necessary to fit your design */
+  height: auto;
+  /* Maintain aspect ratio */
+  z-index: 2;
+}
+
+.Nadeem {
+  position: absolute;
+  width: 30%;
+  height: auto;
+  left: 25%;
+  top: 36%;
+  z-index: 3;
+  /* Ensures stars are on top */
+}
+
+.cloud {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  left: 0%;
+  top: 3%;
+  z-index: 3;
+}
+
+.bubble {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  left: 45%;
+  top: 20%;
+  z-index: 3;
+}
+
+.label-text {
+  position: absolute;
+  left: 53%;
+  top: 26%;
+  font-size: 16px;
+  /* Default font size */
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #835074;
+  /* Base text color */
+  text-align: center;
+  /* Center the text within .label-text */
+  z-index: 4;
+}
+
+/* Smaller tablets and large phones (landscape, 600px and up) */
+@media (min-width: 600px) {
+  .label-text {
+    font-size: 18px;
+  }
+}
+
+/* Tablets (portrait, 768px and up) */
+@media (min-width: 768px) {
+  .label-text {
+    font-size: 20px;
+  }
+}
+
+/* Small desktops and laptops (992px and up) */
+@media (min-width: 992px) {
+  .label-text {
+    font-size: 28px;
+  }
+}
+
+/* Large screens (1200px and up) */
+@media (min-width: 1200px) {
+  .label-text {
+    font-size: 37px;
+  }
+}
+
+.Second {
+  position: relative;
+  display: flex;
+  /* Use flexbox */
+  flex-direction: column;
+  /* Stack children vertically */
+  align-items: center;
+  /* Center children horizontally */
+  width: 100%;
+  /* Full width */
+}
+
+.SecFrame {
+  width: 100%;
+  /* Full width of the container */
+  height: 100%;
+  /* Adjust height based on the image or container needs */
+  left: 0;
+  z-index: 1;
+}
+
+
+.ThirdFrame {
+  position: absolute;
+  width: 100%;
+  /* Full width of the container */
+  height: 100%;
+  /* Adjust height based on the image or container needs */
+  top: 50%;
+  left: 0;
+  z-index: 1;
+}
+
+.scop {
+  position: absolute;
+  width: 18%;
+  /* Full width of the container */
+  height: 30%;
+  /* Adjust height based on the image or container needs */
+  top: 95%;
+  left: 25%;
+  z-index: 1;
+}
+
+
+.label-container3 {
+  position: absolute;
+  top: 80%;
+  left: 10%;
+  z-index: 10;
+  margin: 2%;
+  margin-bottom: 4%;
+  width: 100%;
+  /* Full width to center content */
+
+  text-align: center;
+  /* Center the children elements */
+}
+
+.lbl3 {
+  font-size: 17px;
+  /* Set a base font-size for mobile */
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  /* Remove default paragraph margins */
+}
+
+.span1 {
+  font-weight: bold;
+  position: relative;
+  /* Position relative to move right */
+  top: 0%;
+  font-size: 44px;
+  /* Base size for mobile */
+  margin-bottom: 20px;
+  left: 20%;
+  /* This will only affect the font size */
+}
+
+.span2 {
+  color: #eabb68;
+  /* Golden text color for "نديم" */
+}
+
+.span3 {
+  position: relative;
+  /* Position relative to shift left */
+  margin-top: 20px;
+  left: 13%;
+}
+
+/* CSS Media Queries */
+/* Adjust sizes for tablets and up */
+@media (min-width: 168px) {
+  .lbl3 {
+    font-size: 16px;
+  }
+
+  .span1 {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .lbl3 {
+    font-size: 24px;
+  }
+
+  .span1 {
+    font-size: 64px;
+  }
+}
+
+/* Adjust sizes for small desktops */
+@media (min-width: 992px) {
+  .lbl3 {
+    font-size: 28px;
+  }
+
+  .span1 {
+    font-size: 74px;
+  }
+}
+
+/* Adjust sizes for large desktops */
+@media (min-width: 1200px) {
+  .lbl3 {
+    font-size: 32px;
+  }
+
+  .span1 {
+    font-size: 89px;
+  }
+}
+
+.lbl2 {
+  position: absolute;
+  z-index: 3;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Droid Arabic Kufi', serif;
+  color: #fefefe;
+  /* Base text color */
+}
+
+/* Smaller tablets and large phones (landscape, 600px and up) */
+@media (min-width: 600px) {
+  .lbl2 {
+    font-size: 18px;
+    /* Slightly larger font size for larger devices */
+  }
+}
+
+/* Tablets (portrait, 768px and up) */
+@media (min-width: 768px) {
+  .lbl2 {
+    font-size: 20px;
+    /* Further increase for tablets */
+  }
+}
+
+/* Small desktops and laptops (992px and up) */
+@media (min-width: 992px) {
+  .lbl2 {
+    font-size: 22px;
+    /* Larger font size for small desktops */
+  }
+}
+
+/* Large screens (1200px and up) */
+@media (min-width: 1200px) {
+  .lbl2 {
+    font-size: 30px;
+    /* Larger font size for larger desktops */
+  }
+}
+
+
+
+.last {
+  position: relative;
+  z-index: 3;
+}
+
+.lastpic {
+  position: absolute;
+  z-index: 3;
+  top: 25rem;
+  /* Aligns to the bottom of .homepage */
+  left: 0;
+  width: 100%;
+  /* Adjust if necessary */
+  height: auto;
+  /* Keeps aspect ratio intact */
+}
+
+@media (max-width: 600px) {
+  .lastpic {
+    top: 10rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .lastpic {
+    top: 15rem;
+  }
+}
+
+/* Tablets (portrait, 768px and up) */
+@media (min-width: 768px) {
+  .lastpic {
+    top: 20rem;
+  }
+}
+
+/* Small desktops and laptops (992px and up) */
+@media (min-width: 992px) {
+  .lastpic {
+    top: 25rem;
+  }
+}
+
+/* Large screens (1200px and up) */
+@media (min-width: 1200px) {
+  .lastpic {
+    top: 30rem;
+  }
+}

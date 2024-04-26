@@ -95,9 +95,10 @@
 }
 
 .full-screen-active .story-output {
-    left: 12.5rem;
-    font-size: 1.4rem;
+    left: 13.5rem;
+    font-size: 1.2rem;
     width: 100%;
+    top: -5rem;
     /* Larger text in fullscreen */
     /* Adjust vertical position for readability */
 }
@@ -186,6 +187,87 @@
     height: auto;
     /* You might not need to adjust the width and height if the parent container is sized correctly */
 }
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    /* Ensure it's above all other content */
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    /* or any other size */
+    z-index: 1051;
+}
+
+.modal-close-button {
+    cursor: pointer;
+    background-color: #835074;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close-button:hover {
+    background-color: #6a3f5d;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    /* Overlay the spinner on the page */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.144);
+    /* Optional: white background with opacity */
+    z-index: 1050;
+    /* Above other content */
+}
+
+.spinner {
+    width: 6rem;
+    /* Adjust size as needed */
+    height: auto;
+    /* Adjust size as needed */
+    animation: spin 1s linear infinite;
+    /* Spinner animation */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 
 @media (max-width: 1324px) {
 
@@ -353,11 +435,11 @@
     }
 
     .left-page {
-        top: 6rem;
+        top: 9.5rem;
     }
 
     .story-output {
-        font-size: 0.35rem;
+        font-size: 0.28rem;
     }
 }
 

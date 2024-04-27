@@ -12,7 +12,7 @@ const FormPage = () => {
     insert_prompt: "",
     name: "",
     age: "",
-    gender: "",
+    gender: "بنت",
     choices: "",
     place: "",
     image_prompt: "",
@@ -176,7 +176,6 @@ const FormPage = () => {
               <label class="rd-btn">
                 بنت
                 <input
-                  checked
                   type="radio"
                   name="gender"
                   value="بنت"

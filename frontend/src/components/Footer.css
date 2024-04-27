@@ -1,0 +1,110 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #835074;
+    border-radius: 80rem 80rem 0 0;
+    height: 17rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+
+.footer-content {
+    display: flex;
+    width: 100%;
+    padding: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-section-group {
+    display: flex;
+    flex-direction: column;
+    /* Stack the label and icons vertically */
+    align-items: center;
+    /* Center align the content */
+    padding: 10px;
+}
+
+.footer-section {
+    display: flex;
+    justify-content: center;
+    /* Center the icons horizontally */
+}
+
+@import url(https://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+
+
+
+.footer-section-group span {
+    color: white;
+    margin-bottom: 1.2rem;
+}
+
+.footer-section a {
+    margin: 0 5px;
+}
+
+.footer-section svg {
+    color: white;
+    cursor: pointer;
+    background-color: #9c658b;
+    border-radius: 90rem;
+    padding: 0.7rem;
+}
+
+.footer-section svg:hover {
+    color: #ffffff;
+    background-color: #efd176;
+    transform: scale(1.2);
+}
+
+.logo {
+    height: 10rem;
+    padding-left: 5rem;
+    width: auto;
+}
+
+.footer-bottom-text {
+    color: #dfdfdf;
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .logo {
+        padding-left: 0rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .logo {
+        padding-left: 0rem;
+        width: 8rem;
+    }
+
+    .footer-section-group {
+        padding: 0rem;
+    }
+
+    .footer-section-group span {
+        padding-bottom: -1rem;
+    }
+
+
+    .footer-section span {
+        margin-top: 5px;
+    }
+
+    .footer-bottom-text {
+        color: #eeeeee;
+        margin-top: 20px;
+        /* Adjust as necessary */
+    }
+}

@@ -12,6 +12,7 @@ import StoryClouds from "../addings/StoryClouds.png";
 import StoryFrame from "../addings/StoryFrame.png";
 import ExitFullScreen from "../addings/ExitFullScreen.png";
 import Loading from "../addings/Loading.png";
+import Footer from "./Footer";
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
@@ -291,6 +292,7 @@ const StoryPage = () => {
           <img src={Loading} alt="Loading" className="spinner" />
         </div>
       )}
+      <Footer />
     </div>
   );
 };

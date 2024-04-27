@@ -1,0 +1,839 @@
+  html,
+  body {
+    overflow-x: hidden;
+    /* Prevent horizontal scrollbar */
+  }
+
+  .homepage {
+    background-image: url('../addings/HomeBackground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: scroll;
+    min-height: 512vh;
+    width: 100%;
+    position: relative;
+
+
+
+  }
+
+
+
+  .first {
+    position: relative;
+  }
+
+  .firstframe {
+    width: 100%;
+    /* Full width of the container */
+    height: 100%;
+    /* Adjust height based on the image or container needs */
+    left: 0;
+    top: -3%;
+    z-index: 1;
+  }
+
+  .firststars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Adjust if necessary to fit your design */
+    height: auto;
+    /* Maintain aspect ratio */
+    z-index: 2;
+  }
+
+  .Nadeem {
+    position: absolute;
+    width: 30%;
+    height: auto;
+    left: 25%;
+    top: 36%;
+    z-index: 3;
+    /* Ensures stars are on top */
+  }
+
+  .cloud {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0%;
+    top: 3%;
+    z-index: 3;
+  }
+
+  .bubble {
+    position: absolute;
+    width: 40%;
+    height: auto;
+    left: 45%;
+    top: 20%;
+    z-index: 3;
+  }
+
+  .label-text {
+    position: absolute;
+    left: 55%;
+    top: 29%;
+    font-size: 16px;
+    /* Default font size */
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #835074;
+    /* Base text color */
+    text-align: center;
+    /* Center the text within .label-text */
+    z-index: 4;
+  }
+
+  /* Smaller tablets and large phones (landscape, 600px and up) */
+  @media (min-width: 600px) {
+    .label-text {
+      font-size: 18px;
+    }
+  }
+
+  /* Tablets (portrait, 768px and up) */
+  @media (min-width: 768px) {
+    .label-text {
+      font-size: 20px;
+    }
+  }
+
+  /* Small desktops and laptops (992px and up) */
+  @media (min-width: 992px) {
+    .label-text {
+      font-size: 28px;
+    }
+  }
+
+  /* Large screens (1200px and up) */
+  @media (min-width: 1200px) {
+    .label-text {
+      font-size: 37px;
+    }
+  }
+
+  .Second {
+    position: relative;
+    display: flex;
+    /* Use flexbox */
+    flex-direction: column;
+    /* Stack children vertically */
+    align-items: center;
+    /* Center children horizontally */
+    width: 100%;
+    /* Full width */
+  }
+
+  .SecFrame {
+    width: 100%;
+    /* Full width of the container */
+    height: 100%;
+    /* Adjust height based on the image or container needs */
+    left: 0;
+    z-index: 1;
+  }
+
+  /* Base styles for large screens - assuming 1200px is your design's large breakpoint */
+  .label-container2 {
+    position: absolute;
+    top: 34%;
+    right: 10%;
+    z-index: 10;
+    text-align: center;
+  }
+
+  .lbl2 {
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #fefefe;
+  }
+
+  .image-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 10px;
+  }
+
+  .label-container2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  .hover-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(234, 187, 104, 0.5);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 0 0 20px 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .image-wrapper:hover .hover-label {
+    opacity: 1;
+  }
+
+  /* Media queries */
+  @media (max-width: 1199px) {
+
+    /* Adjustments for screens smaller than 1200px */
+    .lbl2 {
+      font-size: 28px;
+      /* Slightly smaller font size */
+    }
+
+    .image-wrapper {
+      width: 180px;
+      /* Slightly smaller images */
+      height: 180px;
+    }
+
+    .hover-label {
+      font-size: 22px;
+    }
+  }
+
+  @media (max-width: 991px) {
+
+    /* Adjustments for screens smaller than 992px */
+    .lbl2 {
+      font-size: 24px;
+    }
+
+    .image-wrapper {
+      width: 160px;
+      height: 160px;
+    }
+
+    .hover-label {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+
+    /* Adjustments for screens smaller than 768px */
+    .label-container2 {
+      top: 30%;
+      right: 5%;
+    }
+
+    .lbl2 {
+      font-size: 20px;
+    }
+
+    .image-wrapper {
+      width: 120px;
+      height: 120px;
+    }
+
+    .hover-label {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 575px) {
+
+    /* Adjustments for small devices like mobile phones */
+    .label-container2 {
+      top: 28%;
+      right: 2%;
+      /* Smaller right offset for tighter spaces */
+    }
+
+    .lbl2 {
+      font-size: 12px;
+      /* Smaller font size for limited space */
+    }
+
+    .image-wrapper {
+      width: 100px;
+      /* Smaller image size for mobile screens */
+      height: 100px;
+    }
+
+    .hover-label {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 400px) {
+
+    /* Very small devices and narrow viewports */
+    .label-container2 {
+      top: 20%;
+      /* Position it higher as screen gets very small */
+      right: 1%;
+      /* Almost flush with the edge */
+    }
+
+    .lbl2 {
+      font-size: 14px;
+      /* Very small font size for very narrow screens */
+    }
+
+    .image-wrapper {
+      width: 100px;
+      /* Very small images for very narrow screens */
+      height: 100px;
+    }
+
+    .hover-label {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 200px) {
+    .label-container2 {
+      top: 15%;
+      /* Position closer to the top to maximize space */
+      right: 1%;
+      /* Minimal right offset to use screen space efficiently */
+    }
+
+    .lbl2 {
+      font-size: 9px;
+      /* Further reduce font size for very small screens */
+    }
+
+    .image-wrapper {
+      width: 40px;
+      /* Reduce width to fit narrow screens */
+      height: 0px;
+      /* Keep aspect ratio consistent with width */
+    }
+
+    .hover-label {
+      font-size: 8px;
+      /* Reduce font size to ensure readability */
+    }
+  }
+
+
+
+
+
+
+  .ThirdFrame {
+    position: absolute;
+    width: 100%;
+    /* Full width of the container */
+    height: 100%;
+    /* Adjust height based on the image or container needs */
+    top: 50%;
+    left: 0;
+    z-index: 1;
+  }
+
+  .scop {
+    position: absolute;
+    width: 18%;
+    /* Full width of the container */
+    height: 30%;
+    /* Adjust height based on the image or container needs */
+    top: 95%;
+    left: 25%;
+    z-index: 1;
+  }
+
+
+  .label-container3 {
+    position: absolute;
+    top: 80%;
+    left: 10%;
+    z-index: 10;
+    margin: 2%;
+    margin-bottom: 4%;
+    width: 100%;
+    /* Full width to center content */
+
+    text-align: center;
+    /* Center the children elements */
+  }
+
+  .lbl3 {
+    font-size: 17px;
+    /* Set a base font-size for mobile */
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #ffffff;
+    line-height: 1.2;
+    margin: 0;
+    /* Remove default paragraph margins */
+  }
+
+  .span1 {
+    font-weight: bold;
+    position: relative;
+    /* Position relative to move right */
+    top: 0%;
+    font-size: 44px;
+    /* Base size for mobile */
+    margin-bottom: 20px;
+    left: 20%;
+    /* This will only affect the font size */
+  }
+
+  .span2 {
+    color: #eabb68;
+    /* Golden text color for "نديم" */
+  }
+
+  .span3 {
+    position: relative;
+    /* Position relative to shift left */
+    margin-top: 20px;
+    left: 13%;
+  }
+
+  /* CSS Media Queries */
+  /* Adjust sizes for tablets and up */
+  @media (min-width: 168px) {
+    .lbl3 {
+      font-size: 16px;
+    }
+
+    .span1 {
+      font-size: 32px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .lbl3 {
+      font-size: 24px;
+    }
+
+    .span1 {
+      font-size: 64px;
+    }
+  }
+
+  /* Adjust sizes for small desktops */
+  @media (min-width: 992px) {
+    .lbl3 {
+      font-size: 28px;
+    }
+
+    .span1 {
+      font-size: 74px;
+    }
+  }
+
+  /* Adjust sizes for large desktops */
+  @media (min-width: 1200px) {
+    .lbl3 {
+      font-size: 32px;
+    }
+
+    .span1 {
+      font-size: 89px;
+    }
+  }
+
+  .lbl2 {
+    position: absolute;
+    z-index: 3;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Droid Arabic Kufi', serif;
+    color: #fefefe;
+    /* Base text color */
+  }
+
+  /* Smaller tablets and large phones (landscape, 600px and up) */
+  @media (min-width: 600px) {
+    .lbl2 {
+      font-size: 18px;
+      /* Slightly larger font size for larger devices */
+    }
+  }
+
+  /* Tablets (portrait, 768px and up) */
+  @media (min-width: 768px) {
+    .lbl2 {
+      font-size: 20px;
+      /* Further increase for tablets */
+    }
+  }
+
+  /* Small desktops and laptops (992px and up) */
+  @media (min-width: 992px) {
+    .lbl2 {
+      font-size: 22px;
+      /* Larger font size for small desktops */
+    }
+  }
+
+  /* Large screens (1200px and up) */
+  @media (min-width: 1200px) {
+    .lbl2 {
+      font-size: 30px;
+      /* Larger font size for larger desktops */
+    }
+  }
+
+
+
+  .last {
+    position: relative;
+    z-index: 3;
+  }
+
+  .lastpic {
+    position: absolute;
+    z-index: 3;
+    top: 25rem;
+    /* Aligns to the bottom of .homepage */
+    left: 0;
+    width: 100%;
+    /* Adjust if necessary */
+    height: auto;
+    /* Keeps aspect ratio intact */
+  }
+
+  @media (max-width: 600px) {
+    .lastpic {
+      top: 10rem;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .lastpic {
+      top: 15rem;
+    }
+  }
+
+  /* Tablets (portrait, 768px and up) */
+  @media (min-width: 768px) {
+    .lastpic {
+      top: 20rem;
+    }
+  }
+
+  /* Small desktops and laptops (992px and up) */
+  @media (min-width: 992px) {
+    .lastpic {
+      top: 25rem;
+    }
+  }
+
+  /* Large screens (1200px and up) */
+  @media (min-width: 1200px) {
+    .lastpic {
+      top: 30rem;
+    }
+  }
+
+  /* رسالة البوتون*/
+  .label-container4 {
+    position: absolute;
+    right: 2%;
+    font-family: 'Droid Arabic Kufi', serif;
+    /* Replace with the actual font used */
+    color: #835074;
+    text-align: right;
+    /* Align text to the right */
+    margin: 0px;
+    /* Add some space around the text */
+    z-index: 10;
+    font-size: 15px;
+  }
+
+  .lbl4 {
+    line-height: 1.5;
+    margin-bottom: 10px;
+    /* Space between the two paragraphs */
+  }
+
+  .lbl4 span {
+    color: #eabb68;
+    font-weight: bold;
+    /* Make the text bold */
+  }
+
+  .lbl5 {
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .label-container4 {
+      top: 18.5rem;
+    }
+
+    .lbl4 {
+      font-size: 16px;
+    }
+
+    .lbl5 {
+      font-size: 11px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .label-container4 {
+      top: 26.5rem;
+    }
+
+    .lbl4 {
+      font-size: 1rem;
+    }
+
+    .lbl5 {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (min-width: 650px) {
+    .label-container4 {
+      top: 27rem;
+    }
+
+    .lbl4 {
+      font-size: 1.2rem;
+    }
+
+    .lbl5 {
+      font-size: 1rem;
+    }
+  }
+
+  @media (min-width: 700px) {
+    .label-container4 {
+      top: 28rem;
+    }
+
+    .lbl4 {
+      font-size: 1.1rem;
+    }
+
+    .lbl5 {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Tablets (portrait, 768px and up) */
+  @media (min-width: 768px) {
+    .label-container4 {
+      top: 35rem;
+    }
+
+    .lbl4 {
+      font-size: 22px;
+    }
+
+    .lbl5 {
+      font-size: 16px;
+    }
+  }
+
+  /* Small desktops and laptops (992px and up) */
+  @media (min-width: 900px) {
+    .label-container4 {
+      top: 38rem;
+    }
+
+    .lbl4 {
+      font-size: 1.4rem;
+    }
+
+    .lbl5 {
+      font-size: 1.1rem;
+    }
+  }
+
+
+  /* Small desktops and laptops (992px and up) */
+  @media (min-width: 992px) {
+    .label-container4 {
+      top: 48rem;
+    }
+
+    .lbl4 {
+      font-size: 1.4rem;
+    }
+
+    .lbl5 {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Large screens (1200px and up) */
+  @media (min-width: 1200px) {
+    .label-container4 {
+      top: 56rem;
+    }
+
+    .lbl4 {
+      font-size: 1.6rem;
+    }
+
+    .lbl5 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    .label-container4 {
+      top: 57rem;
+    }
+
+    .lbl4 {
+      font-size: 2rem;
+    }
+
+    .lbl5 {
+      font-size: 1.7rem;
+    }
+  }
+
+  /* Base styles */
+  .custom-button-container {
+    text-decoration: none;
+
+    position: relative;
+    top: 30rem;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    /* Center the button horizontally */
+    padding: 20px;
+    /* Add some space around the button container */
+    transition: top 0.3s ease;
+    /* Smooth transition for top property changes */
+  }
+
+  .custom-button a {
+    text-decoration: none;
+    color: #FFFFFF;
+
+  }
+
+  .custom-button {
+    text-decoration: none;
+
+    background-color: #835074;
+    /* The button's background color */
+    color: #FFFFFF;
+    /* The text color */
+    border: none;
+    /* No border */
+    border-radius: 50px;
+    /* Rounded corners */
+    padding: 10px 30px;
+    /* Smaller padding for mobile */
+    font-family: 'Droid Arabic Kufi', serif;
+    font-size: 14px;
+    /* Smaller font size for mobile */
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .custom-button:hover {
+    background-color: #eabb68;
+    /* Slightly darker shade on hover */
+    transform: scale(1.05);
+    /* Slightly larger scale on hover */
+  }
+
+  @media (max-width: 600px) {
+    .custom-button-container {
+      top: 24rem;
+      /* Adjust top position for tablet */
+    }
+
+    .custom-button {
+      padding: 15px 45px;
+      /* Increased padding for tablet */
+      font-size: 11px;
+      /* Increased font size for tablet */
+    }
+  }
+
+  @media (min-width: 600px) {
+    .custom-button-container {
+      top: 33rem;
+      /* Adjust top position for tablet */
+    }
+
+    .custom-button {
+      padding: 15px 45px;
+      /* Increased padding for tablet */
+      font-size: 15px;
+      /* Increased font size for tablet */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .custom-button-container {
+      top: 44rem;
+      /* Adjust top position for tablet */
+    }
+
+    .custom-button {
+      padding: 15px 45px;
+      /* Increased padding for tablet */
+      font-size: 20px;
+      /* Increased font size for tablet */
+    }
+  }
+
+  @media (min-width: 900px) {
+    .custom-button-container {
+      top: 48rem;
+      /* Adjust top position for small desktop */
+    }
+
+    .custom-button {
+      padding: 15px 60px;
+      /* Default padding for desktop */
+      font-size: 25px;
+      /* Default font size for desktop */
+    }
+  }
+
+  @media (min-width: 992px) {
+    .custom-button-container {
+      top: 58rem;
+      /* Adjust top position for small desktop */
+    }
+
+    .custom-button {
+      padding: 15px 60px;
+      /* Default padding for desktop */
+      font-size: 29px;
+      /* Default font size for desktop */
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .custom-button-container {
+      top: 69rem;
+      /* Original top position for large desktop */
+    }
+  }
+
+  @media (min-width: 1500px) {
+    .custom-button-container {
+      top: 79rem;
+      /* Original top position for large desktop */
+    }
+  }

@@ -5,6 +5,7 @@ import Header from "./Header";
 import FormClouds from "../addings/FormClouds (2).png";
 import FormStars from "../addings/FormStars.png";
 import FormNadeem from "../addings/FormNadeem.png";
+import Footer from "./Footer";
 
 const FormPage = () => {
   const [formData, setFormData] = useState({
@@ -309,6 +310,7 @@ const FormPage = () => {
         </div>
       </div>
       <img src={FormStars} alt="Stars" className="form-stars" />
+      <Footer />
     </div>
   );
 };

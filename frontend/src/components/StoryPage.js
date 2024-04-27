@@ -127,9 +127,7 @@ const StoryPage = () => {
 
     return result;
   }
-
   useEffect(() => {
-    // Checking if there's state provided from navigation
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -151,8 +149,8 @@ const StoryPage = () => {
     };
 
     fetchImage();
-  }, [location]);
-  // Function to navigate back to the form page
+  }, [location.state]);
+
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
   };

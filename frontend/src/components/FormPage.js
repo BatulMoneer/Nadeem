@@ -215,9 +215,9 @@ const FormPage = () => {
                   <option value="" className="placeholder-class" hidden>
                     اختر النشاط
                   </option>
-                  <option value="msboy study">مذاكرة</option>
-                  <option value="msboy clean">تنظيف</option>
-                  <option value="msboy pray">صلاة</option>
+                  <option value="msboystudy">مذاكرة</option>
+                  <option value="msboyclean">تنظيف</option>
+                  <option value="msboypray">صلاة</option>
                   <option value="">نشاط اخر</option>
                 </select>
               </div>
@@ -234,12 +234,12 @@ const FormPage = () => {
                   <option value="" hidden className="placeholder-class">
                     اختر النشاط
                   </option>
-                  <option value="msgirl hijabi study">مذاكرة</option>
-                  <option value="msgirl hijabi walk">مشي</option>
-                  <option value="msgirl hijabi cook">طبخ</option>
-                  <option value="msgirl hijabi clean">تنظف</option>
-                  <option value="msgirl hijabi shop">تسوق</option>
-                  <option value="msgirl hijabi pray">صلاة</option>
+                  <option value="msgirlhijabistudy">مذاكرة</option>
+                  <option value="msgirlhijabiwalk">مشي</option>
+                  <option value="msgirlhijabicook">طبخ</option>
+                  <option value="msgirlhijabiclean">تنظف</option>
+                  <option value="msgirlhijabishop">تسوق</option>
+                  <option value="msgirlhijabipray">صلاة</option>
                   <option value="">نشاط اخر</option>
                 </select>
               </div>

@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = () => {
     return (
+
         <div className="homepage">
             <div className="Hader"></div>
             <Header/>

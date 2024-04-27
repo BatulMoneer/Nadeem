@@ -12,7 +12,7 @@ const FormPage = () => {
     insert_prompt: "",
     name: "",
     age: "",
-    gender: "بنت",
+    gender: "",
     choices: "",
     place: "",
     image_prompt: "",

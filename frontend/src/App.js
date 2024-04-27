@@ -3,7 +3,7 @@ import HomePage from "./components/HomePage";
 import FormPage from "./components/FormPage";
 import StoryPage from "./components/StoryPage";
 import Header from "./components/Header";
-import { firebaseConfig } from "./firebaseConfig";
+import RatingModal from "./components/RatingModal";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/storypage" element={<StoryPage />} />
         <Route path="/setpreferences" element={<FormPage />} />
         <Route path="/story" element={<StoryPage />} />
+        <Route path="/rate" element={<RatingModal />} />
       </Routes>
     </Router>
   );

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./StoryPage.css";
 import Header from "./Header";
+import RatingModal from "./RatingModal";
 import { useLocation, useNavigate } from "react-router-dom";
-
 import LikeButton from "../addings/Group 401.png";
 import AddButton from "../addings/Group 400.png";
 import SoundButton from "../addings/Group 399.png";
@@ -16,62 +16,19 @@ import Footer from "./Footer";
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
-  //const [isImageLoading, setIsImageLoading] = useState(false);
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const storyContentRef = useRef(null); // Ref for the story content div
+  const storyContentRef = useRef(null);
   const exitFullScreenRef = useRef(null);
   const isLoading = isStoryLoading;
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-  };
-
-  const RatingModal = ({ isOpen, onClose }) => {
-    if (!isOpen) return null;
-
-    return (
-      <div className="modal-backdrop">
-        <div className="modal-content">
-          <label className="lbl1">قييم االقصة</label>
-          <div className="radio-buttons">
-            <div className="radio-button">
-              <input type="radio" id="like" name="reaction" value="like" />
-              <label htmlFor="like" className="like-label"></label>
-            </div>
-            <div className="radio-button">
-              <input
-                type="radio"
-                id="dislike"
-                name="reaction"
-                value="dislike"
-              />
-              <label htmlFor="dislike" className="dislike-label"></label>
-            </div>
-          </div>
-          <div>
-            <input
-              name=""
-              value=""
-              placeholder="في حال الاستياء من القصة اكتب السبب"
-              className="in-btn1"
-            />
-          </div>
-          {/* Implement your rating logic */}
-
-          <div className="small-btn-container">
-            <button className="small-btn" onClick={onClose}>
-              ارسال
-            </button>
-          </div>
-        </div>
-      </div>
-    );
   };
 
   // Function to fetch and display the story automatically when the component loads

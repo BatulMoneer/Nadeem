@@ -37,7 +37,7 @@ const Footer = () => {
         <img src={logo} alt="Nadeem logo" className="logo" />
       </div>
       <div className="footer-bottom-text">
-        جميع الحقوق محفوظة © 2024 نجم
+        جميع الحقوق محفوظة © 2024 نديم
       </div>
     </footer>
   );

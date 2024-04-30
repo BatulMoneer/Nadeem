@@ -272,6 +272,9 @@ const FormPage = () => {
                 <option value="msgarden">حديقة</option>
                 <option value="msschool">مدرسة</option>
                 <option value="msmosque"> مسجد</option>
+                <option value="home">منزل</option>
+                <option value="mall">سوق</option>
+                <option value="kitchen">مطبخ</option>
               </select>
             </div>
             {errors.place && (

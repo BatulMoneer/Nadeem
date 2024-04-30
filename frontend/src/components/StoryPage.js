@@ -92,7 +92,7 @@ const StoryPage = () => {
     }
 
     const { gender, place, image_prompt } = location.state;
-    const additionalString = "msgirlhijabi doing";
+    //const additionalString = "msgirlhijabi doing";
     const inn = " in";
 
     const combinedVariable = `${gender}${image_prompt}${inn}${place}`;

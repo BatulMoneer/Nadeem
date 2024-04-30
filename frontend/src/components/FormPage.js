@@ -215,9 +215,9 @@ const FormPage = () => {
                   <option value="" className="placeholder-class" hidden>
                     اختر النشاط
                   </option>
-                  <option value="msboystudy">مذاكرة</option>
-                  <option value="msboyclean">تنظيف</option>
-                  <option value="msboypray">صلاة</option>
+                  <option value="msboystudy">يذاكر</option>
+                  <option value="msboyclean">ينظف</option>
+                  <option value="msboypray">يصلي</option>
                   <option value="">نشاط اخر</option>
                 </select>
               </div>
@@ -234,12 +234,12 @@ const FormPage = () => {
                   <option value="" hidden className="placeholder-class">
                     اختر النشاط
                   </option>
-                  <option value="msgirlhijabistudy">مذاكرة</option>
-                  <option value="msgirlhijabiwalk">مشي</option>
-                  <option value="msgirlhijabicook">طبخ</option>
+                  <option value="msgirlhijabistudy">تذاكر</option>
+                  <option value="msgirlhijabiwalk">تمشي</option>
+                  <option value="msgirlhijabicook">تطبخ</option>
                   <option value="msgirlhijabiclean">تنظف</option>
-                  <option value="msgirlhijabishop">تسوق</option>
-                  <option value="msgirlhijabipray">صلاة</option>
+                  <option value="msgirlhijabishop">تتسوق</option>
+                  <option value="msgirlhijabipray">تصلي</option>
                   <option value="">نشاط اخر</option>
                 </select>
               </div>
@@ -273,7 +273,7 @@ const FormPage = () => {
                 <option value="msschool">مدرسة</option>
                 <option value="msmosque"> مسجد</option>
                 <option value="home">منزل</option>
-                <option value="mall">سوق</option>
+                <option value="shop">سوق</option>
                 <option value="kitchen">مطبخ</option>
               </select>
             </div>

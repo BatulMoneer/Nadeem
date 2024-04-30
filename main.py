@@ -41,8 +41,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 # Story Generation
@@ -56,7 +56,7 @@ def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
     unique_english_words = set(english_words)  
     pattern = r'\b(' + '|'.join(map(re.escape, unique_english_words)) + r')\b|[:,\n"]'
     story_cleaned = re.sub(pattern, '', original_story)
-    get_keywords_endpoint()
+    # get_keywords_endpoint()
     return {story_cleaned}
 
 

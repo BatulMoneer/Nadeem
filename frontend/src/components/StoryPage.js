@@ -70,7 +70,7 @@ const StoryPage = () => {
 
   async function query(data) {
     let response = await fetch(
-      "https://api-inference.huggingface.co/models/BatulMrakkan/nadeem",
+      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
       {
         headers: {
           Authorization: "Bearer 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",
@@ -91,8 +91,11 @@ const StoryPage = () => {
       return;
     }
 
-    const { place, image_prompt } = location.state;
-    const combinedVariable = `${place},${image_prompt}`;
+    const { gender, place, image_prompt } = location.state;
+    const additionalString = "msgirlhijabi doing";
+    const inn = " in";
+
+    const combinedVariable = `${gender}${image_prompt}${inn}${place}`;
 
     const fetchImage = async () => {
       try {

@@ -12,7 +12,7 @@ const FormPage = () => {
     insert_prompt: "",
     name: "",
     age: "",
-    gender: "بنت",
+    gender: "msgirlhijabi",
     choices: "",
     place: "",
     image_prompt: "",
@@ -178,7 +178,7 @@ const FormPage = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="بنت"
+                  value="msgirlhijabi"
                   onChange={handleChange}
                   class="real-radio-btn"
                 />
@@ -189,7 +189,7 @@ const FormPage = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="ولد"
+                  value="msboy"
                   onChange={handleChange}
                   class="real-radio-btn"
                 />
@@ -204,7 +204,7 @@ const FormPage = () => {
             <div className="select-container">
               <label className="lbl">النشاط الأساسي لبطل القصة</label>
             </div>
-            {formData.gender === "ولد" && (
+            {formData.gender === "msboy" && (
               <div className="select-container">
                 <select
                   className="select-btn"
@@ -223,7 +223,7 @@ const FormPage = () => {
               </div>
             )}
 
-            {formData.gender === "بنت" && (
+            {formData.gender === "msgirlhijabi" && (
               <div className="select-container">
                 <select
                   name="image_prompt"

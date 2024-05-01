@@ -13,9 +13,12 @@ import StoryFrame from "../addings/StoryFrame.png";
 import ExitFullScreen from "../addings/ExitFullScreen.png";
 import Loading from "../addings/Loading.png";
 import Footer from "./Footer";
+import SoundChoiceModal from './SoundChoiceModal';
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
+  const [isSoundLoading, setIsSoundLoading] = useState(false);
+
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -23,7 +26,9 @@ const StoryPage = () => {
   const navigate = useNavigate();
   const storyContentRef = useRef(null);
   const exitFullScreenRef = useRef(null);
-  const isLoading = isStoryLoading;
+  const isLoading = isStoryLoading || isSoundLoading;
+  const [selectedVoice, setSelectedVoice] = useState('nova');  // Default voice
+  const [showVoiceModal, setShowVoiceModal] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -121,10 +126,17 @@ const StoryPage = () => {
     toggleModal(); // Toggle modal visibility
   };
 
-  const handleSound = async (e) => {
-    e.preventDefault();
+  const handleVoiceSelect = (voice) => {
+    setSelectedVoice(voice);
+    setShowVoiceModal(false);
+    handleSound();  // Trigger the sound fetching with the selected voice
+  };
+
+  const handleSound = async () => {
+    setIsSoundLoading(true);
+
     console.log("Sound button clicked");
-    const url = "http://localhost:8000/generate_speech/";
+    const url = `http://localhost:8000/generate_speech/${selectedVoice}`;  // Use the selected voice in the URL
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -135,14 +147,15 @@ const StoryPage = () => {
 
       if (response.ok) {
         const jsonResponse = await response.json();
-        setAudioData(jsonResponse.AudioBase64); // Set the audio data state
+        setAudioData(jsonResponse.AudioBase64);  // Set the audio data state
       } else {
         throw new Error("Failed to fetch from the backend");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to generate Sound");
     }
+    setIsSoundLoading(false);
+
   };
 
   const handleFullScreen = () => {
@@ -229,7 +242,8 @@ const StoryPage = () => {
               <button onClick={handleAdd}>
                 <img src={AddButton} alt="Add" />
               </button>
-              <button onClick={handleSound}>
+              <button onClick={() => setShowVoiceModal(true)}>
+
                 <img src={SoundButton} alt="Sound" />
               </button>
               <button onClick={handleFullScreen}>
@@ -252,6 +266,11 @@ const StoryPage = () => {
           <img src={Loading} alt="Loading" className="spinner" />
         </div>
       )}
+      <SoundChoiceModal
+        isOpen={showVoiceModal}
+        onClose={() => setShowVoiceModal(false)}
+        onVoiceSelect={handleVoiceSelect}
+      />
       <Footer />
     </div>
   );

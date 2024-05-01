@@ -62,33 +62,30 @@ def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
 
 
 # Audio Generator
-@app.post("/generate_speech/")
-# async def generate_speech(text_input: str, model: str = "tts-1", voice: str = "nova"):
-async def generate_speech():
-    input = text_to_story.last_story_data["story"] 
-    model = "tts-1"
-    voice = "nova"
-    if model not in ['tts-1', 'tts-1-hd']:
-        raise HTTPException(status_code=400, detail="Model not supported")
+from fastapi import HTTPException
+from typing import Literal
+
+@app.post("/generate_speech/{voice}")
+async def generate_speech(voice: Literal['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']):
+    input = text_to_story.last_story_data["story"]
+    model = "tts-1"  # Default model or you could make it dynamic
+    if voice not in ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']:
+        raise HTTPException(status_code=400, detail="Voice not supported")
+
     try:
         response = audio_client.audio.speech.create(
             model=model,
             voice=voice,
             input=input
         )
-    except AttributeError:
-        raise HTTPException(status_code=500, detail="Speech synthesis method not found. Please check the OpenAI documentation for the correct usage.")
-    
-    request_cost = text_to_speech.calculate_cost(input, model)
-    
-    audio_data = response.content
-    audio_base64 = base64.b64encode(audio_data).decode('utf-8')
-    audio_string = f"data:audio/mp3;base64,{audio_base64}"
+        audio_data = response.content
+        audio_base64 = base64.b64encode(audio_data).decode('utf-8')
+        audio_string = f"data:audio/mp3;base64,{audio_base64}"
+        return {"AudioBase64": audio_string}
+    except Exception as e:
+        # Handling the exception with an error message and a 500 status code
+        raise HTTPException(status_code=500, detail=str(e))
 
-    return {
-        "Cost": f"${request_cost:.3f}",
-        "AudioBase64": audio_string  # Send the Base64 string
-    }
 
 from fastapi.responses import StreamingResponse
 

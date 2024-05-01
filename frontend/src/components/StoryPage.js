@@ -29,7 +29,7 @@ const StoryPage = () => {
   const isLoading = isStoryLoading || isSoundLoading;
   const [selectedVoice, setSelectedVoice] = useState('nova');  // Default voice
   const [showVoiceModal, setShowVoiceModal] = useState(false);
-
+  const [isSoundRequested, setIsSoundRequested] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
@@ -125,18 +125,25 @@ const StoryPage = () => {
     console.log("Like button clicked");
     toggleModal(); // Toggle modal visibility
   };
-
   const handleVoiceSelect = (voice) => {
-    setSelectedVoice(voice);
+    console.log(`Voice selected: ${voice}`);
     setShowVoiceModal(false);
-    handleSound();  // Trigger the sound fetching with the selected voice
+    setSelectedVoice(voice);
+    setIsSoundRequested(true);
   };
+
+  useEffect(() => {
+    if (selectedVoice && isSoundRequested) {
+      handleSound();
+      setIsSoundRequested(false); // Reset the request flag after playing the sound
+    }
+  }, [selectedVoice, isSoundRequested]);  // This effect runs only when selectedVoice changes
 
   const handleSound = async () => {
     setIsSoundLoading(true);
+    console.log("Sound button clicked voice ", selectedVoice);
 
-    console.log("Sound button clicked");
-    const url = `http://localhost:8000/generate_speech/${selectedVoice}`;  // Use the selected voice in the URL
+    const url = `http://localhost:8000/generate_speech/${selectedVoice}`;
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -147,7 +154,7 @@ const StoryPage = () => {
 
       if (response.ok) {
         const jsonResponse = await response.json();
-        setAudioData(jsonResponse.AudioBase64);  // Set the audio data state
+        setAudioData(jsonResponse.AudioBase64);
       } else {
         throw new Error("Failed to fetch from the backend");
       }
@@ -155,8 +162,8 @@ const StoryPage = () => {
       console.error("Error:", error);
     }
     setIsSoundLoading(false);
-
   };
+
 
   const handleFullScreen = () => {
     if (storyContentRef.current) {

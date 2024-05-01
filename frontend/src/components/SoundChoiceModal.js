@@ -7,7 +7,9 @@ const SoundChoiceModal = ({ isOpen, onClose, onVoiceSelect }) => {
 
     // Helper function to map gender choice to specific voice
     const handleVoiceChoice = (gender) => {
-        const voice = (gender === 'female' ? 'echo' : 'nova');
+
+        const voice = (gender === 'male' ? 'alloy' : 'nova');
+        console.log(`Gender: ${gender}, Voice: ${voice}`);
         onVoiceSelect(voice);
     };
 

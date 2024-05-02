@@ -90,7 +90,7 @@ const FormPage = () => {
     if (!isValid) {
       setErrors(newErrors);
     } else {
-      navigate("/story", { state: { ...formData } }); // Spread the formData into the state object
+      navigate("/story", { state: { ...formData } });
       setErrors({});
     }
   };

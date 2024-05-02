@@ -13,7 +13,7 @@ import StoryFrame from "../addings/StoryFrame.png";
 import ExitFullScreen from "../addings/ExitFullScreen.png";
 import Loading from "../addings/Loading.png";
 import Footer from "./Footer";
-import SoundChoiceModal from './SoundChoiceModal';
+import SoundChoiceModal from "./SoundChoiceModal";
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
@@ -27,7 +27,7 @@ const StoryPage = () => {
   const storyContentRef = useRef(null);
   const exitFullScreenRef = useRef(null);
   const isLoading = isStoryLoading || isSoundLoading;
-  const [selectedVoice, setSelectedVoice] = useState('nova');  // Default voice
+  const [selectedVoice, setSelectedVoice] = useState("nova"); // Default voice
   const [showVoiceModal, setShowVoiceModal] = useState(false);
   const [isSoundRequested, setIsSoundRequested] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -79,6 +79,7 @@ const StoryPage = () => {
       {
         headers: {
           Authorization: "Bearer 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",
+          "Postman-Token": Math.random(),
           "Content-Type": "application/json",
           "Cache-Control": "no-cache", // Prevent caching
         },
@@ -104,7 +105,10 @@ const StoryPage = () => {
 
     const fetchImage = async () => {
       try {
-        const imageBlob = await query({ inputs: combinedVariable });
+        const imageBlob = await query({
+          inputs: combinedVariable,
+          random: Math.random(),
+        });
         const imageObjectURL = URL.createObjectURL(imageBlob);
         setImageSrc(imageObjectURL);
         console.log("Image fetched successfully");
@@ -137,7 +141,7 @@ const StoryPage = () => {
       handleSound();
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
-  }, [selectedVoice, isSoundRequested]);  // This effect runs only when selectedVoice changes
+  }, [selectedVoice, isSoundRequested]); // This effect runs only when selectedVoice changes
 
   const handleSound = async () => {
     setIsSoundLoading(true);
@@ -163,7 +167,6 @@ const StoryPage = () => {
     }
     setIsSoundLoading(false);
   };
-
 
   const handleFullScreen = () => {
     if (storyContentRef.current) {
@@ -250,7 +253,6 @@ const StoryPage = () => {
                 <img src={AddButton} alt="Add" />
               </button>
               <button onClick={() => setShowVoiceModal(true)}>
-
                 <img src={SoundButton} alt="Sound" />
               </button>
               <button onClick={handleFullScreen}>

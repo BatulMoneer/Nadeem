@@ -68,7 +68,9 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
                 {"role": "user", "content": f"{insert_prompt} أكتب علامات التشكيل على جميع الكلمات والحروف."},
                 {"role": "user", "content": f"{name} اسم الشخصية الرئيسية."},
                 {"role": "user", "content": f"{gender} جنس الشخصية الرئيسية."},
-                {"role": "user", "content": f"{age} عمر الطفل الذي سيقرأ القصة."}
+                {"role": "user", "content": f"{age} عمر الطفل الذي سيقرأ القصة."},
+                {"role": "user", "content": f"لا تكتب اي تعليقات اضافية لديك فقط اكتب القصة"},
+                {"role": "user", "content": f"لا تضيف اي تعليقات عند نهاية القصة"}
             ]
         )
 

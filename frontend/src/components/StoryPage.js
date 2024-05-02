@@ -14,6 +14,10 @@ import ExitFullScreen from "../addings/ExitFullScreen.png";
 import Loading from "../addings/Loading.png";
 import Footer from "./Footer";
 import SoundChoiceModal from "./SoundChoiceModal";
+import newImage from "../addings/Group 420.png";
+import newText from "../addings/Group 421.png";
+
+
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
@@ -258,7 +262,17 @@ const StoryPage = () => {
               <button onClick={handleFullScreen}>
                 <img src={FullscreenButton} alt="FullScreen" />
               </button>
+              <div className="new-button-container">
+              <button >
+                <img src={newText} alt="New Text" />
+              </button>
+              <button >
+                <img src={newImage} alt="New Image" />
+              </button>
+              
             </div>
+            </div>
+            
             <button
               ref={exitFullScreenRef}
               className="exit-fullscreen-button"

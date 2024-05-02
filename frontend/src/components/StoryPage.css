@@ -78,6 +78,36 @@
     transform: scale(1.1);
     /* Scales the image up on hover */
 }
+.new-button-container {
+    width: 60%;
+    left: 50%;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 1rem;
+    z-index: 500;
+    display: flex;
+    position: fixed; /* Stays fixed during scrolling */
+    top: 120vh; /* Adjusted to bring it into the viewport */
+    transform: translateX(-50%); /* Center horizontally */
+}
+
+
+
+
+
+.new-button-container button img {
+    width: 10vw;
+    /* Use viewport width for scaling */
+    height: auto;
+    /* Maintain aspect ratio */
+    transition: transform 0.3s ease;
+    
+}
+
+.new-button-container button:hover img {
+    transform: scale(1.1);
+    /* Scales the image up on hover */
+}
 
 
 
@@ -536,6 +566,10 @@
     .story-output {
         font-size: 0.85rem;
     }
+    .new-button-container {
+        top: 95vh; /* Adjust based on visual preference */
+    }
+    
 }
 
 @media (max-width: 1224px) {
@@ -559,12 +593,18 @@
     .story-output {
         font-size: 0.78rem;
     }
+    .new-button-container {
+        top: 70vh;
+    }
 }
 
 @media (max-width: 1090px) {
 
     .button-container {
         top: 0.2rem;
+    }
+    .new-button-container {
+        top: 78vh;/**corect*/
     }
 
     .story-book {
@@ -605,9 +645,15 @@
     .story-output {
         font-size: 0.6rem;
     }
+    .new-button-container {
+        top: 66vh;/*corect*/
+    }
 }
 
 @media (max-width: 820px) {
+    .new-button-container {
+        top: 63vh;/*corect*/
+    }
 
     .button-container {
         top: -0.4rem;
@@ -650,6 +696,9 @@
     .story-output {
         font-size: 0.4rem;
     }
+    .new-button-container {
+        top: 57vh;/*corect*/
+    }
 }
 
 
@@ -673,11 +722,17 @@
     .story-output {
         font-size: 0.32rem;
     }
+    .new-button-container {
+        top: 46vh;
+    }
 }
 
 @media (max-width: 500px) {
     .button-container {
         top: -1.2rem;
+    }
+    .new-button-container {
+        top: 36vh;/*corect*/
     }
 
     .story-book {

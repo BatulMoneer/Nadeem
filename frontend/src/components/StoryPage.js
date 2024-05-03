@@ -17,8 +17,6 @@ import SoundChoiceModal from "./SoundChoiceModal";
 import newImage from "../addings/Group 420.png";
 import newText from "../addings/Group 421.png";
 
-
-
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
   const [isSoundLoading, setIsSoundLoading] = useState(false);
@@ -41,7 +39,7 @@ const StoryPage = () => {
   };
 
   // Function to fetch and display the story automatically when the component loads
-  useEffect(() => {
+  const fetchStory = async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -50,80 +48,82 @@ const StoryPage = () => {
     const { insert_prompt, name, age, gender } = location.state;
     const url = "http://localhost:8000/generate_story/";
 
-    const fetchStory = async () => {
-      setIsStoryLoading(true);
-      try {
-        const response = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ insert_prompt, name, age, gender }),
-        });
+    setIsStoryLoading(true);
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ insert_prompt, name, age, gender }),
+      });
 
-        if (response.ok) {
-          const jsonResponse = await response.json();
-          setStory(jsonResponse);
-          console.log("Story generated successfully");
-        } else {
-          throw new Error("Failed to fetch from the backend");
-        }
-      } catch (error) {
-        console.error("Error:", error);
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        setStory(jsonResponse);
+        console.log("Story generated successfully");
+      } else {
+        throw new Error("Failed to fetch from the backend");
       }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
       setIsStoryLoading(false);
-    };
+    }
+  };
 
+  // useEffect to fetch the story when the component mounts
+  useEffect(() => {
     fetchStory();
-  }, [location]);
+  }, []);
 
-  async function query(data) {
+  // Function to perform the query to fetch the image
+  const query = async (data) => {
     let response = await fetch(
       "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
       {
         headers: {
           Authorization: "Bearer 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",
-          "Postman-Token": Math.random(),
           "Content-Type": "application/json",
-          "Cache-Control": "no-cache", // Prevent caching
+          "Cache-Control": "no-cache", // This ensures no caching
         },
         method: "POST",
         body: JSON.stringify(data),
       }
     );
     let result = await response.blob();
-
     return result;
-  }
-  useEffect(() => {
+  };
+
+  // Function to initiate fetching of the image
+  const fetchImage = async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
     }
 
     const { gender, place, image_prompt } = location.state;
-    //const additionalString = "msgirlhijabi doing";
     const inn = " in";
-
     const combinedVariable = `${gender}${image_prompt}${inn}${place}`;
 
-    const fetchImage = async () => {
-      try {
-        const imageBlob = await query({
-          inputs: combinedVariable,
-          random: Math.random(),
-        });
-        const imageObjectURL = URL.createObjectURL(imageBlob);
-        setImageSrc(imageObjectURL);
-        console.log("Image fetched successfully");
-        console.log("Image URL:", imageObjectURL); // Check the URL in the console
-      } catch (error) {
-        console.error("Failed to fetch image:", error);
-      }
-    };
+    try {
+      const imageBlob = await query({
+        inputs: combinedVariable,
+        random: Math.random(), // Consider removing random if "Cache-Control" is set to "no-cache"
+      });
+      const imageObjectURL = URL.createObjectURL(imageBlob);
+      setImageSrc(imageObjectURL);
+      console.log("Image fetched successfully");
+      console.log("Image URL:", imageObjectURL);
+    } catch (error) {
+      console.error("Failed to fetch image:", error);
+    }
+  };
 
+  // useEffect for initial fetch when the component mounts
+  useEffect(() => {
     fetchImage();
-  }, [location.state]);
+  }, []);
 
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
@@ -263,16 +263,15 @@ const StoryPage = () => {
                 <img src={FullscreenButton} alt="FullScreen" />
               </button>
               <div className="new-button-container">
-              <button >
-                <img src={newText} alt="New Text" />
-              </button>
-              <button >
-                <img src={newImage} alt="New Image" />
-              </button>
-              
+                <button onClick={fetchStory}>
+                  <img src={newText} alt="New Text" />
+                </button>
+                <button onClick={fetchImage}>
+                  <img src={newImage} alt="New Image" />
+                </button>
+              </div>
             </div>
-            </div>
-            
+
             <button
               ref={exitFullScreenRef}
               className="exit-fullscreen-button"

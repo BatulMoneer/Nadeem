@@ -23,9 +23,9 @@ const Header = () => {
         <nav className={`header-nav ${isOpen ? "open" : ""}`}>
           <ul>
             {/* Close the menu when a list item is clicked */}
-            <li onClick={closeMenu}>
+            {/*<li onClick={closeMenu}>
               <Link to="/about">عن نديم</Link>
-            </li>
+  </li>*/}
             {/* <li onClick={closeMenu}><Link to="/children">أطفالي</Link></li> */}
             <li onClick={closeMenu}>
               <Link to="/storypage">قصصي</Link>

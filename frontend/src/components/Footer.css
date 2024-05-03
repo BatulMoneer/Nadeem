@@ -4,10 +4,13 @@
     width: 100%;
     background-color: #835074;
     border-radius: 80rem 80rem 0 0;
-    height: 17rem;
+    height: 11rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    box-shadow: inset 0px 10px 20px rgba(0, 0, 0, 0.162);
+
+
 }
 
 
@@ -15,9 +18,9 @@
 .footer-content {
     display: flex;
     width: 100%;
-    padding: 3rem;
     align-items: center;
     justify-content: center;
+
 }
 
 .footer-section-group {
@@ -26,7 +29,8 @@
     /* Stack the label and icons vertically */
     align-items: center;
     /* Center align the content */
-    padding: 10px;
+    padding: 1rem;
+
 }
 
 .footer-section {
@@ -64,7 +68,8 @@
 }
 
 .logo {
-    height: 10rem;
+    height: 8rem;
+    width: auto;
     padding-left: 5rem;
     width: auto;
 }
@@ -81,6 +86,7 @@
     .logo {
         padding-left: 0rem;
     }
+
 }
 
 @media (max-width: 700px) {
@@ -106,5 +112,6 @@
         color: #eeeeee;
         margin-top: 20px;
         /* Adjust as necessary */
+
     }
 }

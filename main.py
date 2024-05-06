@@ -34,7 +34,9 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",   # React's default port
-    "http://127.0.0.1:3000",    # localhost with explicit IP        # without port (for cases where React dev server uses a different port)
+    "http://127.0.0.1:3000",
+    "https://nadeem-nadeemstory-aff85867.koyeb.app/"
+    # localhost with explicit IP        # without port (for cases where React dev server uses a different port)
 ]
 
 app.add_middleware(
@@ -46,6 +48,10 @@ app.add_middleware(
 )
 
 # Story Generation
+@app.get("/api/data")
+async def read_data():
+    return {"message": "Hello from the backend!"}
+
 @app.post("/generate_story/")
 def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
     #return story, english_words=keywords

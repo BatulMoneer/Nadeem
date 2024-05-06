@@ -46,7 +46,7 @@ const StoryPage = () => {
     }
 
     const { insert_prompt, name, age, gender } = location.state;
-    const url = "http://localhost:8000/generate_story/";
+    const url = "https://nadeem-nadeemstory-aff85867.koyeb.app/generate_story/";
 
     setIsStoryLoading(true);
     try {
@@ -151,7 +151,7 @@ const StoryPage = () => {
     setIsSoundLoading(true);
     console.log("Sound button clicked voice ", selectedVoice);
 
-    const url = `http://localhost:8000/generate_speech/${selectedVoice}`;
+    const url = `https://nadeem-nadeemstory-aff85867.koyeb.app/generate_speech/${selectedVoice}`;
     try {
       const response = await fetch(url, {
         method: "POST",

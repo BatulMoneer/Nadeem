@@ -20,7 +20,6 @@ import newText from "../addings/Group 421.png";
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
   const [isSoundLoading, setIsSoundLoading] = useState(false);
-
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -75,7 +74,7 @@ const StoryPage = () => {
   // useEffect to fetch the story when the component mounts
   useEffect(() => {
     fetchStory();
-  }, []);
+  });
 
   // Function to perform the query to fetch the image
   const query = async (data) => {
@@ -123,7 +122,7 @@ const StoryPage = () => {
   // useEffect for initial fetch when the component mounts
   useEffect(() => {
     fetchImage();
-  }, []);
+  });
 
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed

@@ -144,7 +144,7 @@ const StoryPage = () => {
       handleSound();
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
-  }, [selectedVoice, isSoundRequested]); // This effect runs only when selectedVoice changes
+  }, [selectedVoice, isSoundRequested, handleSound]); // Include handleSound in the dependency array
 
   const handleSound = async () => {
     setIsSoundLoading(true);

@@ -20,6 +20,7 @@ import newText from "../addings/Group 421.png";
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
   const [isSoundLoading, setIsSoundLoading] = useState(false);
+
   const [audioData, setAudioData] = useState("");
   const [story, setStory] = useState("");
   const [imageSrc, setImageSrc] = useState("");
@@ -46,7 +47,6 @@ const StoryPage = () => {
 
     const { insert_prompt, name, age, gender } = location.state;
     const url = "https://nadeem-nadeemstory-aff85867.koyeb.app/generate_story/";
-
     setIsStoryLoading(true);
     try {
       const response = await fetch(url, {
@@ -74,7 +74,7 @@ const StoryPage = () => {
   // useEffect to fetch the story when the component mounts
   useEffect(() => {
     fetchStory();
-  });
+  }, []);
 
   // Function to perform the query to fetch the image
   const query = async (data) => {
@@ -122,7 +122,7 @@ const StoryPage = () => {
   // useEffect for initial fetch when the component mounts
   useEffect(() => {
     fetchImage();
-  });
+  }, []);
 
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
@@ -144,7 +144,7 @@ const StoryPage = () => {
       handleSound();
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
-  }, [selectedVoice, isSoundRequested, handleSound]); // Include handleSound in the dependency array
+  }, [selectedVoice, isSoundRequested]); // This effect runs only when selectedVoice changes
 
   const handleSound = async () => {
     setIsSoundLoading(true);

@@ -71,11 +71,6 @@ const StoryPage = () => {
     }
   };
 
-  // useEffect to fetch the story when the component mounts
-  useEffect(() => {
-    fetchStory();
-  }, [location]);
-
   // Function to perform the query to fetch the image
   const query = async (data) => {
     let response = await fetch(
@@ -119,7 +114,10 @@ const StoryPage = () => {
     }
   };
 
-  // useEffect for initial fetch when the component mounts
+  useEffect(() => {
+    fetchStory();
+  }, [location]);
+
   useEffect(() => {
     fetchImage();
   }, [location]);

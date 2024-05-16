@@ -30,7 +30,7 @@ app = FastAPI()
 
 # from fastapi.staticfiles import StaticFiles
 # app.mount("/static", StaticFiles(directory="static"), name="static")
-
+#ي
 
 allow_origins=[
         "http://localhost:3000",  # React's default port on localhost

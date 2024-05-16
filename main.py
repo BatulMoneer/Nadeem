@@ -32,12 +32,12 @@ app = FastAPI()
 # app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
-origins = [
-    "http://localhost:3000",   # React's default port
-    "http://127.0.0.1:3000",
-    "https://nadeem-nadeemstory-aff85867.koyeb.app/"
-    # localhost with explicit IP        # without port (for cases where React dev server uses a different port)
-]
+allow_origins=[
+        "http://localhost:3000",  # React's default port on localhost
+        "http://127.0.0.1:3000",  # Localhost with explicit IP
+        "https://nadeemstory1.netlify.app",  # Production frontend URL
+        "https://nadeem-nadeemstory-aff85867.koyeb.app"  # Your API's production URL
+    ],
 
 app.add_middleware(
     CORSMiddleware,

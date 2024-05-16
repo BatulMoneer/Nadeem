@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./StoryPage.css";
 import Header from "./Header";
 import RatingModal from "./RatingModal";
@@ -38,8 +38,7 @@ const StoryPage = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  // Function to fetch and display the story automatically when the component loads
-  const fetchStory = async () => {
+  const fetchStory = useCallback(async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -47,6 +46,7 @@ const StoryPage = () => {
 
     const { insert_prompt, name, age, gender } = location.state;
     const url = "https://nadeem-nadeemstory-aff85867.koyeb.app/generate_story/";
+
     setIsStoryLoading(true);
     try {
       const response = await fetch(url, {
@@ -69,33 +69,9 @@ const StoryPage = () => {
     } finally {
       setIsStoryLoading(false);
     }
-  };
+  }, [location.state]);
 
-  // useEffect to fetch the story when the component mounts
-  useEffect(() => {
-    fetchStory();
-  }, [location]);
-
-  // Function to perform the query to fetch the image
-  const query = async (data) => {
-    let response = await fetch(
-      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
-      {
-        headers: {
-          Authorization: "Bearer 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",
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache", // This ensures no caching
-        },
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    );
-    let result = await response.blob();
-    return result;
-  };
-
-  // Function to initiate fetching of the image
-  const fetchImage = async () => {
+  const fetchImage = useCallback(async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -117,12 +93,32 @@ const StoryPage = () => {
     } catch (error) {
       console.error("Failed to fetch image:", error);
     }
-  };
+  }, [location.state]);
 
-  // useEffect for initial fetch when the component mounts
+  useEffect(() => {
+    fetchStory();
+  }, [fetchStory]);
+
   useEffect(() => {
     fetchImage();
-  }, [location]);
+  }, [fetchImage]);
+
+  const query = async (data) => {
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
+      {
+        headers: {
+          Authorization: "Bearer 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",
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache", // This ensures no caching
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+    return result;
+  };
 
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
@@ -132,6 +128,7 @@ const StoryPage = () => {
     console.log("Like button clicked");
     toggleModal(); // Toggle modal visibility
   };
+
   const handleVoiceSelect = (voice) => {
     console.log(`Voice selected: ${voice}`);
     setShowVoiceModal(false);
@@ -144,7 +141,7 @@ const StoryPage = () => {
       handleSound();
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
-  }, [selectedVoice, isSoundRequested]); // This effect runs only when selectedVoice changes
+  }, [selectedVoice, isSoundRequested]);
 
   const handleSound = async () => {
     setIsSoundLoading(true);
@@ -221,7 +218,6 @@ const StoryPage = () => {
             <div>
               <img src={StoryBook} alt="Book" className="story-book" />
               <div className="left-page">
-                {/* Story text output */}
                 <div className="story-output">
                   {story && (
                     <div>
@@ -236,7 +232,6 @@ const StoryPage = () => {
                 </div>
               </div>
               <div className="right-page">
-                {/* Story image output */}
                 {imageSrc ? (
                   <img
                     src={imageSrc}

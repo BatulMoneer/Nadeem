@@ -17,6 +17,37 @@ import SoundChoiceModal from "./SoundChoiceModal";
 import newImage from "../addings/Group 420.png";
 import newText from "../addings/Group 421.png";
 
+// Define handleSound outside of the component
+const handleSound = async (
+  setAudioData,
+  setSelectedVoice,
+  setIsSoundLoading,
+  selectedVoice
+) => {
+  setIsSoundLoading(true);
+  console.log("Sound button clicked voice ", selectedVoice);
+
+  const url = `https://nadeem-nadeemstory-aff85867.koyeb.app/generate_speech/${selectedVoice}`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      setAudioData(jsonResponse.AudioBase64);
+    } else {
+      throw new Error("Failed to fetch from the backend");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+  setIsSoundLoading(false);
+};
+
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
   const [isSoundLoading, setIsSoundLoading] = useState(false);
@@ -138,35 +169,15 @@ const StoryPage = () => {
 
   useEffect(() => {
     if (selectedVoice && isSoundRequested) {
-      handleSound();
+      handleSound(
+        setAudioData,
+        setSelectedVoice,
+        setIsSoundLoading,
+        selectedVoice
+      );
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
   }, [selectedVoice, isSoundRequested]);
-
-  const handleSound = async () => {
-    setIsSoundLoading(true);
-    console.log("Sound button clicked voice ", selectedVoice);
-
-    const url = `https://nadeem-nadeemstory-aff85867.koyeb.app/generate_speech/${selectedVoice}`;
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        setAudioData(jsonResponse.AudioBase64);
-      } else {
-        throw new Error("Failed to fetch from the backend");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-    setIsSoundLoading(false);
-  };
 
   const handleFullScreen = () => {
     if (storyContentRef.current) {

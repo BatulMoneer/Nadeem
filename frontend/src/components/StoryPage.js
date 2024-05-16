@@ -272,7 +272,7 @@ const StoryPage = () => {
                   <img src={newText} alt="New Text" />
                 </button>
                 <button onClick={fetchImage}>
-                  <img src={newImage} alt="New Image" />
+                  <img src={newImage} alt="" />
                 </button>
               </div>
             </div>

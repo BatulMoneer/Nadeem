@@ -415,3 +415,127 @@ input::placeholder {
         width: 25%;
     }
 }
+
+@media (max-width: 450px) {
+
+    .form-nadeem {
+        display: none;
+    }
+
+    .nadeem-speech {
+        display: none;
+    }
+
+    .in-btn {
+        width: 50%;
+    }
+
+    .select-container select {
+        width: 50%;
+    }
+
+    .in-btn-small {
+        width: 24%;
+    }
+
+    .btn {
+        margin-left: 30%;
+        width: 18rem;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .form-container {
+        left: 1.8rem;
+    }
+
+    .form-nadeem {
+        display: none;
+    }
+
+    .nadeem-speech {
+        display: none;
+    }
+
+    .in-btn {
+        width: 50%;
+    }
+
+    .select-container select {
+        width: 50%;
+    }
+
+    .in-btn-small {
+        width: 24%;
+    }
+
+    .btn {
+        margin-left: 27%;
+        width: 18rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .form-container {
+        left: 1.5rem;
+    }
+
+    .form-nadeem {
+        display: none;
+    }
+
+    .nadeem-speech {
+        display: none;
+    }
+
+    .in-btn {
+        width: 50%;
+    }
+
+    .select-container select {
+        width: 50%;
+    }
+
+    .in-btn-small {
+        width: 24%;
+    }
+
+    .btn {
+        margin-left: 23%;
+        width: 18rem;
+    }
+}
+
+@media (max-width: 376px) {
+
+    .form-container {
+        left: 1.5rem;
+    }
+
+    .form-nadeem {
+        display: none;
+    }
+
+    .nadeem-speech {
+        display: none;
+    }
+
+    .in-btn {
+        width: 50%;
+    }
+
+    .select-container select {
+        width: 50%;
+    }
+
+    .in-btn-small {
+        width: 24%;
+    }
+
+    .btn {
+        margin-left: 20%;
+        width: 18rem;
+    }
+}

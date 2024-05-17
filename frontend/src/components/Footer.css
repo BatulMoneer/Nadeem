@@ -115,3 +115,159 @@
 
     }
 }
+
+@media (max-width: 450px) {
+    .logo {
+        padding-left: 0rem;
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .footer-section-group {
+        padding: -1rem;
+    }
+
+    .footer-section-group span {
+        padding-bottom: -2rem;
+        padding-left: 1rem;
+
+    }
+
+
+    .footer-section span {
+        margin-top: 5px;
+    }
+
+    .footer-bottom-text {
+        color: #eeeeee;
+        margin-top: 0px;
+
+        /* Adjust as necessary */
+
+    }
+
+
+    .footer-section svg {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 420px) {
+    .logo {
+        padding-left: 0rem;
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .footer-section-group {
+        padding: -1rem;
+    }
+
+    .footer-section-group span {
+        padding-bottom: -2rem;
+        padding-left: 1rem;
+
+    }
+
+
+    .footer-section span {
+        margin-top: 5px;
+    }
+
+    .footer-bottom-text {
+        color: #eeeeee;
+        margin-top: 0px;
+
+        /* Adjust as necessary */
+
+    }
+
+
+    .footer-section svg {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 376px) {
+    .logo {
+        padding-left: 0rem;
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .footer-section-group {
+        padding: -1rem;
+    }
+
+    .footer-section-group span {
+        padding-bottom: -2rem;
+        padding-left: 1rem;
+
+    }
+
+
+    .footer-section span {
+        margin-top: 5px;
+    }
+
+    .footer-bottom-text {
+        color: #eeeeee;
+        margin-top: 0px;
+
+        /* Adjust as necessary */
+
+    }
+
+
+    .footer-section svg {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 360px) {
+    .logo {
+        padding-left: 0rem;
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .footer-section-group {
+        padding: -1rem;
+    }
+
+    .footer-section-group span {
+        padding-bottom: -2rem;
+        padding-left: 1rem;
+
+    }
+
+
+    .footer-section span {
+        margin-top: 5px;
+    }
+
+    .footer-bottom-text {
+        color: #eeeeee;
+        margin-top: 0px;
+
+        /* Adjust as necessary */
+
+    }
+
+
+    .footer-section svg {
+        width: 0.5rem;
+        height: 0.5rem;
+        margin-top: 0;
+    }
+
+}

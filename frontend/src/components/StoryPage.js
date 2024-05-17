@@ -102,9 +102,10 @@ const StoryPage = () => {
       return;
     }
 
-    const { gender, place, image_prompt } = location.state;
+    const { gender, place, image_prompt, choices } = location.state;
     const inn = " in";
-    const combinedVariable = `${gender}${image_prompt}${inn}${place}`;
+    const dd = "donig";
+    const combinedVariable = `${gender}${dd}${image_prompt}${choices}${inn}${place}`;
 
     try {
       const imageBlob = await query({

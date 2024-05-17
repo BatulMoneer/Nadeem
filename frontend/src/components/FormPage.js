@@ -90,7 +90,30 @@ const FormPage = () => {
     if (!isValid) {
       setErrors(newErrors);
     } else {
-      navigate("/story", { state: { ...formData } });
+      // If you want to translate the choices before navigating
+      if (formData.choices) {
+        const apiUrl = "http://localhost:3000/translate_word/"; // Your API endpoint
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: formData.choices }),
+          });
+          const { translatedText } = await response.json();
+          navigate("/story", {
+            state: { ...formData, choices: translatedText },
+          });
+        } catch (error) {
+          console.error("Error translating choices:", error);
+          // Here, decide how you want to handle the error.
+          // You could navigate with the untranslated text or show an error message.
+        }
+      } else {
+        // If there is no need for translation or choices is empty, navigate as usual
+        navigate("/story", { state: { ...formData } });
+      }
       setErrors({});
     }
   };
@@ -128,6 +151,25 @@ const FormPage = () => {
 
     isValid = Object.keys(newErrors).length === 0;
     return { isValid, newErrors };
+  };
+  const handleChoicesUpdate = async () => {
+    const apiUrl = "http://localhost:3000/translate_word/"; // Your API endpoint
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: formData.choices }),
+      });
+      const { translatedText } = await response.json();
+      setFormData((prevState) => ({
+        ...prevState,
+        choices: translatedText, // Update the 'choices' with the response
+      }));
+    } catch (error) {
+      console.error("Error translating choices:", error);
+    }
   };
 
   return (

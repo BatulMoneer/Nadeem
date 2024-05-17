@@ -12,6 +12,8 @@ import io
 import datetime
 import story_to_image
 from text_to_story import last_story_data,get_keywords_endpoint
+from translator import TranslationRequest, translate_arabic_to_english
+
 from io import BytesIO
 import base64
 
@@ -53,6 +55,15 @@ app.add_middleware(
 async def read_data():
     return {"message": "Hello from the backend!"}
 
+@app.post("/translate_word/")
+async def translate_word_endpoint(request: TranslationRequest):
+    try:
+        # Access the text client that's already initialized with your OpenAI API key
+        translation = translate_arabic_to_english(text_client, request.arabic_word)
+        return {"translation": translation}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e)) 
+    
 @app.post("/generate_story/")
 def generate_story_endpoint(story_request: text_to_story.Text_to_Story):
     #return story, english_words=keywords

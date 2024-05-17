@@ -92,7 +92,8 @@ const FormPage = () => {
     } else {
       // If you want to translate the choices before navigating
       if (formData.choices) {
-        const apiUrl = "http://localhost:3000/translate_word/"; // Your API endpoint
+        const apiUrl =
+          "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/"; // Your API endpoint
         try {
           const response = await fetch(apiUrl, {
             method: "POST",
@@ -139,9 +140,9 @@ const FormPage = () => {
     if (!formData.gender.trim()) {
       newErrors.gender = "يرجى اخيار جنس بطل القصة";
     }
-    if (!formData.image_prompt.trim()) {
-      newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
-    }
+    // if (!formData.image_prompt.trim()) {
+    //   newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
+    // }
     if (!formData.place.trim()) {
       newErrors.place = "يرجى اختيار مكان القصة";
     }
@@ -153,7 +154,8 @@ const FormPage = () => {
     return { isValid, newErrors };
   };
   const handleChoicesUpdate = async () => {
-    const apiUrl = "http://localhost:3000/translate_word/"; // Your API endpoint
+    const apiUrl =
+      "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/"; // Your API endpoint
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -163,6 +165,7 @@ const FormPage = () => {
         body: JSON.stringify({ text: formData.choices }),
       });
       const { translatedText } = await response.json();
+
       setFormData((prevState) => ({
         ...prevState,
         choices: translatedText, // Update the 'choices' with the response

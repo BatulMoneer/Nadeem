@@ -52,6 +52,7 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
     try:
         response = main.text_client.chat.completions.create(
             model="gpt-3.5-turbo",
+            seed=40,
             messages=[
                 {
                     "role": "system",
@@ -62,7 +63,7 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
                         "about 20-25 sentences, designed to instill values like honesty, helping others, and devotion, "
                         "all while being compatible with Islamic morals and presented in Arabic. "
                         "Start the story directly without opening words. At the end of the story, "
-                        " Write the story with the appropriate,"
+                        " Write the story with the appropriate diacritic  on all words"
                         "dont edit any hadith")
                 },
                 # f"{} is a way to include variables or expressions inside a string.

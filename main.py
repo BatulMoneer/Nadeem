@@ -14,6 +14,9 @@ import story_to_image
 from text_to_story import last_story_data,get_keywords_endpoint
 from io import BytesIO
 import base64
+from translator import TranslationRequest, translate_arabic_to_english
+
+
 
 # Load from .env
 load_dotenv()
@@ -85,6 +88,15 @@ async def generate_speech(voice: Literal['alloy', 'echo', 'fable', 'onyx', 'nova
     except Exception as e:
         # Handling the exception with an error message and a 500 status code
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/translate_word/")
+async def translate_word_endpoint(request: TranslationRequest):
+    try:
+        # Access the text client that's already initialized with your OpenAI API key
+        translation = translate_arabic_to_english(text_client, request.arabic_word)
+        return {"translation": translation}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))    
 
 
 from fastapi.responses import StreamingResponse
@@ -104,9 +116,11 @@ async def generate_image(prompt: str):
         # In case of an HTTPException from query_hugging_face,
         # it will be caught and returned here.
         return JSONResponse({"error": e.detail}, status_code=e.status_code)
+    
+        
 
 
-
+    
 
 if __name__ == "__main__":
     import uvicorn

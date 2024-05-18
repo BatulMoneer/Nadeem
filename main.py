@@ -38,16 +38,16 @@ origins = [
     "http://localhost:3000",   # React's default port
     "http://127.0.0.1:3000",
     "https://nadeem-nadeemstory-aff85867.koyeb.app/",
-    "https://nadeemstory1.netlify.app",  
-
+    "https://nadeemstory1.netlify.app",
+    "https://nadeemstory.netlify.app"  
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Specify domains as needed, '*' allows all domains
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 # Story Generation

@@ -103,6 +103,10 @@ const StoryPage = () => {
     }
 
     const { gender, place, image_prompt, choices } = location.state;
+    console.log("Received gender:", gender);
+    console.log("Received place:", place);
+    console.log("Received image_prompt:", image_prompt);
+    console.log("Received choices:", choices);
     const inn = " in";
     const dd = "donig";
     const combinedVariable = `${gender}${dd}${image_prompt}${choices}${inn}${place}`;

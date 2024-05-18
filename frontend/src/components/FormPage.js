@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./FormPage.css"; // Importing our custom CSS
 import Header from "./Header";
@@ -17,10 +17,10 @@ const FormPage = () => {
     place: "",
     image_prompt: "",
   });
-
   const navigate = useNavigate();
   const [errorName, setErrorName] = useState("");
   const [errorPrompt, setErrorPrompt] = useState("");
+  const [readyToNavigate, setReadyToNavigate] = useState(false);
 
   const [errors, setErrors] = useState({});
 
@@ -83,11 +83,10 @@ const FormPage = () => {
       setErrorPrompt(""); // Clear any error as other inputs do not require Arabic validation
     }
   };
-
   const translateChoices = async () => {
     const apiUrl =
       "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/";
-    const payload = { text: formData.choices, targetLang: "en" };
+    const payload = { arabic_word: formData.choices };
 
     console.log("Sending payload for translation:", JSON.stringify(payload));
 
@@ -101,30 +100,38 @@ const FormPage = () => {
       });
 
       if (!response.ok) {
-        const errorBody = await response.json(); // Parse the JSON error response
+        const errorBody = await response.json();
         console.error(
           "API responded with an error:",
           JSON.stringify(errorBody)
         );
-
-        // Extract error details if available
-        const details = errorBody.detail
-          ? JSON.stringify(errorBody.detail)
-          : "No details provided";
         throw new Error(
-          `HTTP error! status: ${response.status}, Details: ${details}`
+          `HTTP error! status: ${response.status}, Details: ${JSON.stringify(
+            errorBody.detail
+          )}`
         );
       }
 
       const result = await response.json();
-      console.log("Translation result:", result.translatedText);
+      console.log("API Translation result:", result);
+      console.log("Translation result:", result.translation);
 
-      setFormData((prevState) => ({
-        ...prevState,
-        choices: result.translatedText,
-      }));
-
-      return true;
+      if (result.translation) {
+        return new Promise((resolve) => {
+          setFormData((prevState) => {
+            const updatedState = { ...prevState, choices: result.translation };
+            console.log(
+              "State updated with English translation:",
+              updatedState.choices
+            );
+            resolve(true);
+            return updatedState;
+          });
+        });
+      } else {
+        console.error("No translation found in the response");
+        return false;
+      }
     } catch (error) {
       console.error("Error translating choices:", error.message);
       return false;
@@ -139,19 +146,28 @@ const FormPage = () => {
       return;
     }
 
-    // Translate choices before navigating
     if (formData.choices) {
       const translationSuccess = await translateChoices();
       if (!translationSuccess) {
         setErrors({ ...errors, choices: "Failed to translate choices" });
-        return; // Stop submission if translation fails
+        return;
+      } else {
+        setReadyToNavigate(true);
       }
+    } else {
+      setReadyToNavigate(true);
     }
-
-    navigate("/story", { state: { ...formData } });
   };
 
-  // Validation
+  useEffect(() => {
+    if (readyToNavigate) {
+      console.log("Navigating with updated formData:", formData);
+      navigate("/story", { state: { ...formData } });
+      setReadyToNavigate(false);
+    }
+  }, [readyToNavigate, formData, navigate]);
+
+  // Further component code...
   const isValidArabicName = (input) => {
     return !/[^ا-ي\s]/.test(input);
   };

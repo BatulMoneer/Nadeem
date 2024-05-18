@@ -5,12 +5,12 @@ import openai
 class TranslationRequest(BaseModel):
     arabic_word: str
 
-    @validator('arabic_word')
-    def check_arabic_word(cls, v):
-        # Updated regex to include Arabic characters, spaces, and common punctuation
-        if not re.fullmatch(r'[\u0600-\u06FF\u0750-\u077F\s،؛:.!-]*', v):
-            raise ValueError("The word must be in Arabic.")
-        return v
+    # @validator('arabic_word')
+    # def check_arabic_word(cls, v):
+    #     # Updated regex to include Arabic characters, spaces, and common punctuation
+    #     if not re.fullmatch(r'[\u0600-\u06FF\u0750-\u077F\s،؛:.!-]*', v):
+    #         raise ValueError("The word must be in Arabic.")
+    #     return v
 
 def translate_arabic_to_english(text_client, arabic_word: str):
     try:

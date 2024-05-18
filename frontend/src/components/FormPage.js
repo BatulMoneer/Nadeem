@@ -84,39 +84,63 @@ const FormPage = () => {
     }
   };
 
+  const translateChoices = async () => {
+    const apiUrl =
+      "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/";
+    const payload = { text: formData.choices, targetLang: "en" };
+
+    console.log("Sending payload for translation:", JSON.stringify(payload));
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json(); // Assuming the server sends JSON with error details
+        console.error("API responded with an error:", errorBody);
+        throw new Error(
+          `HTTP error! status: ${response.status}, ${errorBody.message}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("Translation result:", result.translatedText);
+
+      setFormData((prevState) => ({
+        ...prevState,
+        choices: result.translatedText,
+      }));
+
+      return true;
+    } catch (error) {
+      console.error("Error translating choices:", error);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { isValid, newErrors } = validateForm();
     if (!isValid) {
       setErrors(newErrors);
-    } else {
-      // If you want to translate the choices before navigating
-      if (formData.choices) {
-        const apiUrl =
-          "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/"; // Your API endpoint
-        try {
-          const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ text: formData.choices }),
-          });
-          const { translatedText } = await response.json();
-          navigate("/story", {
-            state: { ...formData, choices: translatedText },
-          });
-        } catch (error) {
-          console.error("Error translating choices:", error);
-          // Here, decide how you want to handle the error.
-          // You could navigate with the untranslated text or show an error message.
-        }
-      } else {
-        // If there is no need for translation or choices is empty, navigate as usual
-        navigate("/story", { state: { ...formData } });
-      }
-      setErrors({});
+      return;
     }
+
+    // Translate choices before navigating
+    if (formData.choices) {
+      const translationSuccess = await translateChoices();
+      if (!translationSuccess) {
+        setErrors({ ...errors, choices: "Failed to translate choices" });
+        return; // Stop submission if translation fails
+      }
+    }
+
+    navigate("/story", { state: { ...formData } });
   };
 
   // Validation
@@ -131,48 +155,15 @@ const FormPage = () => {
     const newErrors = {};
     let isValid = true;
 
-    if (!formData.name.trim()) {
-      newErrors.name = "يرجى إدخال اسم الطفل";
-    }
-    if (!formData.age.trim()) {
-      newErrors.age = "يرجى اختيار عمر الطفل";
-    }
-    if (!formData.gender.trim()) {
-      newErrors.gender = "يرجى اخيار جنس بطل القصة";
-    }
-    // if (!formData.image_prompt.trim()) {
-    //   newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
-    // }
-    if (!formData.place.trim()) {
-      newErrors.place = "يرجى اختيار مكان القصة";
-    }
-    if (!formData.insert_prompt.trim()) {
+    if (!formData.name.trim()) newErrors.name = "يرجى إدخال اسم الطفل";
+    if (!formData.age.trim()) newErrors.age = "يرجى اختيار عمر الطفل";
+    if (!formData.gender.trim()) newErrors.gender = "يرجى اخيار جنس بطل القصة";
+    if (!formData.place.trim()) newErrors.place = "يرجى اختيار مكان القصة";
+    if (!formData.insert_prompt.trim())
       newErrors.insert_prompt = "يرجى ادخال الفكرة الرئيسية للقصة";
-    }
 
     isValid = Object.keys(newErrors).length === 0;
     return { isValid, newErrors };
-  };
-  const handleChoicesUpdate = async () => {
-    const apiUrl =
-      "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/"; // Your API endpoint
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: formData.choices }),
-      });
-      const { translatedText } = await response.json();
-
-      setFormData((prevState) => ({
-        ...prevState,
-        choices: translatedText, // Update the 'choices' with the response
-      }));
-    } catch (error) {
-      console.error("Error translating choices:", error);
-    }
   };
 
   return (

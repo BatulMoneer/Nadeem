@@ -65,15 +65,68 @@ const FormPage = () => {
     }
   };
 
+  const translateChoices = async () => {
+    const apiUrl =
+      "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/";
+    const payload = { arabic_word: formData.choices }; // Change 'text' to 'arabic_word'
+
+    console.log("Sending payload for translation:", JSON.stringify(payload));
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json();
+        console.error(
+          "API responded with an error:",
+          JSON.stringify(errorBody)
+        );
+        throw new Error(
+          `HTTP error! status: ${response.status}, Details: ${JSON.stringify(
+            errorBody.detail
+          )}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("Translation result:", result.translation);
+
+      setFormData((prevState) => ({
+        ...prevState,
+        choices: result.translation, // Assuming response key is 'translation'
+      }));
+
+      return true;
+    } catch (error) {
+      console.error("Error translating choices:", error.message);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { isValid, newErrors } = validateForm();
     if (!isValid) {
       setErrors(newErrors);
-    } else {
-      navigate("/story", { state: { ...formData } });
-      setErrors({});
+      return;
     }
+
+    // Translate choices before navigating
+    if (formData.choices) {
+      const translationSuccess = await translateChoices();
+      if (!translationSuccess) {
+        setErrors({ ...errors, choices: "Failed to translate choices" });
+        return; // Stop submission if translation fails
+      }
+    }
+
+    navigate("/story", { state: { ...formData } });
   };
 
   const isValidArabicName = (input) => {
@@ -96,9 +149,9 @@ const FormPage = () => {
     if (!formData.gender.trim()) {
       newErrors.gender = "يرجى اخيار جنس بطل القصة";
     }
-    if (!formData.image_prompt.trim()) {
-      newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
-    }
+    // if (!formData.image_prompt.trim()) {
+    //   newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
+    // }
     if (!formData.place.trim()) {
       newErrors.place = "يرجى اختيار مكان القصة";
     }

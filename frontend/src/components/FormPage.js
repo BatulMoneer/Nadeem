@@ -101,10 +101,18 @@ const FormPage = () => {
       });
 
       if (!response.ok) {
-        const errorBody = await response.json(); // Assuming the server sends JSON with error details
-        console.error("API responded with an error:", errorBody);
+        const errorBody = await response.json(); // Parse the JSON error response
+        console.error(
+          "API responded with an error:",
+          JSON.stringify(errorBody)
+        );
+
+        // Extract error details if available
+        const details = errorBody.detail
+          ? JSON.stringify(errorBody.detail)
+          : "No details provided";
         throw new Error(
-          `HTTP error! status: ${response.status}, ${errorBody.message}`
+          `HTTP error! status: ${response.status}, Details: ${details}`
         );
       }
 
@@ -118,7 +126,7 @@ const FormPage = () => {
 
       return true;
     } catch (error) {
-      console.error("Error translating choices:", error);
+      console.error("Error translating choices:", error.message);
       return false;
     }
   };

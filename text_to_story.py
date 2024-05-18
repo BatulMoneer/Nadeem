@@ -64,7 +64,8 @@ def ask_gpt(insert_prompt: str, name: str, age: str, gender: str):
                         "all while being compatible with Islamic morals and presented in Arabic. "
                         "Start the story directly without opening words. At the end of the story, "
                         "Write the story with the appropriate diacritic (tashkeel)on all words"
-                        "dont edit any hadith")
+                        "dont edit any hadith,"
+                        "don't create story about girl make friend with boy")
                 },
                 # f"{} is a way to include variables or expressions inside a string.
                 {"role": "user", "content": f"{insert_prompt} أكتب علامات التشكيل على جميع الكلمات والحروف."},

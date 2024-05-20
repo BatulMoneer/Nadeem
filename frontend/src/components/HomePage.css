@@ -89,6 +89,12 @@
   }
 
   /* Smaller tablets and large phones (landscape, 600px and up) */
+  @media (min-width: 300px) {
+    .label-text {
+      font-size: 11px;
+    }
+  }
+
   @media (min-width: 600px) {
     .label-text {
       font-size: 18px;
@@ -262,9 +268,9 @@
     }
 
     .image-wrapper {
-      width: 100px;
+      width: 70px;
       /* Smaller image size for mobile screens */
-      height: 100px;
+      height: 70px;
     }
 
     .hover-label {
@@ -272,7 +278,7 @@
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 300px) {
 
     /* Very small devices and narrow viewports */
     .label-container2 {
@@ -283,7 +289,7 @@
     }
 
     .lbl2 {
-      font-size: 14px;
+      font-size: 5px;
       /* Very small font size for very narrow screens */
     }
 
@@ -294,7 +300,7 @@
     }
 
     .hover-label {
-      font-size: 14px;
+      font-size: 11px;
     }
   }
 
@@ -411,6 +417,15 @@
       font-size: 32px;
     }
   }
+  @media (min-width: 368px) {
+    .lbl3 {
+      font-size: 11px;
+    }
+
+    .span1 {
+      font-size: 26px;
+    }
+  }
 
   @media (min-width: 768px) {
     .lbl3 {
@@ -457,6 +472,12 @@
     /* Base text color */
   }
 
+  @media (min-width: 300px) {
+    .lbl2 {
+      font-size: 12px;
+      /* Slightly larger font size for larger devices */
+    }
+  }
   /* Smaller tablets and large phones (landscape, 600px and up) */
   @media (min-width: 600px) {
     .lbl2 {
@@ -513,7 +534,7 @@
       top: 10rem;
     }
   }
-
+ 
   @media (min-width: 600px) {
     .lastpic {
       top: 15rem;
@@ -572,13 +593,13 @@
     line-height: 1.5;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 390px) {
     .label-container4 {
-      top: 18.5rem;
+      top: 16rem;
     }
 
     .lbl4 {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .lbl5 {
@@ -586,17 +607,17 @@
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 414px) {
     .label-container4 {
-      top: 26.5rem;
+      top: 16rem;
     }
 
     .lbl4 {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .lbl5 {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
   }
 
@@ -662,15 +683,15 @@
   /* Small desktops and laptops (992px and up) */
   @media (min-width: 992px) {
     .label-container4 {
-      top: 48rem;
+      top: 45rem;
     }
 
     .lbl4 {
-      font-size: 1.4rem;
+      font-size: 1.8rem;
     }
 
     .lbl5 {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
   }
 
@@ -754,9 +775,10 @@
     /* Slightly larger scale on hover */
   }
 
-  @media (max-width: 600px) {
+ 
+  @media (max-width: 414px) {
     .custom-button-container {
-      top: 24rem;
+      top: 21rem;
       /* Adjust top position for tablet */
     }
 
@@ -768,9 +790,22 @@
     }
   }
 
+  @media (min-width: 500px) {
+    .custom-button-container {
+      top: 24rem;
+      /* Adjust top position for tablet */
+    }
+
+    .custom-button {
+      padding: 15px 45px;
+      /* Increased padding for tablet */
+      font-size: 15px;
+      /* Increased font size for tablet */
+    }
+  }
   @media (min-width: 600px) {
     .custom-button-container {
-      top: 33rem;
+      top: 34rem;
       /* Adjust top position for tablet */
     }
 

@@ -789,19 +789,6 @@ body {
     /* Increased font size for tablet */
   }
 }
-@media (max-width: 430px) {
-  .custom-button-container {
-    top: 21rem;
-    /* Adjust top position for tablet */
-  }
-
-  .custom-button {
-    padding: 15px 45px;
-    /* Increased padding for tablet */
-    font-size: 11px;
-    /* Increased font size for tablet */
-  }
-}
 
 @media (min-width: 500px) {
   .custom-button-container {

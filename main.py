@@ -39,7 +39,8 @@ origins = [
     "http://127.0.0.1:3000",
     "https://nadeem-nadeemstory-aff85867.koyeb.app/",
     "https://nadeemstory1.netlify.app",
-    "https://nadeemstory.netlify.app"  
+    "https://nadeemstory.netlify.app",
+    "https://nadeemstories.netlify.app",
 ]
 
 app.add_middleware(

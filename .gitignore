@@ -4,3 +4,5 @@ shahd-env
 .venv
 .DS_Store
 node_modules
+# Local Netlify folder
+.netlify

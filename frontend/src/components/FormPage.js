@@ -24,26 +24,10 @@ const FormPage = () => {
 
   const [errors, setErrors] = useState({});
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   // if (isValidArabicInput(value)){
-  //   //   setError('');
-
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // // }else{
-  // //   setError('يرجى ملئ الحقل باللغة العربية');
-  // // }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Check the type of the input to decide if it needs Arabic validation
     if (name === "name" && name !== "age" && name !== "choices") {
-      // Assuming 'age' and 'choices' do not require Arabic validation
       if (isValidArabicName(value)) {
         setErrorName("");
         setFormData((prevState) => ({
@@ -55,15 +39,13 @@ const FormPage = () => {
         formData.name = "";
       }
     } else {
-      // For non-text inputs or text inputs that do not require Arabic validation
       setFormData((prevState) => ({
         ...prevState,
         [name]: value,
       }));
-      setErrorName(""); // Clear any error as other inputs do not require Arabic validation
+      setErrorName("");
     }
     if (name === "insert_prompt" && name !== "age" && name !== "choices") {
-      // Assuming 'age' and 'choices' do not require Arabic validation
       if (isValidArabicPrompt(value)) {
         setErrorPrompt("");
         setFormData((prevState) => ({
@@ -75,12 +57,55 @@ const FormPage = () => {
         formData.insert_prompt = "";
       }
     } else {
-      // For non-text inputs or text inputs that do not require Arabic validation
       setFormData((prevState) => ({
         ...prevState,
         [name]: value,
       }));
-      setErrorPrompt(""); // Clear any error as other inputs do not require Arabic validation
+      setErrorPrompt("");
+    }
+  };
+
+  const translateChoices = async () => {
+    const apiUrl =
+      "https://nadeem-nadeemstory-aff85867.koyeb.app/translate_word/";
+    const payload = { arabic_word: formData.choices }; // Change 'text' to 'arabic_word'
+
+    console.log("Sending payload for translation:", JSON.stringify(payload));
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json();
+        console.error(
+          "API responded with an error:",
+          JSON.stringify(errorBody)
+        );
+        throw new Error(
+          `HTTP error! status: ${response.status}, Details: ${JSON.stringify(
+            errorBody.detail
+          )}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("Translation result:", result.translation);
+
+      setFormData((prevState) => ({
+        ...prevState,
+        choices: result.translation, // Assuming response key is 'translation'
+      }));
+
+      return true;
+    } catch (error) {
+      console.error("Error translating choices:", error.message);
+      return false;
     }
   };
   const translateChoices = async () => {
@@ -144,6 +169,7 @@ const FormPage = () => {
     if (!isValid) {
       setErrors(newErrors);
       return;
+<<<<<<< HEAD
     }
 
     if (formData.choices) {
@@ -156,9 +182,23 @@ const FormPage = () => {
       }
     } else {
       setReadyToNavigate(true);
+=======
+>>>>>>> origin/shahdNadeem
     }
+
+    // Translate choices before navigating
+    if (formData.choices) {
+      const translationSuccess = await translateChoices();
+      if (!translationSuccess) {
+        setErrors({ ...errors, choices: "Failed to translate choices" });
+        return; // Stop submission if translation fails
+      }
+    }
+
+    navigate("/story", { state: { ...formData } });
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     if (readyToNavigate) {
       console.log("Navigating with updated formData:", formData);
@@ -168,6 +208,8 @@ const FormPage = () => {
   }, [readyToNavigate, formData, navigate]);
 
   // Further component code...
+=======
+>>>>>>> origin/shahdNadeem
   const isValidArabicName = (input) => {
     return !/[^ا-ي\s]/.test(input);
   };
@@ -179,11 +221,30 @@ const FormPage = () => {
     const newErrors = {};
     let isValid = true;
 
+<<<<<<< HEAD
     if (!formData.name.trim()) newErrors.name = "يرجى إدخال اسم الطفل";
     if (!formData.age.trim()) newErrors.age = "يرجى اختيار عمر الطفل";
     if (!formData.gender.trim()) newErrors.gender = "يرجى اخيار جنس بطل القصة";
     if (!formData.place.trim()) newErrors.place = "يرجى اختيار مكان القصة";
     if (!formData.insert_prompt.trim())
+=======
+    if (!formData.name.trim()) {
+      newErrors.name = "يرجى إدخال اسم الطفل";
+    }
+    if (!formData.age.trim()) {
+      newErrors.age = "يرجى اختيار عمر الطفل";
+    }
+    if (!formData.gender.trim()) {
+      newErrors.gender = "يرجى اخيار جنس بطل القصة";
+    }
+    // if (!formData.image_prompt.trim()) {
+    //   newErrors.image_prompt = "يرجى اختيار النشاط الأساسي لبطل القصة";
+    // }
+    if (!formData.place.trim()) {
+      newErrors.place = "يرجى اختيار مكان القصة";
+    }
+    if (!formData.insert_prompt.trim()) {
+>>>>>>> origin/shahdNadeem
       newErrors.insert_prompt = "يرجى ادخال الفكرة الرئيسية للقصة";
 
     isValid = Object.keys(newErrors).length === 0;
@@ -232,28 +293,28 @@ const FormPage = () => {
             {errors.age && <div className="error-message">{errors.age}</div>}
 
             <div>
-              <label class="lbl">جنس بطل القصة</label>
-              <label class="rd-btn">
+              <label className="lbl">جنس بطل القصة</label>
+              <label className="rd-btn">
                 بنت
                 <input
                   type="radio"
                   name="gender"
                   value="msgirlhijabi"
                   onChange={handleChange}
-                  class="real-radio-btn"
+                  className="real-radio-btn"
                 />
-                <span class="custom-radio"></span>
+                <span className="custom-radio"></span>
               </label>
-              <label class="rd-btn">
+              <label className="rd-btn">
                 ولد
                 <input
                   type="radio"
                   name="gender"
                   value="msboy"
                   onChange={handleChange}
-                  class="real-radio-btn"
+                  className="real-radio-btn"
                 />
-                <span class="custom-radio"></span>
+                <span className="custom-radio"></span>
               </label>
             </div>
 
@@ -316,7 +377,7 @@ const FormPage = () => {
               onChange={handleChange}
               placeholder="ادخل كلمة واحدة"
             />
-            <label className="lbl-inln ">نشاط اخر</label>
+            <label className="lbl-inln">نشاط اخر</label>
 
             <div className="select-container">
               <label className="lbl"> مكان القصة</label>
@@ -327,7 +388,7 @@ const FormPage = () => {
                 onChange={handleChange}
               >
                 <option value="" hidden className="placeholder-class">
-                  اختر مكان القصة{" "}
+                  اختر مكان القصة
                 </option>
                 <option value="msgarden">حديقة</option>
                 <option value="msschool">مدرسة</option>
@@ -363,12 +424,12 @@ const FormPage = () => {
           </form>
         </div>
         <img src={FormNadeem} alt="Nadeem" className="form-nadeem" />
-        <div class="nadeem-speech">
-          <text class="nadeem-text">
+        <div className="nadeem-speech">
+          <p className="nadeem-text">
             <span>مرحبًا مرة أخرى، ساعدني في</span>{" "}
             <span className="dif-txy">تعبئة البيانات</span>{" "}
             <span>التالية لأتمكن من إنشاء قصة تثير إعجابك</span>
-          </text>
+          </p>
         </div>
       </div>
       <img src={FormStars} alt="Stars" className="form-stars" />

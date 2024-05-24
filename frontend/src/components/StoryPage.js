@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./StoryPage.css";
 import Header from "./Header";
 import RatingModal from "./RatingModal";
@@ -16,6 +16,37 @@ import Footer from "./Footer";
 import SoundChoiceModal from "./SoundChoiceModal";
 import newImage from "../addings/Group 420.png";
 import newText from "../addings/Group 421.png";
+
+// Define handleSound outside of the component
+const handleSound = async (
+  setAudioData,
+  setSelectedVoice,
+  setIsSoundLoading,
+  selectedVoice
+) => {
+  setIsSoundLoading(true);
+  console.log("Sound button clicked voice ", selectedVoice);
+
+  const url = `https://nadeem-nadeemstory-aff85867.koyeb.app/generate_speech/${selectedVoice}`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      setAudioData(jsonResponse.AudioBase64);
+    } else {
+      throw new Error("Failed to fetch from the backend");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+  setIsSoundLoading(false);
+};
 
 const StoryPage = () => {
   const [isStoryLoading, setIsStoryLoading] = useState(false);
@@ -38,8 +69,7 @@ const StoryPage = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  // Function to fetch and display the story automatically when the component loads
-  const fetchStory = async () => {
+  const fetchStory = useCallback(async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -70,33 +100,9 @@ const StoryPage = () => {
     } finally {
       setIsStoryLoading(false);
     }
-  };
+  }, [location.state]);
 
-  // useEffect to fetch the story when the component mounts
-  useEffect(() => {
-    fetchStory();
-  }, []);
-
-  // Function to perform the query to fetch the image
-  const query = async (data) => {
-    let response = await fetch(
-      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
-      {
-        headers: {
-          Authorization: "Bearer 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",
-          "Content-Type": "application/json",
-          "Cache-Control": "no-cache", // This ensures no caching
-        },
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    );
-    let result = await response.blob();
-    return result;
-  };
-
-  // Function to initiate fetching of the image
-  const fetchImage = async () => {
+  const fetchImage = useCallback(async () => {
     if (!location.state) {
       console.log("No form data provided");
       return;
@@ -123,12 +129,32 @@ const StoryPage = () => {
     } catch (error) {
       console.error("Failed to fetch image:", error);
     }
-  };
+  }, [location.state]);
 
-  // useEffect for initial fetch when the component mounts
+  useEffect(() => {
+    fetchStory();
+  }, [fetchStory]);
+
   useEffect(() => {
     fetchImage();
-  }, []);
+  }, [fetchImage]);
+
+  const query = async (data) => {
+    let response = await fetch(
+      "https://api-inference.huggingface.co/models/BatulMrakkan/snadeem",
+      {
+        headers: {
+          Authorization: "Bearer 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",
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache", // This ensures no caching
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    let result = await response.blob();
+    return result;
+  };
 
   const handleAdd = () => {
     navigate("/setpreferences"); // Adjust the path as needed
@@ -138,6 +164,7 @@ const StoryPage = () => {
     console.log("Like button clicked");
     toggleModal(); // Toggle modal visibility
   };
+
   const handleVoiceSelect = (voice) => {
     console.log(`Voice selected: ${voice}`);
     setShowVoiceModal(false);
@@ -147,9 +174,15 @@ const StoryPage = () => {
 
   useEffect(() => {
     if (selectedVoice && isSoundRequested) {
-      handleSound();
+      handleSound(
+        setAudioData,
+        setSelectedVoice,
+        setIsSoundLoading,
+        selectedVoice
+      );
       setIsSoundRequested(false); // Reset the request flag after playing the sound
     }
+<<<<<<< HEAD
   }, [selectedVoice, isSoundRequested]); // This effect runs only when selectedVoice changes
 
   const handleSound = async () => {
@@ -176,6 +209,9 @@ const StoryPage = () => {
     }
     setIsSoundLoading(false);
   };
+=======
+  }, [selectedVoice, isSoundRequested]);
+>>>>>>> origin/shahdNadeem
 
   const handleFullScreen = () => {
     if (storyContentRef.current) {
@@ -227,7 +263,6 @@ const StoryPage = () => {
             <div>
               <img src={StoryBook} alt="Book" className="story-book" />
               <div className="left-page">
-                {/* Story text output */}
                 <div className="story-output">
                   {story && (
                     <div>
@@ -242,7 +277,6 @@ const StoryPage = () => {
                 </div>
               </div>
               <div className="right-page">
-                {/* Story image output */}
                 {imageSrc ? (
                   <img
                     src={imageSrc}
@@ -272,7 +306,7 @@ const StoryPage = () => {
                   <img src={newText} alt="New Text" />
                 </button>
                 <button onClick={fetchImage}>
-                  <img src={newImage} alt="New Image" />
+                  <img src={newImage} alt="" />
                 </button>
               </div>
             </div>

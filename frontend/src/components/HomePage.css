@@ -2,6 +2,7 @@ html,
 body {
   overflow-x: hidden;
   /* Prevent horizontal scrollbar */
+
 }
 
 .homepage {
@@ -10,25 +11,16 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: scroll;
-  min-height: 512vh;
+
   width: 100%;
   position: relative;
 }
-@media (max-width: 400px) {
+@media (min-width: 350px) and (max-width: 450px) {
   .homepage {
-    min-height: 240vh; /* Adjust the height for mobile devices */
+    min-height: 90rem; /* Adjust the height for devices with height between 350px and 450px */
   }
 }
-@media (max-width: 350px) {
-  .homepage {
-    min-height: 240vh; /* Adjust the height for mobile devices */
-  }
-}
-@media (max-width: 450px) {
-  .homepage {
-    min-height: 240vh; /* Adjust the height for mobile devices */
-  }
-}
+ 
 
 
 
